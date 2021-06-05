@@ -4,24 +4,94 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>마포구립장애인 직업재활센터</title>
 <style type="text/css" media="screen">
 @import url("../css/common.css");
 @import url("../css/main.css");
 @import url("../css/sub.css");
 </style>
+
+
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <style>
+  /* Make the image fully responsive */
+   .carousel-inner img {
+    width: 80%; 
+    height: 40%;
+
+  } 
+  
+   .carousel-control-next-icon {
+      background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='white' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E");
+ 		position: relative;
+		right :70%;
+  }
+  .carousel-control-prev-icon {
+      background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='white' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E");
+	  position: relative;
+	  left :70%;
+  }
+  </style>
+
+
+
 </head>
 <body>
 <center>
 	<div id="wrap">
 		<%@ include file="../include/top.jsp"%>
+		<br />
+		<div id="main_visual" style="margin-right:10%; margin-left:10%" >
 		
-		<div id="main_visual">
-		<a href="/product/sub01.jsp"><img src="../images/main_image_01.jpg" /></a><a href="/product/sub01_02.jsp"><img src="../images/main_image_02.jpg" /></a><a href="/product/sub01_03.jsp"><img src="../images/main_image_03.jpg" /></a><a href="/product/sub02.jsp"><img src="../images/main_image_04.jpg" /></a>
+			<!-- 여기부터 메인화면 강아지 사진 탭 -->
+			<div id="demo" class="carousel slide" data-ride="carousel">
+		
+			  <!-- Indicators -->
+			  <ul class="carousel-indicators">
+			    <li data-target="#demo" data-slide-to="0" class="active"></li>
+			    <li data-target="#demo" data-slide-to="1"></li>
+			    <li data-target="#demo" data-slide-to="2"></li>
+			    <li data-target="#demo" data-slide-to="3"></li>
+			  </ul>
+			  
+			  <!-- The slideshow -->
+			  <div class="carousel-inner">
+			    <div class="carousel-item active" data-bs-interval="10000">
+			      <img src="../images/centerImage/walk.jpg" alt="walk Image" width="900" height="300">
+			    </div>
+			    <div class="carousel-item" data-bs-interval="10000">
+			      <img src="../images/centerImage/cat.jpg" alt="cat Image" width="900" height="300">
+			    </div>
+			    <div class="carousel-item" data-bs-interval="10000">
+			      <img src="../images/centerImage/dog.jpg" alt="dog Image" width="900" height="300">
+			    </div>
+			    <div class="carousel-item" data-bs-interval="10000">
+			      <img src="../images/centerImage/puppy.jpg" alt="puppy Image" width="900" height="300">
+			    </div>
+			    
+			  </div>
+			  
+			  <!-- Left and right controls -->
+			  <a class="carousel-control-prev" href="#demo" data-slide="prev">
+			    <span class="carousel-control-prev-icon"></span>
+			  </a>
+			  <a class="carousel-control-next" href="#demo" data-slide="next">
+			    <span class="carousel-control-next-icon" ></span>
+			  </a>
+			</div>
 		</div>
+		
+	<!-- 여기까지 메인화면 강아지 사진 탭 -->
 
 		<div class="main_contents">
+
 			<div class="main_con_left">
+				
 				<p class="main_title" style="border:0px; margin-bottom:0px;"><img src="../images/main_title01.gif" alt="로그인 LOGIN" /></p>
 				<div class="login_box">
 					<table cellpadding="0" cellspacing="0" border="0">
@@ -215,7 +285,10 @@
 				</ul>
 			</div>
 		</div>
+		<div>
 		<%@ include file="../include/quick.jsp"%>
+		
+		</div>
 	</div>
 
 	<%@ include file="../include/footer.jsp"%>

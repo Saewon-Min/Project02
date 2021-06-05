@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <div id="top" style="border:0px solid #000;"> 
-	<a href="../main/main.jsp"><img src="../images/logo.gif" alt="마포구립장애인 직업재활센터" id="top_logo" /></a>
+	<!-- <a href="../main/main.jsp"><img src="../images/logo.gif" alt="마포구립장애인 직업재활센터" id="top_logo" /></a> -->
+	<a href="../main/main.jsp"><img src="../images/topImage/toppets2.png" alt="강아지사진" id="top_logo" 
+			width="178" height="60"/></a>
 	<ul id="lnb">
 		<!-- 로그인전 -->
 		<li><a href="../member/login.jsp"><img src="../images/lnb01.gif" alt="LOGIN" /></a></li>
