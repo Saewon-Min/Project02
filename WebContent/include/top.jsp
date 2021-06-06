@@ -23,7 +23,7 @@
 
     <nav class="navbar navbar-expand-sm navbar-dark fixed-top" id="mainNav" style="background-color: lightblue">
        <div class="container">
-       		<a href="#page-top"><img src="../images/topImage/logo_en.png" alt="강아지사진" id="top_logo" 
+       		<a href="../main/main.jsp"><img src="../images/topImage/logo_en.png" alt="강아지사진" id="top_logo" 
 				width=200 height=85/></a>
 
 			
@@ -39,9 +39,9 @@
                    <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
                    <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
-                   <li class="nav-item"><a class="nav-link" href="#map">Map</a></li>
+                   <li class="nav-item"><a class="nav-link" href="../map/map.jsp">Map</a></li>
                    <li class="nav-item"><a class="nav-link" href="../login/login.jsp">Login</a></li>
-			    	<li class="nav-item"><a class="nav-link" href="#">Sign Up</a></li>
+			    	<li class="nav-item"><a class="nav-link" href="../signUp/signUp.jsp">Sign Up</a></li>
                </ul>
            </div>
        </div>

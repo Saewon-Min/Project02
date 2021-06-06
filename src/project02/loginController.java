@@ -12,9 +12,9 @@ import javax.servlet.http.HttpSession;
 
 import model.MemberDAO;
 
-@WebServlet("/*.log")
+@WebServlet("*.log")
 public class loginController  extends HttpServlet{
-	
+	private static final long serialVersionUID = 1L;
 	
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -59,19 +59,42 @@ public class loginController  extends HttpServlet{
 				
 				
 				// 로그인 페이지로 이동
-				response.sendRedirect("../include/login.jsp");
+				response.sendRedirect("./login/login.jsp");
 				
 			}else{
 				// 로그인 실패시 request 영역에 속성을 저장한다.
 				request.setAttribute("ERROR_MSG", "등록된 회원이 아닙니다.");
 				// 로그인 페이지로 포워드(전달)한다.
-				request.getRequestDispatcher("../include/login.jsp").forward(request, response);
+				request.getRequestDispatcher("./login/login.jsp").forward(request, response);
 			}
 			
 	}
 	
 	public void logout(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
-	
+		
+		HttpSession session = request.getSession();
+		session.removeAttribute("USER_ID");
+		session.removeAttribute("USER_PW");
+		
+		// 세션영역 전체를 한꺼번에 삭제
+		session.invalidate();
+		
+		response.sendRedirect("./login/login.jsp");
 	}
+	
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -337,8 +337,7 @@
                 </div>
             </div>
         </div>
-        <!-- map-->
-        <%@ include file="../include/map.jsp" %>
+        
         
         
         

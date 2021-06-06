@@ -56,9 +56,9 @@ if(session.getAttribute("USER_ID")==null){
 		로그인 3단계 : LoginProcessMap.jsp
 	 -->
 	
-	<form action="./login.log" method="post" name="loginFrm"
+	<form action="../login.log" method="post" name="loginFrm"
 		onsubmit="return loginValidate(this);">
-	<table border="1" >
+	<table border="1" align="center">
 		<tr>
 			<td>아이디</td>
 			<td> 
@@ -81,6 +81,7 @@ if(session.getAttribute("USER_ID")==null){
 <!-- 세션 영역에 회원 인증 정보가 있을때 : 로그인이 된 상태 -->
 <% }else{ %>
 	<!-- 로그인에 성공했을때 출력되는 화면 -->
+	<form action="../logout.log">
 	<table border='1'>
 		<tr>
 			<td style="text-align:center;">
@@ -89,10 +90,11 @@ if(session.getAttribute("USER_ID")==null){
 				<br />
 				즐거운 시간 보내세요 ^^*
 				<br />
-				<a href="Logout.jsp">[로그아웃]</a>
+				<input type="submit" value="로그아웃" tabindex="4" />
 			</td>
 		</tr>
 	</table>
+	</form>
 <% } %>
 </body>
 
