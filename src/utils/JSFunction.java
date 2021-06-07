@@ -58,7 +58,7 @@ public class JSFunction {
 		}catch(Exception e) {}
 		
 	}
-	
+
 
 	// 경고창을 띄우고 뒤로 이동한다.
 	public static void alertBack(HttpServletResponse resp,String msg) {
@@ -100,6 +100,21 @@ public class JSFunction {
 		
 	}
 	
+	
+	// 경고창을 띄운다.
+	public static void alert(HttpServletResponse resp,String msg) {
+		String str = "";
+		try {
+			resp.setContentType("text/html;charset=UTF-8");
+			PrintWriter writer = resp.getWriter();
+			str =  "<script>"
+					+ "	alert('"+msg+"');  "
+					+ "</script>";
+			writer.println(str); 
+			
+		}catch(Exception e) {}
+		
+	}
 	
 	
 }

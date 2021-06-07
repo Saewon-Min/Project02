@@ -17,9 +17,9 @@ public class CommentDAO extends ConnectionPool{
 		int result = 0;
 		try {
 			String query = " insert into mycomment ( "
-					+ " idx, board_idx, name, pass, comments ) "
+					+ " board_idx, name, pass, comments ) "
 					+ " values ( "
-					+ " seq_board_num.nextval, ?, ?, ?, ? ) ";
+					+ " ?, ?, ?, ? ) ";
 			
 			
 			psmt = con.prepareStatement(query);
@@ -46,7 +46,7 @@ public class CommentDAO extends ConnectionPool{
 		
 		// 댓글 작성일을 시:분까지 출력하기 위해 to_char()함수를 사용함
 		String query = " select idx, board_idx, name, pass, comments, "
-				+ " to_char(postdate,'yyyy-mm-dd hh:mi') "
+				+ " DATE_FORMAT(postdate,'%Y-%m-%d %H:%i:%s') "
 				+ " from mycomment "
 				+ " where board_idx=? "
 				+ " order by idx desc " ;
@@ -90,7 +90,7 @@ public class CommentDAO extends ConnectionPool{
 		
 		
 		String query = " select idx, board_idx, name, pass, comments, "
-				+ " to_char(postdate,'yyyy-mm-dd hh:mi') "
+				+ " DATE_FORMAT(postdate,'%Y-%m-%d %H:%i:%s') "
 				+ " from mycomment "
 				+ " where idx=? and board_idx=?" ;
 		

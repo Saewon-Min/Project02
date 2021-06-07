@@ -48,8 +48,8 @@ public class ListController extends HttpServlet{
 			pageNum = Integer.parseInt(pageTemp);
 
 		// 한 페이지에 출력할 게시물의 범위 결정(between절에 사용)
-		int start = (pageNum-1)*pageSize+1;
-		int end = pageNum * pageSize;
+		int start = (pageNum-1)*pageSize;
+		int end = pageSize;
 
 		map.put("start", start);
 		map.put("end", end);
@@ -71,7 +71,7 @@ public class ListController extends HttpServlet{
 		
 		request.setAttribute("boardLists", boardLists); // 페이지에 출력할 게시물
 		request.setAttribute("map", map); // 각종 파라미터 및 페이지관련 값
-		request.getRequestDispatcher("/14MVCBoard/List.jsp").forward(request, resp);
+		request.getRequestDispatcher("/space/spaceSub01.jsp").forward(request, resp);
 		
 	
 	}

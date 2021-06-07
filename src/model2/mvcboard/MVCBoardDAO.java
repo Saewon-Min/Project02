@@ -46,24 +46,20 @@ public class MVCBoardDAO extends ConnectionPool{
 		List<MVCBoardDTO> bbs = new Vector<MVCBoardDTO>();
 		
 		String query = " " +
-				" select * " + 
-				" from (select Tb.* , rownum rNum " + 
-				" 		from (select * " +
-				"			 from mvcboard ";
+				"select * from mvcboard ";
 		
 		if(map.get("searchWord")!=null) {
 			query += " where " + map.get("searchField") + " "
 					+ " like '%" + map.get("searchWord") + "%' ";
 		}
 		query += " "+
-				" order by idx desc)   Tb) " +  
-				" where rNum between ? and ? "; 
+				" order by idx desc limit ?, ? "; 
 		System.out.println("페이지 쿼리 : "+query);
 		try {
 			
 			psmt = con.prepareStatement(query);
-			psmt.setString(1, map.get("start").toString());
-			psmt.setString(2, map.get("end").toString());
+			psmt.setInt(1, Integer.parseInt(map.get("start").toString()));
+			psmt.setInt(2, Integer.parseInt(map.get("end").toString()));
 			rs = psmt.executeQuery();
 			while(rs.next()) {
 				MVCBoardDTO dto = new MVCBoardDTO();
@@ -97,9 +93,9 @@ public class MVCBoardDAO extends ConnectionPool{
 		int result = 0;
 		try {
 			String query = " INSERT INTO mvcboard( "
-				 +  " idx,name, title, content, ofile,sfile,pass ) "
+				 +  " name, title, content, ofile,sfile,pass ) "
 				 + " VALUES ( "
-				 + " seq_board_num.NEXTVAL, ?, ?, ?, ?, ?, ? ) ";
+				 + " ?, ?, ?, ?, ?, ? ) ";
 			
 			psmt = con.prepareStatement(query);
 			psmt.setString(1, dto.getName());

@@ -25,22 +25,25 @@ public class MemberDAO {
 	// 기본 생성자를 통한 오라클 연결
 	public MemberDAO() {
 		try {
-			Class.forName("oracle.jdbc.OracleDriver");
+			Class.forName("org.mariadb.jdbc.Driver");
 
-			String url = "jdbc:oracle:thin:@localhost:1521:xe";
-			String id ="kosmo";  // 계정이름
+			String url = "jdbc:mariadb://127.0.0.1:3307/kosmo_db";
+			String id ="kosmo_user";  // 계정이름
 			String pass = "1234";  // 계정비번
 			
 			con = DriverManager.getConnection(url,id,pass);
 			
-			System.out.println("Oracle 연결성공");
+			System.out.println("MariaDB 연결성공");
 			
 		}catch (Exception e){
-			System.out.println("Oracle 연결시 예외발생");
+			System.out.println("MariaDB 연결시 예외발생");
 			e.printStackTrace();
 		}
 	}
 	
+	public static void main(String[] args) {
+		new MemberDAO();
+	}
 	
 	/*
 		JSP에서 컨텍스트 초기화 파라미터를 읽어서 매개변수로
@@ -51,15 +54,15 @@ public class MemberDAO {
 		try {
 			Class.forName(driver);
 
-			String id ="kosmo";  // 계정이름
+			String id ="kosmo_user";  // 계정이름
 			String pass = "1234";  // 계정비번
 			
 			con = DriverManager.getConnection(url,id,pass);
 			
-			System.out.println("Oracle 연결성공");
+			System.out.println("MariaDB 연결성공");
 			
 		}catch (Exception e){
-			System.out.println("Oracle 연결시 예외발생");
+			System.out.println("MariaDB 연결시 예외발생");
 			e.printStackTrace();
 		}
 		

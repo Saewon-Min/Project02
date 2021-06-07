@@ -1,6 +1,7 @@
 package common;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -40,36 +41,21 @@ public class ConnectionPool {
 	
 	public ConnectionPool() {
 		try {
-			/*
-			1. initialContext객체를 생성한다.
-			 */
-			Context initCtx = new InitialContext();
-			/*
-			2. 앞에서 생성한 객체를 통해 JNDI서비스 구조의 초기 ROOT디렉토리를
-			얻어온다. 여기서 얻어오는 톰켓의 루트 디렉토리명은 java:comp/env로
-			이미 정해져 있고 그대로 사용하면 된다.
-			 */
-			//Context ctx = (Context)initCtx.lookup("java:comp/env");
-			/*
-			3. server.xml에 등록한 네이밍을 lookup하여 DataSource를 얻어온다.
-			해당 데이터 소스는 DB에 연결된 정보를 가지고 있다.
-			 */
-			//DataSource source = (DataSource)ctx.lookup("dbcp_myoracle");
+			Class.forName("org.mariadb.jdbc.Driver");
+
+			String url = "jdbc:mariadb://127.0.0.1:3307/kosmo_db";
+			String id ="kosmo_user";  // 계정이름
+			String pass = "1234";  // 계정비번
 			
-			// 위 2,3은 하나로 합칠수있다.
-			DataSource source = (DataSource)initCtx.lookup("java:comp/env/dbcp_myoracle");
+			con = DriverManager.getConnection(url,id,pass);
 			
-			/*
-			4. 커넥션풀에 톰캣이 생성해 놓은 커넥션 객체를 가져다가 사용한다.
-			 */
-			con = source.getConnection();
-			System.out.println("DB ConnectionPool 연결 성공");
-		
-		} catch (Exception e) {
-			System.out.println("DB ConnectionPool 연결 실패");
+			System.out.println("MariaDB 연결성공");
+			
+		}catch (Exception e){
+			System.out.println("MariaDB 연결시 예외발생");
 			e.printStackTrace();
-		
 		}
+			
 		
 	}
 	

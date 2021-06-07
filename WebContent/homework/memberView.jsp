@@ -10,7 +10,7 @@ String searchField = request.getParameter("searchField");// 검색필드
 String searchWord = request.getParameter("searchWord"); // 검색어
 
 
-MembershipDAO dao = new MembershipDAO(application);
+MembershipDAO dao = new MembershipDAO();
 
 
 // 파라미터로 전달된 아이디를 조회

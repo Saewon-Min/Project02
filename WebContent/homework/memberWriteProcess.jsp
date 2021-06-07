@@ -77,7 +77,7 @@ dto.setId(paramArr[0]);
 
 
 	// DAO객체 생성 및 쓰기 처리를 위한 메소드 호출
-	MembershipDAO dao = new MembershipDAO(application);
+	MembershipDAO dao = new MembershipDAO();
 	
 	
 	int iResult = dao.memberRegist(dto);

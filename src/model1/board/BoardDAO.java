@@ -30,15 +30,15 @@ public class BoardDAO {
 		try {
 			Class.forName(driver);
 
-			String id ="kosmo";  // 계정이름
+			String id ="kosmo_user";  // 계정이름
 			String pass = "1234";  // 계정비번
 			
 			con = DriverManager.getConnection(url,id,pass);
 			
-			System.out.println("Oracle 연결성공");
+			System.out.println("MariaDB 연결성공");
 			
 		}catch (Exception e){
-			System.out.println("Oracle 연결시 예외발생");
+			System.out.println("MariaDB 연결시 예외발생");
 			e.printStackTrace();
 		}
 		
@@ -57,19 +57,19 @@ public class BoardDAO {
 	public BoardDAO(ServletContext application){
 		try {
 			
-			String drv = application.getInitParameter("JDBCDriver");
-			String url = application.getInitParameter("ConnectionURL");
-			String id = application.getInitParameter("OracleId");
-			String pwd = application.getInitParameter("OraclePwd");
+			String drv = application.getInitParameter("MariaJDBCDriver");
+			String url = application.getInitParameter("MariaConnectURL");
+			String id = application.getInitParameter("MariaUser");
+			String pwd = application.getInitParameter("MariaPass");
 			
 			Class.forName(drv);
 			
 			con = DriverManager.getConnection(url,id,pwd);
 			
-			System.out.println("JDBC 연결성공");
+			System.out.println("MariaDB 연결성공");
 			
 		}catch (Exception e){
-			System.out.println("JDBC 연결시 예외발생");
+			System.out.println("MariaDB 연결시 예외발생");
 			e.printStackTrace();
 		}
 		
@@ -114,35 +114,28 @@ public class BoardDAO {
 	public List<BoardDTO> selectListPage(Map<String, Object> map){
 		List<BoardDTO> bbs = new Vector<BoardDTO>();
 		/*
-		목록의 페이지 처리를 위해 레코드의 구간을 between으로 정해 조회함
-		
-		1번 : board테이블의 게시물을 일련번호의 내림차순으로 정렬
-		2번 : 1번의 결과에 rownum(순차적인 가상번호)를 부여함
-		3번 : 2번의 결과를 between으로 구간을 정해 조회함
-		
-		※ 만약 게시판이 아닌 다른 테이블을 조회하고 싶다면 1번 쿼리문에서
-			테이블명만 변경하면 된다.
+
 		 */
 		String query = " " +
-				" select * " + 
-				" from (select Tb.* , rownum rNum " + 
-				" 		from (select * " +
-				"			 from board ";
+				" select * from board ";
 		
 		if(map.get("searchWord")!=null) {
 			query += " where " + map.get("searchField") + " "
 					+ " like '%" + map.get("searchWord") + "%' ";
 		}
-		query += " "+
-				" order by num desc)   Tb) " +  
-				" where rNum between ? and ? "; 
+		query += " order by num desc limit ?, ? " ; 
 		System.out.println("페이지 쿼리 : "+query);
 		try {
 			
 			psmt = con.prepareStatement(query);
-			// between절의 start와 end값을 인파라미터 설정
-			psmt.setString(1, map.get("start").toString());
-			psmt.setString(2, map.get("end").toString());
+			/*
+			setString()으로 인파라미터를 설정하면 문자형이 되므로
+			값 양쪽에 싱글 쿼테이션이 자동으로 삽입된다. 여기서는
+			정수는 입력해야 하므로 setInt()를 사용하고, 인수로 전달되는
+			변수를 정수로 변경해야 한다.
+			 */
+			psmt.setInt(1, Integer.parseInt(map.get("start").toString())); 
+			psmt.setInt(2, Integer.parseInt(map.get("end").toString())); 
 			rs = psmt.executeQuery();
 			while(rs.next()) {
 				BoardDTO dto = new BoardDTO();
@@ -235,9 +228,9 @@ public class BoardDAO {
 		try {
 			// 인파라미터가 있는 insert 쿼리문 작성
 			String query = " INSERT INTO board( "
-				 +  " num, title, content, id, visitcount) "
+				 +  " title, content, id, visitcount) "
 				 + " VALUES ( "
-				 + " seq_board_num.NEXTVAL, ?, ?, ?, 0 ) ";
+				 + "  ?, ?, ?, 0 ) ";
 			
 			// prepare객체 생성 후 인파라미터 설정
 			psmt = con.prepareStatement(query);

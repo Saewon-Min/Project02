@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Statement;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
@@ -165,6 +166,49 @@ public class MembershipDAO extends ConnectionPool{
 		
 	}
 	
+	// 게시물 조회하기(내용보기, 상세보기)
+	public Map<String, String> getMember(String id, String pass) {
+		
+		Map<String, String> map = new HashMap<String,String>();
+		
+		/* 
+		회원의 이름을 가져오기 위해
+		회원테이블과 게시판 테이블을 조인하여 조회함
+		*/
+		String query = " SELECT id, pass, name "
+				+ " FROM membership "
+				+ " WHERE id=? and pass=?";
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, id);
+			psmt.setString(2, pass);
+			rs = psmt.executeQuery();
+			/*
+			매개변수로 전달된 일련번호를 통해 조회하므로
+			결과는 무조건 1개만 나오게 된다. 따라서 if문으로
+			반환된 결과가 있는지만 확인하면 된다.
+			 */
+
+			
+			if(rs.next()) {
+				map.put("id",rs.getString("id")); // 아이디
+				map.put("pass", rs.getString("pass")); // 패스워드
+				map.put("name", rs.getString("name")); // 이름
+
+				
+			}else {
+				System.out.println("결과셋이 없습니다.");
+			}
+			
+		} catch (Exception e) {
+			System.out.println("getMember오류");
+			e.printStackTrace();
+		}
+		return map;
+		
+	}
+	
+	
 	
 	/*
 	게시물의 개수를 카운트
@@ -209,7 +253,7 @@ public class MembershipDAO extends ConnectionPool{
 			if(con!=null) con.close();
 			
 		}catch(Exception e) {
-			System.out.println("Oracle 자원 반납시 예외발생");
+			System.out.println("mariaDB 자원 반납시 예외발생");
 		}
 	}
 	

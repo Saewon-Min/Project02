@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import homework.MembershipDAO;
 import model.MemberDAO;
 
 @WebServlet("*.log")
@@ -39,10 +40,10 @@ public class loginController  extends HttpServlet{
 		
 			HttpSession session = request.getSession();
 			// DAO객체 생성 및 DB연결
-			MemberDAO dao = new MemberDAO();
+			MembershipDAO dao = new MembershipDAO();
 			
 			// 폼 값으로 받은 아이디, 패스워드를 통해 로그인 처리 메소드 호출
-			Map<String, String> map= dao.getMemberMap(id, pw);
+			Map<String, String> map= dao.getMember(id, pw);
 			
 			/*
 			연습문제]

@@ -29,21 +29,21 @@
 
 					var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 					    mapOption = {
-					        center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
+					        center: new kakao.maps.LatLng(37.4788642,126.877888), // 지도의 중심좌표
 					        level: 3 // 지도의 확대 레벨
 					    };  
 
 					// 지도를 생성합니다    
 					var map = new kakao.maps.Map(mapContainer, mapOption); 
 					
-					//function validate(f){
+					function validate(f){
 					// 장소 검색 객체를 생성합니다
 					var ps = new kakao.maps.services.Places(); 
-					
+					var searchword = f.park.value;
 					
 					
 					// 키워드로 장소를 검색합니다
-					ps.keywordSearch('이태원 맛집', placesSearchCB); 
+					ps.keywordSearch(searchword, placesSearchCB); 
  
 					// 키워드 검색 완료 시 호출되는 콜백함수 입니다
 					function placesSearchCB (data, status, pagination) {
@@ -61,6 +61,7 @@
 					        // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
 					        map.setBounds(bounds);
 					    } 
+					    return true;
 					}
 
 					// 지도에 마커를 표시하는 함수입니다
@@ -79,10 +80,10 @@
 					        infowindow.open(map, marker);
 					        
 					    });
-					    //return true;
+					    
 					}
 						
-					//}
+					}
 					</script>
 					</div>
 					<br></br>
@@ -99,8 +100,9 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <!-- Park input-->
-                                <input class="form-control" id="park" type="text" placeholder="공원을 검색해주세요*" data-sb-validations="required" value="이태원맛집"/>
+                                <input class="form-control" id="park" type="text" placeholder="공원을 검색해주세요*" data-sb-validations="required" value="공원"/>
                                 <div class="invalid-feedback" data-sb-feedback="park:required">A park is required.</div>
+                            	<button type="button" onclick="validate(this.form);">검색버튼</button>
                             </div>
                             <div class="form-group">
                                 <!-- Email address input-->

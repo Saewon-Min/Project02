@@ -128,12 +128,27 @@ public class BoardPage {
 		첫페이지, 이전블럭 링크를 출력하지 않는다.
 		*/
 		if(pageTemp != 1) {
-			pagingStr += "<a href='"+reqUrl +"?pageNum=1'><img src='../images/paging1.gif' /></a> ";
-			pagingStr += "&nbsp;";
-			pagingStr += "<a href='"+reqUrl +"?pageNum="+(pageTemp-1)+"'><img src='../images/paging2.gif' /></a> ";
 			
+			pagingStr += " <ul class='pagination'> ";
+			pagingStr += " <li class='page-item'><a class='page-link' href='"+reqUrl +"?pageNum=1'><i class='fas fa-angle-double-left' style='font-size:12px;color:blue'></i></a></li> ";
+			pagingStr += " &nbsp;";
+			pagingStr += " <li class='page-item'><a class='page-link' href='"+reqUrl +"?pageNum="+(pageTemp-1)+"'><i class='fas fa-angle-double-right' style='font-size:12px;color:blue'></i></a></li> ";
+			pagingStr += " </ul> ";
 			
 		}
+		
+		
+		/*
+		 * <ul class="pagination"> <li class="page-item"><a class="page-link"
+		 * href="#">Previous</a></li> <li class="page-item"><a class="page-link"
+		 * href="#">1</a></li> <li class="page-item active"><a class="page-link"
+		 * href="#">2</a></li> <li class="page-item"><a class="page-link"
+		 * href="#">3</a></li> <li class="page-item"><a class="page-link"
+		 * href="#">Next</a></li> </ul>
+		 */
+		
+		
+		
 		
 		int blockCount = 1;
 		

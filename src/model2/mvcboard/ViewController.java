@@ -39,7 +39,7 @@ public class ViewController extends HttpServlet{
 		req.setAttribute("comments", comments);
 		dao2.close();
 		
-		req.getRequestDispatcher("/14MVCBoard/View.jsp").forward(req, resp);
+		req.getRequestDispatcher("/space/spaceSub01View.jsp").forward(req, resp);
 		
 		
 	}

@@ -9,7 +9,7 @@
     pageEncoding="UTF-8"%>
 <% 
 // application 내장객체를 인수로 DAO객체를 생성한다.(DB연결)
-MembershipDAO dao = new MembershipDAO(application);
+MembershipDAO dao = new MembershipDAO();
 
 // 파라미터를 저장하기 위해 Map 컬렉션 생성
 Map<String, Object> param = new HashMap<String, Object>();

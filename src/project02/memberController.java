@@ -76,11 +76,14 @@ public class memberController extends HttpServlet{
 		dao.close();
 		
 		if(iResult==1){
-			response.sendRedirect("./signUp/signUp.jsp");
+			JSFunction.alert(response, "회원가입이 완료되었습니다.");
+			response.sendRedirect("./main/main.jsp");
 		}else if(iResult==-1){
 			JSFunction.alertBack(response,"중복된 아이디가 존재합니다.");
 		}else{
+			System.out.println(iResult);
 			JSFunction.alertBack(response,"회원가입에 실패하였습니다.");
+			
 		}
 		
 		
