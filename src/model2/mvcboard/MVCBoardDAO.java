@@ -19,7 +19,7 @@ public class MVCBoardDAO extends ConnectionPool{
 	public int selectCount(Map<String, Object> map) {
 		int totalCount = 0;
 		
-		String query = " SELECT COUNT(*) FROM mvcboard ";
+		String query = " SELECT COUNT(*) FROM multiMVCBoard ";
 		
 		if(map.get("searchWord")!=null) {
 			query += " WHERE " +map.get("searchField") + " " 
@@ -46,13 +46,14 @@ public class MVCBoardDAO extends ConnectionPool{
 		List<MVCBoardDTO> bbs = new Vector<MVCBoardDTO>();
 		
 		String query = " " +
-				"select * from mvcboard ";
+				"select * from multiMVCBoard ";
 		
 		if(map.get("searchWord")!=null) {
-			query += " where " + map.get("searchField") + " "
-					+ " like '%" + map.get("searchWord") + "%' ";
+			query += " where " + map.get("searchField") 
+					+ " like '%" + map.get("searchWord") + "%' "
+					+ " and flag like '%"+map.get("flag")+"%' ";
 		}
-		query += " "+
+		query += " where flag like '%"+map.get("flag")+"%' "+
 				" order by idx desc limit ?, ? "; 
 		System.out.println("페이지 쿼리 : "+query);
 		try {
@@ -64,18 +65,19 @@ public class MVCBoardDAO extends ConnectionPool{
 			while(rs.next()) {
 				MVCBoardDTO dto = new MVCBoardDTO();
 				
-				dto.setIdx(rs.getString(1));
-				dto.setName(rs.getString(2));
-				dto.setTitle(rs.getString(3));
-				dto.setContent(rs.getString(4));
-				dto.setPostdate(rs.getDate(5));
-				dto.setOfile(rs.getString(6));
-				dto.setSfile(rs.getString(7));
-				dto.setDowncount(rs.getInt(8));
-				dto.setPass(rs.getString(9));
-				dto.setVisitcount(rs.getInt(10));
-				
+				dto.setIdx(rs.getString("idx"));
+				dto.setName(rs.getString("name"));
+				dto.setTitle(rs.getString("title"));
+				dto.setContent(rs.getString("content"));
+				dto.setPostdate(rs.getDate("postdate"));
+				dto.setOfile(rs.getString("ofile"));
+				dto.setSfile(rs.getString("sfile"));
+				dto.setDowncount(rs.getInt("downcount"));
+				dto.setPass(rs.getString("pass"));
+				dto.setVisitcount(rs.getInt("visitcount"));
+				dto.setId(rs.getString("id"));
 				bbs.add(dto);
+				
 				
 			}
 		} catch (Exception e) {
@@ -92,7 +94,7 @@ public class MVCBoardDAO extends ConnectionPool{
 	public int insertWrite(MVCBoardDTO dto) {
 		int result = 0;
 		try {
-			String query = " INSERT INTO mvcboard( "
+			String query = " INSERT INTO multiMVCBoard ( "
 				 +  " name, title, content, ofile,sfile,pass ) "
 				 + " VALUES ( "
 				 + " ?, ?, ?, ?, ?, ? ) ";
@@ -119,7 +121,7 @@ public class MVCBoardDAO extends ConnectionPool{
 	
 	public MVCBoardDTO selectView(String idx) {
 		MVCBoardDTO dto = new MVCBoardDTO();
-		String query = " select * from mvcboard where idx=? ";
+		String query = " select * from multiMVCBoard where idx=? ";
 		
 		
 		try {
@@ -128,16 +130,17 @@ public class MVCBoardDAO extends ConnectionPool{
 			psmt.setString(1, idx);
 			rs = psmt.executeQuery();
 			if(rs.next()) {
-				dto.setIdx(rs.getString(1));
-				dto.setName(rs.getString(2));
-				dto.setTitle(rs.getString(3));
-				dto.setContent(rs.getString(4));
-				dto.setPostdate(rs.getDate(5));
-				dto.setOfile(rs.getString(6));
-				dto.setSfile(rs.getString(7));
-				dto.setDowncount(rs.getInt(8));
-				dto.setPass(rs.getString(9));
-				dto.setVisitcount(rs.getInt(10));
+				dto.setIdx(rs.getString("idx"));
+				dto.setName(rs.getString("name"));
+				dto.setTitle(rs.getString("title"));
+				dto.setContent(rs.getString("content"));
+				dto.setPostdate(rs.getDate("postdate"));
+				dto.setOfile(rs.getString("ofile"));
+				dto.setSfile(rs.getString("sfile"));
+				dto.setDowncount(rs.getInt("downcount"));
+				dto.setPass(rs.getString("pass"));
+				dto.setVisitcount(rs.getInt("visitcount"));
+				dto.setId(rs.getString("id"));
 			
 			}
 
@@ -154,7 +157,7 @@ public class MVCBoardDAO extends ConnectionPool{
 	
 	
 	public void updateVisitCount(String idx) {
-		String query = " update mvcboard set "
+		String query = " update multiMVCBoard set "
 				+ " visitcount = visitcount+1 "
 				+ " where idx=? ";
 		
@@ -178,7 +181,7 @@ public class MVCBoardDAO extends ConnectionPool{
 		boolean isCorr = true;
 		try {
 			// 일련번호와 패스워드가 일치하는 게시물이 있는지 확인
-			String sql = " select count(*) from mvcboard where pass=? and idx=? ";
+			String sql = " select count(*) from multiMVCBoard where pass=? and idx=? ";
 			psmt = con.prepareStatement(sql);
 			psmt.setString(1, pass);
 			psmt.setString(2, idx);
@@ -209,7 +212,7 @@ public class MVCBoardDAO extends ConnectionPool{
 		int result = 0;
 		try {
 			// 비회원제 게시판이므로 패스워드까지 where절에 추가함
-			String query = " update mvcboard set "
+			String query = " update multiMVCBoard set "
 					+ " title=?, name=?, content=?, ofile=?, sfile=? "
 					+ " where idx=? and pass=? ";
 			
@@ -244,7 +247,7 @@ public class MVCBoardDAO extends ConnectionPool{
 		int result = 0;
 		try {
 			// 비밀번호 검증 후 즉시 삭제되므로 비밀번호는 조건에서 제외한다.
-			String query= " delete from mvcboard where idx=? ";
+			String query= " delete from multiMVCBoard where idx=? ";
 			psmt = con.prepareStatement(query);
 			psmt.setString(1, idx);
 			result = psmt.executeUpdate();
@@ -260,7 +263,7 @@ public class MVCBoardDAO extends ConnectionPool{
 	
 	public void downCountPlus(String idx) {
 		
-		String sql = " update mvcboard set "
+		String sql = " update multiMVCBoard set "
 				+ " downcount = downcount+1 "
 				+ " where idx=? ";
 		

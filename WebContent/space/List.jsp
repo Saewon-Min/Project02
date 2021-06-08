@@ -17,6 +17,7 @@
 	<!-- 검색폼 : 제목과 내용을 통해 검색할 수 있다. -->
 	<form method="get">
 	<table border="1" width="90%">
+	<input type="hid den" name="flag" value="${param.flag }" />
 	<tr>
 		<td align='center'>
 			<select name="searchField">

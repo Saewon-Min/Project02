@@ -12,6 +12,9 @@ public class MVCBoardDTO {
 	private int downcount;
 	private String pass;
 	private int visitcount;
+	private String flag;
+	private String id;
+	
 	public String getIdx() {
 		return idx;
 	}
@@ -71,6 +74,18 @@ public class MVCBoardDTO {
 	}
 	public void setVisitcount(int visitcount) {
 		this.visitcount = visitcount;
+	}
+	public String getFlag() {
+		return flag;
+	}
+	public void setFlag(String flag) {
+		this.flag = flag;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	

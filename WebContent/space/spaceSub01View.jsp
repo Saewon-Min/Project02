@@ -27,9 +27,9 @@
        </div>
 
     </div>
+    <div class="d-flex" id="wrapper">
 		<%@ include file="../include/spaceLeft.jsp" %>
-            <!-- Page content wrapper-->
-            <div id="page-content-wrapper">
+
 			
 			<div class="container-fluid">
 			<table border="1" width="90%">

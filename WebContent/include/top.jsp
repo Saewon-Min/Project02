@@ -54,6 +54,13 @@
   background-color: info;
  
 }
+.navbar-toggler{
+	width:70px;
+}
+#maptn{
+width:70px;
+
+}
 </style>
 
 </head>
@@ -85,9 +92,9 @@
 	                   </button>
 	                   
 			           	<div class="dropdown-content">
-				           	<a href="../space/spaceSub01.jsp"><a href="../mvcboard/list.do">공지사항</a></a>
-				           	<a href="../space/spaceSub02.jsp">정모일정</a>
-				           	<a href="../space/spaceSub03.jsp">사진게시판</a>
+			           		<a href="../Project02/notice.list">공지사항</a>
+				           	<a href="../Project02/schedule.list" >정모일정</a>
+				           	<a href="../Project02/photo.list">사진게시판</a>
 	               		</div>
 	                </div>
 	              </li>
@@ -121,8 +128,8 @@
 	                &nbsp;&nbsp;
 	                </li>
 	              	<li class="nav-item">
-	              	<div>
-	                   <button class="dropbtn">
+	              	<div class="dropdown">
+	                   <button class="dropbtn" id="mapbtn">
 	                   	
               		 	<a href="../map/map.jsp" style="color:white; text-decoration: none">지도</a>
      					</button>

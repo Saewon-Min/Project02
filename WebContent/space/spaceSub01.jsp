@@ -3,6 +3,7 @@
 <%@ include file="../include/global.jsp" %>
     
 <%@ include file="../include/top.jsp" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,6 +16,9 @@
 
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="../bootstrap4.6.0/css/styles.css" rel="stylesheet" />
+
+
+ <!-- Core theme CSS (includes Bootstrap)-->
 </head>
 <body>
 
@@ -24,16 +28,20 @@
        	<br />
            <h1 class="section-heading text-uppercase" >공지사항</h1>
            <br />
-       </div>
+     </div>
 
     </div>
+    <div class="d-flex" id="wrapper">
+    
 		<%@ include file="../include/spaceLeft.jsp" %>
+    
+    
             <!-- Page content wrapper-->
-            <div id="page-content-wrapper">
+            
 			
 			<div class="container-fluid">
 			<form method="get">
-				<table width="90%" style="border:none">
+				<table width="90%" style="border:none" >
 				<tr>
 					<td align='center'>
 						<select name="searchField">
@@ -93,8 +101,8 @@
 
 		</tr>
 		</c:forEach>
-	</c:otherwise>
-</c:choose>
+		</c:otherwise>
+		</c:choose>
 	</table>
 	<table border="1" width="90%">
 
@@ -108,11 +116,10 @@
 	</table>	
 			</div>
         	</div>
-       
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="../bootstrap4.6.0/js/js/scripts.js"></script>
+        	
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="../bootstrap4.6.0/js/js/scripts.js"></script>
     
 </body>
 </html>

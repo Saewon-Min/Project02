@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,21 +14,42 @@ import javax.servlet.http.HttpServletResponse;
 import common.BoardConfig;
 import utils.BoardPage;
 
+@WebServlet("*.list")
 public class ListController extends HttpServlet{
 
+	
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse resp) throws ServletException, IOException {
+	protected void service(HttpServletRequest request, HttpServletResponse resp) throws ServletException, IOException {
+		
+		String uri = request.getRequestURI();
+		int lastSlash = uri.lastIndexOf("/");
+		String commandStr = uri.substring(lastSlash);
+		String flag = "";
+		
+		if(commandStr.equals("/notice.list")) {
+			flag="notice";
+		}else if(commandStr.equals("/schedule.list")) {
+			flag="schedule";
+		}else if(commandStr.equals("/photo.list")) {
+			flag="photo";
+		}else if(commandStr.equals("/people.list")) {
+			flag="people";
+		}
+		
 		
 		//DAO객체 생성(커넥션 풀 사용함)
 		MVCBoardDAO dao = new MVCBoardDAO();
 
+		
 		// 검색 파라미터 및 View로 전달할 여러가지 데이터 저장용 Map컬렉션 생성
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		// 검색 파라미터 처리
 		String searchField = request.getParameter("searchField"); // 검색할 필드명
 		String searchWord = request.getParameter("searchWord"); // 검색할 단어
+		
 
+		System.out.println(flag);
 		if(searchWord != null){
 			map.put("searchField", searchField);
 			map.put("searchWord", searchWord);
@@ -53,6 +75,7 @@ public class ListController extends HttpServlet{
 
 		map.put("start", start);
 		map.put("end", end);
+		map.put("flag", flag);
 		System.out.println(start+" = "+end);
 		/* 페이지 처리 end */
 
@@ -71,8 +94,22 @@ public class ListController extends HttpServlet{
 		
 		request.setAttribute("boardLists", boardLists); // 페이지에 출력할 게시물
 		request.setAttribute("map", map); // 각종 파라미터 및 페이지관련 값
-		request.getRequestDispatcher("/space/spaceSub01.jsp").forward(request, resp);
-		
+
+		if(flag=="notice") {
+			
+			request.getRequestDispatcher("/space/spaceSub01.jsp").forward(request, resp);
+		}else if(flag=="schedule") {
+			/* session.removeAttribute("flag"); */
+			request.getRequestDispatcher("/space/spaceSub02.jsp").forward(request, resp);
+		}else if(flag=="photo") {
+			/* session.removeAttribute("flag"); */
+			request.getRequestDispatcher("/space/spaceSub03.jsp").forward(request, resp);
+		}else if(flag=="people") {
+			request.getRequestDispatcher("").forward(request, resp);
+			
+		}
+
+
 	
 	}
 	
