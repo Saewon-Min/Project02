@@ -36,7 +36,7 @@ function idUse(f){
 <body>
 	<div class="container" style="background-color: lightblue" align="center">
 	
-	<% 
+	<%   
 	try{
 	if(!dto.getId().equals(null)){ %>
 	<h2 style="color:white;">아이디 중복확인 하기</h2>
@@ -45,7 +45,7 @@ function idUse(f){
 	<h3>중복된 아이디가 존재합니다</h3>
 	<h3>새로운 아이디를 입력해주세요</h3>
 	<form name="overlapFrm">
-		 <input type="text" name="retype_id" size="20" />
+		<input type="text" name="retype_id" size="20" />+
 		<input type="button" value="아이디사용하기" onclick="idUse(this.form);" />
 	</form>
 	</div>
@@ -62,7 +62,7 @@ function idUse(f){
 	
 	<h3>사용가능한 아이디입니다</h3>
 	<form name="overlapFrm">
-		<input type="button" value="아이디사용하기" onclick="idUse();" />
+		<input type="button" value="아이디사용하기" onclick="idUse(this.form);" />
 	</form>
 	
 	<% } %>
