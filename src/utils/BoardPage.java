@@ -117,22 +117,22 @@ public class BoardPage {
 	
 	
 	// 페이지번호와 블럭을 이미지로 처리한 메소드
-	public static String pagingImg(int totalCount, int pageSize, int blockPage,
+	public static String pagingImg(int flagCount, int pageSize, int blockPage,
 			int pageNum, String reqUrl) {
 		
 		String pagingStr = "";
-		int totalPage = (int)(Math.ceil(((double)totalCount/pageSize)));
+		int totalPage = (int)(Math.ceil((double)flagCount/pageSize));
 		int pageTemp = (((pageNum-1)/blockPage)*blockPage)+1;
 		/*
 		계산된 pageTemp가 1이라면 이전 블럭이 없는 상태이므로
 		첫페이지, 이전블럭 링크를 출력하지 않는다.
 		*/
 		if(pageTemp != 1) {
-			pagingStr += " <ul class='pager'> ";
 			
-			pagingStr += " <li><a href='"+reqUrl +"?pageNum=1'><i class='fas fa-angle-double-left' style='font-size:12px;color:blue'></i></a></li> ";
 			
-			pagingStr += " <li><a href='"+reqUrl +"?pageNum="+(pageTemp-1)+"'><i class='fas fa-angle-left' style='font-size:12px;color:blue'></i></a></li> ";
+			pagingStr += " <li class=\"page-item\"><a class=\"page-link\" href='"+reqUrl +"?pageNum=1'><i class=\"fas fa-angle-double-left\" style=\"font-size:12px;color:blue\"></i></a></li> ";
+			
+			pagingStr += " <li class=\"page-item\"><a class=\"page-link\" href='"+reqUrl +"?pageNum="+(pageTemp-1)+"'><i class=\"fas fa-angle-left\" style=\"font-size:12px;color:blue\"></i></a></li> ";
 			/* pagingStr += " </ul> "; */
 			
 		}
@@ -156,16 +156,11 @@ public class BoardPage {
 			 */
 			if(pageTemp==pageNum) {
 				
-				/* pagingStr += " <ul class='pager'> "; */ 
-				pagingStr += " <li>"+pageTemp+"</li> ";
-				/* pagingStr += " </ul> "; */
+				pagingStr += " <li class='page-item active '><a class='page-link'>"+pageTemp+"</a></li> ";
 
 			}
 			else {
-				/* pagingStr += " <ul class='pager'> "; */
-				/* pagingStr += " &nbsp;"; */
-				pagingStr += " <li><a href='"+reqUrl +"?pageNum="+pageTemp+"'>"+pageTemp+"</a></li> ";
-				/* pagingStr += " </ul> "; */
+				pagingStr += " <li class=\"page-item\"><a class=\"page-link\" href='"+reqUrl +"?pageNum="+pageTemp+"'>"+pageTemp+"</a></li> ";
 				
 				
 			}
@@ -177,11 +172,9 @@ public class BoardPage {
 		다음 블럭이 있을때만 출력한다.
 		 */
 		if(pageTemp<= totalPage) {
-			/* pagingStr += " <ul class='pagination'> "; */
-			pagingStr += " <li><a href='"+reqUrl +"?pageNum="+pageTemp+"'><i class='fas fa-angle-right' style='font-size:12px;color:blue'></i></a></li> ";
+			pagingStr += " <li class=\"page-item\"><a class=\"page-link\" href='"+reqUrl +"?pageNum="+pageTemp+"'><i class=\"fas fa-angle-right\" style=\"font-size:12px;color:blue\"></i></a></li> ";
 			
-			pagingStr += " <li><a href='"+reqUrl +"?pageNum="+totalPage+"'><i class='fas fa-angle-double-right' style='font-size:12px;color:blue'></i></a></li> ";
-			pagingStr += " </ul> ";
+			pagingStr += " <li class=\"page-item\"><a class=\"page-link\" href='"+reqUrl +"?pageNum="+totalPage+"'><i class=\"fas fa-angle-double-right\" style=\"font-size:12px;color:blue\"></i></a></li> ";
 		}
 		
 		return pagingStr;

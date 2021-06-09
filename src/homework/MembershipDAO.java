@@ -166,6 +166,35 @@ public class MembershipDAO extends ConnectionPool{
 		
 	}
 	
+	
+	// 게시물 조회하기(내용보기, 상세보기)
+	public boolean memberCheck(String id) {
+		
+		String query = " SELECT id "
+				+ " FROM membership "
+				+ " WHERE id=? ";
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, id);
+			rs = psmt.executeQuery();
+
+			if(rs.next()) {
+				return true;
+			}else {
+				return false;
+			}
+			
+		} catch (Exception e) {
+			System.out.println("아이디 중복체크 중 예외발생");
+			e.printStackTrace();
+			return false;
+		}
+	
+		
+	}
+	
+	
+	
 	// 게시물 조회하기(내용보기, 상세보기)
 	public Map<String, String> getMember(String id, String pass) {
 		

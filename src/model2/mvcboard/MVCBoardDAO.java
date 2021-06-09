@@ -42,18 +42,46 @@ public class MVCBoardDAO extends ConnectionPool{
 	
 	
 	
+	public int flagCount(Map<String, Object> map) {
+		int flagcount = 0;
+		
+		String query = " SELECT COUNT(*) FROM multiMVCBoard ";
+		
+		query += " WHERE flag " 
+				+ " LIKE '%" +map.get("flag") + "%' "; 	
+		
+		
+		try {
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(query);
+			rs.next();
+			flagcount = rs.getInt(1); 
+			System.out.println("flagcount :"+flagcount);
+		} catch (Exception e) {
+			System.out.println("게시물 카운트 중 예외발생");
+			e.printStackTrace();
+		}
+		
+		return flagcount;
+		
+	}
+	
+	
+	
+	
+	
 	public List<MVCBoardDTO> selectListPage(Map<String, Object> map){
 		List<MVCBoardDTO> bbs = new Vector<MVCBoardDTO>();
 		
 		String query = " " +
-				"select * from multiMVCBoard ";
+				"select * from multiMVCBoard where ";
 		
 		if(map.get("searchWord")!=null) {
-			query += " where " + map.get("searchField") 
-					+ " like '%" + map.get("searchWord") + "%' "
-					+ " and flag like '%"+map.get("flag")+"%' ";
+			query += " " + map.get("searchField") 
+					+ " like '%" + map.get("searchWord") + "%' and ";
+					
 		}
-		query += " where flag like '%"+map.get("flag")+"%' "+
+		query += " flag like '%"+map.get("flag")+"%' "+
 				" order by idx desc limit ?, ? "; 
 		System.out.println("페이지 쿼리 : "+query);
 		try {

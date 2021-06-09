@@ -57,12 +57,13 @@ public class ListController extends HttpServlet{
 		
 
 		// 게시물 개수 카운트
-		int totalCount = dao.selectCount(map);
+		map.put("flag", flag);
+		int flagCount = dao.flagCount(map);
 
 		/* 페이지 처리 start */
 		int pageSize = BoardConfig.PAGE_PER_SIZE; // 한페이지에 출력할 게시물의 개수
 		int blockPage = BoardConfig.PAGE_PER_BLOCK; // 한 블럭당 출력할 페이지번호의 개수
-		int totalPage = (int)Math.ceil((double)totalCount/pageSize); // 전체 페이지 수 계산
+		int totalPage = (int)Math.ceil((double)flagCount/pageSize); // 전체 페이지 수 계산
 		// 페이지 번호 처리
 		int pageNum = 1; // 목록 첫 진입시에는 무조건 1페이지로 지정
 		String pageTemp = request.getParameter("pageNum"); 
@@ -75,7 +76,6 @@ public class ListController extends HttpServlet{
 
 		map.put("start", start);
 		map.put("end", end);
-		map.put("flag", flag);
 		System.out.println(start+" = "+end);
 		/* 페이지 처리 end */
 
@@ -83,12 +83,26 @@ public class ListController extends HttpServlet{
 		// 실제 출력할 레코드를 가져옴
 		List<MVCBoardDTO> boardLists = dao.selectListPage(map);
 		dao.close();
-		
+		String pagingImg = "";
 		// View에 출력할 페이지 번호를 문자열로 저장
-		String pagingImg = BoardPage.pagingImg(totalCount, pageSize, blockPage, pageNum, "../mvcboard/list.do");
+		if(flag=="notice") {
+			pagingImg = BoardPage.pagingImg(flagCount, pageSize, blockPage, pageNum, "../Project02/notice.list");
+			
+		}else if(flag=="schedule") {
+			pagingImg = BoardPage.pagingImg(flagCount, pageSize, blockPage, pageNum, "../Project02/schedule.list");
+			
+		}else if(flag=="photo") {
+			pagingImg = BoardPage.pagingImg(flagCount, pageSize, blockPage, pageNum, "../Project02/photo.list");
+			
+		}else if(flag=="people") {
+			pagingImg = BoardPage.pagingImg(flagCount, pageSize, blockPage, pageNum, "../Project02/people.list");
+			
+		}
+		
+		
 		
 		map.put("pagingImg", pagingImg); // 페이지 번호 문자열
-		map.put("totalCount", totalCount); // 게시물의 개수
+		map.put("flagCount", flagCount); // 게시물의 개수
 		map.put("pageSize", pageSize); // 페이지 수
 		map.put("pageNum", pageNum); // 현재 페이지 번호
 		
@@ -105,7 +119,7 @@ public class ListController extends HttpServlet{
 			/* session.removeAttribute("flag"); */
 			request.getRequestDispatcher("/space/spaceSub03.jsp").forward(request, resp);
 		}else if(flag=="people") {
-			request.getRequestDispatcher("").forward(request, resp);
+			request.getRequestDispatcher("/community/community.jsp").forward(request, resp);
 			
 		}
 

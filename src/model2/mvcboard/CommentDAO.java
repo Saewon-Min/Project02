@@ -60,13 +60,13 @@ public class CommentDAO extends ConnectionPool{
 				
 				CommentDTO dto = new CommentDTO();
 				
-				dto.setIdx(rs.getString(1));
-				dto.setBoard_idx(rs.getString(2));
-				dto.setName(rs.getString(3));
-				dto.setPass(rs.getString(4));
-				dto.setComments(rs.getString(5).replaceAll("\r\n", "<br/>"));
+				dto.setIdx(rs.getString("idx"));
+				dto.setBoard_idx(rs.getString("board_idx"));
+				dto.setName(rs.getString("name"));
+				dto.setPass(rs.getString("pass"));
+				dto.setComments(rs.getString("comments").replaceAll("\r\n", "<br/>"));
 				//dto.setCommentsEdit(rs.getString(5));
-				dto.setPostdate(rs.getString(6));
+				dto.setPostdate(rs.getString("postdate"));
 				
 				comments.add(dto);
 				

@@ -1,6 +1,7 @@
 package project02;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import homework.MembershipDAO;
 import model.MemberDAO;
+import utils.JSFunction;
 
 @WebServlet("*.log")
 public class loginController  extends HttpServlet{
@@ -60,13 +62,19 @@ public class loginController  extends HttpServlet{
 				
 				
 				// 로그인 페이지로 이동
-				response.sendRedirect("./login/login.jsp");
+				/* response.sendRedirect("./login/login.jsp"); */
+				response.sendRedirect("./main/main.jsp"); 
 				
 			}else{
+				JSFunction.alertBack(response, "일치하는 회원정보가 없습니다.");
+				
 				// 로그인 실패시 request 영역에 속성을 저장한다.
-				request.setAttribute("ERROR_MSG", "등록된 회원이 아닙니다.");
+				//request.setAttribute("ERROR_MSG", "일치하는 회원정보가 없습니다.");
 				// 로그인 페이지로 포워드(전달)한다.
-				request.getRequestDispatcher("./login/login.jsp").forward(request, response);
+				
+				//request.getRequestDispatcher("./main/main.jsp").forward(request, response);
+				 
+				 
 			}
 			
 	}
@@ -81,7 +89,7 @@ public class loginController  extends HttpServlet{
 		// 세션영역 전체를 한꺼번에 삭제
 		session.invalidate();
 		
-		response.sendRedirect("./login/login.jsp");
+		response.sendRedirect("./main/main.jsp");
 	}
 	
 	

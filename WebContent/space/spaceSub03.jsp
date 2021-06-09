@@ -72,7 +72,7 @@
 
 		<tr align="center">
 			<td>
-				${map.totalCount - (((map.pageNum-1) * map.pageSize)
+				${map.flagCount - (((map.pageNum-1) * map.pageSize)
 					+ loop.index) }
 			</td>
 			<td align="left">
@@ -96,20 +96,16 @@
 	</c:otherwise>
 </c:choose>
 	</table>
-	<table border="1" width="90%">
-
-	<tr align="center">
-		<td>
-			<!-- 컨트롤러에서 map에 저장한 페이지 번호 문자열 출력 -->
-			${map.pagingImg }
-		</td>
-			<td width="100">
-				<button type="button" onclick="location.href='../mvcboard/write.do';">
-				글쓰기
-				</button>
-			</td>
-		</tr>
-	</table>	
+	<ul class="pagination d-flex justify-content-center" >
+	
+	${map.pagingImg }
+	
+	</ul>
+	<ul class="pagination d-flex justify-content-end" >	
+	<button type="button" class="btn btn-warning" onclick="location.href='../spacesub03.write';" style="width:130px; ">
+	글쓰기
+	</button>
+	</ul>	
 			</div>
         	</div>
 

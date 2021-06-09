@@ -28,6 +28,5 @@
         <link href="../bootstrap4.6.0/css/css/styles.css" rel="stylesheet" />
         
         
-        
-        
+  
 </head>

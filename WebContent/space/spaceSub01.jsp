@@ -7,18 +7,19 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="UTF-8">
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-
-
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="../bootstrap4.6.0/css/styles.css" rel="stylesheet" />
+ <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+ <meta name="description" content="" />
+ <meta name="author" content="" />
 
 
  <!-- Core theme CSS (includes Bootstrap)-->
+ <link href="../bootstrap4.6.0/css/styles.css" rel="stylesheet" />
+
+
 </head>
 <body>
 
@@ -80,7 +81,7 @@
 
 		<tr align="center">
 			<td>
-				${map.totalCount - (((map.pageNum-1) * map.pageSize)
+				${map.flagCount - (((map.pageNum-1) * map.pageSize)
 					+ loop.index) }
 			</td>
 			<td align="left">
@@ -104,18 +105,23 @@
 		</c:otherwise>
 		</c:choose>
 	</table>
-	<table border="1" width="90%">
 
-	<tr align="center">
-		<td>
-			<!-- 컨트롤러에서 map에 저장한 페이지 번호 문자열 출력 -->
-			${map.pagingImg }
-		</td>
+	<ul class="pagination d-flex justify-content-center" >
 	
-		</tr>
-	</table>	
-			</div>
-        	</div>
+	${map.pagingImg }
+	
+	</ul>
+	<ul class="pagination d-flex justify-content-end" >	
+	<button type="button" class="btn btn-warning" onclick="location.href='../spacesub01.write';" style="width:130px; ">
+	글쓰기
+	</button>
+	</ul>
+	
+	
+
+	
+	</div>
+      	</div>
         	
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->

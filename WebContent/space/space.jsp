@@ -45,7 +45,7 @@ $(function(){
                 <div class="row text-center" style="background-color:white">
                     <div class="col-md-4" id="notice">
                         <span class="fa-stack fa-4x">
-                           <a href="../space/spaceSub01.jsp">
+                           <a href="../Project02/notice.list">
                            <i class="fas fa-circle fa-stack-2x text-primary"></i>
                             <i class="fas fa-bell fa-stack-1x fa-inverse"></i>
 							</a>
@@ -54,7 +54,7 @@ $(function(){
                     </div>
                     <div class="col-md-4" id="schedule">
                         <span class="fa-stack fa-4x">
-                        	<a href="../space/spaceSub02.jsp">
+                        	<a href="../Project02/schedule.list">
                             <i class="fas fa-circle fa-stack-2x text-primary"></i>
                             <i class="fas fa-calendar-alt fa-stack-1x fa-inverse"></i>
                             </a>
@@ -63,7 +63,7 @@ $(function(){
                     </div>
                     <div class="col-md-4" id="photo">
                         <span class="fa-stack fa-4x">
-                        	<a href="../space/spaceSub03.jsp">
+                        	<a href="../Project02/photo.list">
                             <i class="fas fa-circle fa-stack-2x text-primary"></i>
                             <i class="fas fa-photo-video fa-stack-1x fa-inverse"></i>
                             </a>

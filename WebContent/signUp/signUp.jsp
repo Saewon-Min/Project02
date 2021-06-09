@@ -46,6 +46,8 @@
         .w06{width:80px;}
         .s01{width:140px;}
         .s02{width:70px;}
+        
+
     </style>
 
    
@@ -87,7 +89,7 @@
         }
         else{
             fn.user_id.readOnly = true;
-            window.open("./id_overapping.jsp?id="+fn.user_id.value,
+            window.open("./id_overapping.jsp?user_id="+fn.user_id.value,
                     "idover", "width=500,height=300");
         }
     }

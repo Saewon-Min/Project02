@@ -61,7 +61,50 @@
 width:70px;
 
 }
+.txtpwd  {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+
 </style>
+
+<%@ include file="../include/logincss.jsp" %>
+<script>
+// Get the modal
+var modal = document.getElementById('id01');
+
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+function loginValidate(fn){
+	if(!fn.user_id.value){
+		alert("아이디를 입력하세요");
+		fn.user_id.focus();
+		return false;
+	}
+	if(fn.user_pw.value==""){
+		alert("패스워드를 입력하세요");
+		fn.user_pw.focus();
+		return false;
+	}
+	
+}
+
+
+
+	
+	
+</script>
 
 </head>
     
@@ -106,7 +149,7 @@ width:70px;
 	                   </button>
 	                   
 			           	<div class="dropdown-content">
-				           	<a href="">반려인게시판</a>
+				           	<a href="../Project02/people.list">반려인게시판</a>
 
 	               		</div>
 	                </div>
@@ -137,17 +180,117 @@ width:70px;
                 	
                </li></ul>
                <ul class="navbar-nav ml-auto">
+					<%
+					/* 
+						session영역에 회원 인증 정보가 없다면 로그아웃 상태이므로
+						로그인 폼을 출력한다.
+					*/
+					if(session.getAttribute("USER_ID")==null){
+					%>
+
+					
                <li class="nav-item">
-                <div>
+				<div>
+					
+					<div  align="center">
+					<button id="btnModal" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">로그인</button>
+					</div>
+					<div id="id01" class="modal">
+					  
+					  <form class="modal-content animate"  method="post" action="../login.log" onsubmit="return loginValidate(this);">
+					    <div class="imgcontainer">
+					      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+					
+					    </div>
+					
+					    <div class="container" style="width:50%">
+					      <label for="uname"><b>UserID</b></label>
+					      
+					      	<span style="color:red; font-size:1.5em;" id="logDisplay">		
+							
+								<%-- <%=request.getAttribute("ERROR_MSG")==null ?
+									"" : request.getAttribute("ERROR_MSG") %> --%>
+							</span>
+					      <input class="txtpwd" type="text" placeholder="Enter Username" name="user_id" required>
+					
+					      <label for="psw"><b>Password</b></label>
+					      <input class="txtpwd"  type="password" placeholder="Enter Password" name="user_pw" required>
+					        
+					      <button type="submit" id="subbtn">Login</button>
+					      <label>
+					        <input type="checkbox" checked="checked" name="remember"> Remember me
+					      </label>
+					    </div>
+					
+					    <div class="container" style="background-color:#f1f1f1">
+					      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+					      <span class="psw">Forgot <a href="#">password?</a></span>
+					    </div>
+					  </form>
+					</div>
+				</div>
+				</li>
+			   <li class="nav-item">
+				<div class="dropdown">
+				<button class="dropbtn" onclick="location.href='../signUp/signUp.jsp';">
+					회원가입
+				</button>
+				</div>
+				</li> 
+				</ul>
+					<% }else{ %>
+					<ul class="navbar-nav ml-auto">
+					
+					<li class="nav-item">
+					<div>
+					
+					<div align="center">
+					 <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">로그아웃</button>
+					</div>
+					<div id="id01" class="modal">
+					  
+					  <form class="modal-content animate" action="../logout.log" >
+					    <div class="imgcontainer">
+					      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+					
+					    </div>
+					
+					    <div class="container" align="center" >
+					    	<p>
+							${sessionScope.USER_NAME } 회원님
+										<br />
+										로그아웃 하시겠습니까?
+									<br />
+									
+					    	</p>
+					      <button type="submit">Logout</button>
+					
+					    </div>
+					
+					
+					  </form>
+					</div>
+					</div>
+				</li>
+				<li class="nav-item">
+
+				<div class="dropdown">
+				<button class="dropbtn" onclick="location.href='../signUp/signEdit.jsp';">
+					회원정보수정
+				</button>
+				</div>
+				</li>
+					<% } %>
+					
+				
+<!--                <li class="nav-item">
+                	<div>
                		<a href="../login/login.jsp" style="color:white; text-decoration: none">로그인</a>
 			    	</div>
-			    </li>
-			    <li class="nav-item">
-			    	<div>
-			    	
-			    	<a href="../signUp/signUp.jsp" style="color:white; text-decoration: none">회원가입</a>
-               </div>
-               </li></ul>
+			    </li>-->
+
+               
+               </ul>
 	       </div>
            </div>
       

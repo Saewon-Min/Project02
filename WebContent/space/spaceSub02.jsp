@@ -74,7 +74,7 @@
 
 		<tr align="center">
 			<td>
-				${map.totalCount - (((map.pageNum-1) * map.pageSize)
+				${map.flagCount - (((map.pageNum-1) * map.pageSize)
 					+ loop.index) }
 			</td>
 			<td align="left">
@@ -98,23 +98,21 @@
 	</c:otherwise>
 </c:choose>
 	</table>
-	<table border="1" width="90%">
 
-	<tr align="center">
-		<td>
-			<!-- 컨트롤러에서 map에 저장한 페이지 번호 문자열 출력 -->
-			${map.pagingImg }
-		</td>
-			<td width="100">
-				<button type="button" onclick="location.href='../spacesub02.write';">
-				글쓰기
-				</button>
-			</td>
-		</tr>
-	</table>	
-			</div>
-        	</div>
-        	        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+	<ul class="pagination d-flex justify-content-center" >
+	
+	${map.pagingImg }
+	
+	</ul>
+	<ul class="pagination d-flex justify-content-end" >	
+	<button type="button" class="btn btn-warning" onclick="location.href='../spacesub02.write';" style="width:130px; ">
+	글쓰기
+	</button>
+	</ul>
+	
+	</div>
+      	</div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="../bootstrap4.6.0/js/js/scripts.js"></script>
 
