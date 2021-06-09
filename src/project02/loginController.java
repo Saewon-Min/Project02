@@ -10,9 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.jsp.JspWriter;
 
 import homework.MembershipDAO;
 import model.MemberDAO;
+import utils.CookieManager;
 import utils.JSFunction;
 
 @WebServlet("*.log")
@@ -35,11 +37,34 @@ public class loginController  extends HttpServlet{
 	public void login(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		
-
+			
 			
 			String id = request.getParameter("user_id");
 			String pw = request.getParameter("user_pw");
 		
+			String remember = request.getParameter("remember");
+			
+			
+			if("must".equals(id) && "1234".equals(pw)){
+				// 아이디 저장 체크박스에 체크한 경우 쿠키를 생성한다.
+				if(remember !=null && remember.equals("Y")){
+					// 쿠키명 : loginId, 쿠키값 : 입력한 아이디, 유효시간 : 1일
+					CookieManager.makeCookie(response, "loginId", id, 86400*30);
+				
+				// 체크박스에 체크하지 않은 경우 쿠키를 삭제한다.
+				}else{
+					CookieManager.deleteCookie(response, "loginId");
+				}
+				// 메세지를 경고창으로 띄우고 로그인 페이지로 이동한다.
+				JSFunction.alertLocation(response, "로그인 성공", "../main/main.jsp");
+
+			// 로그인 실패하는 경우
+			}else{
+				JSFunction.alertBack(response, "로그인 실패");
+			}
+			
+			
+			
 			HttpSession session = request.getSession();
 			// DAO객체 생성 및 DB연결
 			MembershipDAO dao = new MembershipDAO();
