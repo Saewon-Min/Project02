@@ -1,3 +1,5 @@
+<%@page import="utils.JSFunction"%>
+<%@page import="utils.CookieManager"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
@@ -135,9 +137,9 @@ function loginValidate(fn){
 	                   </button>
 	                   
 			           	<div class="dropdown-content">
-			           		<a href="../Project02/notice.list">공지사항</a>
-				           	<a href="../Project02/schedule.list" >정모일정</a>
-				           	<a href="../Project02/photo.list">사진게시판</a>
+			           		<a href="../Project02/notice.list?flag=notice">공지사항</a>
+				           	<a href="../Project02/schedule.list?flag=schedule" >정모일정</a>
+				           	<a href="../Project02/photo.list?flag=photo">사진게시판</a>
 	               		</div>
 	                </div>
 	              </li>
@@ -149,7 +151,7 @@ function loginValidate(fn){
 	                   </button>
 	                   
 			           	<div class="dropdown-content">
-				           	<a href="../Project02/people.list">반려인게시판</a>
+				           	<a href="../Project02/people.list?flag=people">반려인게시판</a>
 
 	               		</div>
 	                </div>
@@ -186,9 +188,20 @@ function loginValidate(fn){
 						로그인 폼을 출력한다.
 					*/
 					if(session.getAttribute("USER_ID")==null){
+						
 					%>
 
-					
+					<% 
+					// 체크박스 체크용 변수
+					String cookieCheck = "";
+					// 쿠키명이 loginId 인 쿠키값을 읽어온다.
+					String loginId =CookieManager.readCookie(request, "loginId");
+					// 빈값이 아니면
+					if(!loginId.equals("")){
+						// 체크용 변수에 checked를 할당
+						cookieCheck = "checked";
+					}
+					%>
                <li class="nav-item">
 				<div>
 					
@@ -211,14 +224,14 @@ function loginValidate(fn){
 								<%-- <%=request.getAttribute("ERROR_MSG")==null ?
 									"" : request.getAttribute("ERROR_MSG") %> --%>
 							</span>
-					      <input class="txtpwd" type="text" placeholder="Enter Username" name="user_id" required>
+					      <input class="txtpwd" type="text" placeholder="Enter Username" name="user_id" required value="<%=loginId%>" />
 					
 					      <label for="psw"><b>Password</b></label>
 					      <input class="txtpwd"  type="password" placeholder="Enter Password" name="user_pw" required>
 					        
 					      <button type="submit" id="subbtn">Login</button>
 					      <label>
-					        <input type="checkbox" checked="checked" name="remember"> Remember me
+					        <input type="checkbox"  name="save_check" value="Y" <%=cookieCheck %>> Remember me
 					      </label>
 					    </div>
 					

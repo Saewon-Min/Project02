@@ -12,11 +12,16 @@
      <link href="../bootstrap4.6.0/css/styles.css" rel="stylesheet" />
 </head>
 <body>
+<%
+
+String id = (String)session.getAttribute("USER_ID");
+
+%>
 	<div class="jumbotron">
 	<br /><br /><br /><br /><br />
      <div class="text-center" style="vertical-align: middle" >
        	<br />
-           <h1 class="section-heading text-uppercase" >커뮤니티</h1>
+           <h1 class="section-heading text-uppercase" >반려인게시판</h1>
            <br />
        </div>
 
@@ -28,6 +33,8 @@
 <div class="container-fluid">
 			<form method="get">
 				<table width="90%" style="border:none" >
+			<input type="hid den" name="user_id" value="<%=id %>" />
+				
 				<tr>
 					<td align='center'>
 						<select name="searchField">
@@ -70,7 +77,7 @@
 					+ loop.index) }
 			</td>
 			<td align="left">
-				<a href="../mvcboard/view.do?idx=${row.idx }">${row.title }</a>
+				<a href="../mvcboard/view.do?idx=${row.idx }&flag=people">${row.title }</a>
 			</td>
 			<td>${row.name }</td>
 			<td>${row.visitcount }</td>
@@ -96,7 +103,7 @@
 	
 	</ul>
 	<ul class="pagination d-flex justify-content-end" >	
-	<button type="button" class="btn btn-warning" onclick="location.href='../community.write';" style="width:130px; ">
+	<button type="button" class="btn btn-warning" onclick="location.href='../Project02/community.write?flag=people';" style="width:130px; ">
 	글쓰기
 	</button>
 	</ul>

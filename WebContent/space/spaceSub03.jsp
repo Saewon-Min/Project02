@@ -18,6 +18,10 @@
         <link href="../bootstrap4.6.0/css/styles.css" rel="stylesheet" />
 </head>
 <body>
+<%
+String id = (String)session.getAttribute("USER_ID");
+
+%>
 	<div class="jumbotron">
 	<br /><br /><br /><br /><br />
      <div class="text-center" style="vertical-align: middle" >
@@ -34,6 +38,7 @@
 <div class="container-fluid">
 			<form method="get">
 				<table width="90%" style="border:none">
+				<input type="hid den" name="user_id" value="<%=id %>" />
 				<tr>
 					<td align='center'>
 						<select name="searchField">
@@ -76,7 +81,7 @@
 					+ loop.index) }
 			</td>
 			<td align="left">
-				<a href="../mvcboard/view.do?idx=${row.idx }">${row.title }</a>
+				<a href="../mvcboard/view.do?idx=${row.idx }&flag=photo">${row.title }</a>
 			</td>
 			<td>${row.name }</td>
 			<td>${row.visitcount }</td>
@@ -102,7 +107,7 @@
 	
 	</ul>
 	<ul class="pagination d-flex justify-content-end" >	
-	<button type="button" class="btn btn-warning" onclick="location.href='../spacesub03.write';" style="width:130px; ">
+	<button type="button" class="btn btn-warning" onclick="location.href='../Project02/spacesub03.write?flag=photo';" style="width:130px; ">
 	글쓰기
 	</button>
 	</ul>	

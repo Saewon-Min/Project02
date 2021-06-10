@@ -34,7 +34,7 @@ function loginValidate(fn){
 		fn.user_pw.focus();
 		return false;
 	}
-
+}
 </script>
 
 </head>
@@ -44,17 +44,7 @@ function loginValidate(fn){
 
 <br /><br /><br /><br /><br /><br /><br /><br />
 
-<%
-// 체크박스 체크용 변수
-String cookieCheck = "";
-// 쿠키명이 loginId 인 쿠키값을 읽어온다.
-String loginId =CookieManager.readCookie(request, "loginId");
-// 빈값이 아니면
-if(!loginId.equals("")){
-	// 체크용 변수에 checked를 할당
-	cookieCheck = "checked";
-}
-%>
+
 
 <!-- 
 	로그인에 실패한 경우 request영역에 속성을 저장한 후
@@ -73,6 +63,18 @@ if(!loginId.equals("")){
 	로그인 폼을 출력한다.
 */
 if(session.getAttribute("USER_ID")==null){
+
+%>
+<% 
+// 체크박스 체크용 변수
+String cookieCheck = "";
+// 쿠키명이 loginId 인 쿠키값을 읽어온다.
+String loginId =CookieManager.readCookie(request, "loginId");
+// 빈값이 아니면
+if(!loginId.equals("")){
+	// 체크용 변수에 checked를 할당
+	cookieCheck = "checked";
+}
 %>
 <h2 align="center">로그인 페이지</h2>
 <div  align="center">
@@ -88,14 +90,15 @@ if(session.getAttribute("USER_ID")==null){
 
     <div class="container">
       <label for="uname"><b>Username</b></label>
-      <input type="text" placeholder="Enter Username" name="user_id" required value="<%=loginId%>">
+      <input type="text" placeholder="Enter Username" name="user_id" required value="<%=loginId%>" />
 
       <label for="psw"><b>Password</b></label>
       <input type="password" placeholder="Enter Password" name="user_pw" required>
         
       <button type="submit">Login</button>
       <label>
-        <input type="checkbox" checked="checked" name="remember" value="Y" <%=cookieCheck %>> Remember me
+        <input type="checkbox" name="save_check" value="Y" <%=cookieCheck %>/> Remember me
+
       </label>
     </div>
 
@@ -120,8 +123,7 @@ if(session.getAttribute("USER_ID")==null){
     </div>
 
     <div class="container" align="center" >
-    	<p>
-		${sessionScope.USER_NAME } 회원님
+    	<p>${sessionScope.USER_NAME } 회원님
 					<br />
 					로그아웃 하시겠습니까?
 				<br />

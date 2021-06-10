@@ -103,7 +103,8 @@ public class MVCBoardDAO extends ConnectionPool{
 				dto.setDowncount(rs.getInt("downcount"));
 				dto.setPass(rs.getString("pass"));
 				dto.setVisitcount(rs.getInt("visitcount"));
-				dto.setId(rs.getString("id"));
+				//dto.setId(rs.getString("id"));
+				//dto.setFlag(rs.getString("flag"));
 				bbs.add(dto);
 				
 				
@@ -123,17 +124,19 @@ public class MVCBoardDAO extends ConnectionPool{
 		int result = 0;
 		try {
 			String query = " INSERT INTO multiMVCBoard ( "
-				 +  " name, title, content, ofile,sfile,pass ) "
+				 +  "id, name, title, content, ofile,sfile,pass,flag ) "
 				 + " VALUES ( "
-				 + " ?, ?, ?, ?, ?, ? ) ";
+				 + " ? ,?, ?, ?, ?, ?, ?,? ) ";
 			
 			psmt = con.prepareStatement(query);
-			psmt.setString(1, dto.getName());
-			psmt.setString(2, dto.getTitle());
-			psmt.setString(3, dto.getContent());
-			psmt.setString(4, dto.getOfile());
-			psmt.setString(5, dto.getSfile());
-			psmt.setString(6, dto.getPass());
+			psmt.setString(1, dto.getId());
+			psmt.setString(2, dto.getName());
+			psmt.setString(3, dto.getTitle());
+			psmt.setString(4, dto.getContent());
+			psmt.setString(5, dto.getOfile());
+			psmt.setString(6, dto.getSfile());
+			psmt.setString(7, dto.getPass());
+			psmt.setString(8, dto.getFlag());
 			
 			result = psmt.executeUpdate();
 		
@@ -169,6 +172,7 @@ public class MVCBoardDAO extends ConnectionPool{
 				dto.setPass(rs.getString("pass"));
 				dto.setVisitcount(rs.getInt("visitcount"));
 				dto.setId(rs.getString("id"));
+				dto.setFlag(rs.getString("flag"));
 			
 			}
 

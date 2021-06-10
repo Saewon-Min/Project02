@@ -194,16 +194,41 @@ public class MembershipDAO extends ConnectionPool{
 	}
 	
 	
+	// 게시물 조회하기(내용보기, 상세보기)
+	public boolean loginCheck(String id,String pass) {
+		
+		String query = " SELECT id, pass "
+				+ " FROM membership "
+				+ " WHERE id=? and pass=?";
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, id);
+			psmt.setString(2, pass);
+			rs = psmt.executeQuery();
+
+			if(rs.next()) {
+				return true;
+			}else {
+				return false;
+			}
+			
+		} catch (Exception e) {
+			System.out.println("로그인 id, pass 체크 중 예외발생");
+			e.printStackTrace();
+			return false;
+		}
+	
+		
+	}
+	
+	
 	
 	// 게시물 조회하기(내용보기, 상세보기)
 	public Map<String, String> getMember(String id, String pass) {
 		
 		Map<String, String> map = new HashMap<String,String>();
 		
-		/* 
-		회원의 이름을 가져오기 위해
-		회원테이블과 게시판 테이블을 조인하여 조회함
-		*/
+
 		String query = " SELECT id, pass, name "
 				+ " FROM membership "
 				+ " WHERE id=? and pass=?";

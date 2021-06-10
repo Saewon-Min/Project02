@@ -12,15 +12,34 @@ import javax.servlet.http.HttpSession;
 import fileupload.FileUtil;
 import utils.JSFunction;
 
-@WebServlet("/mvcboard/pass.do")
+@WebServlet("*.editpass")
 public class PassController extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		HttpSession session = req.getSession();
+		
+		if(session.getAttribute("USER_ID")==null){
+			JSFunction.alertBack(resp, "로그인 후 이용해주세요");
+			return;
+		}
+		
+		// ../notice.editpass  ../schedule.editpass  ../photo.editpass  ../people.editpass
+		
 		// 파라미터를 request 내장객체로 받은 후 request 영역에 저장
 		req.setAttribute("mode", req.getParameter("mode"));
-		req.getRequestDispatcher("/14MVCBoard/Pass.jsp").forward(req, resp);
-	
+		String flag = req.getParameter("flag");
+		System.out.println(flag);
+		if(flag.equals("notice")) {
+			req.getRequestDispatcher("/common/Pass.jsp?flag=notice").forward(req, resp);
+		}else if(flag.equals("schedule")) {
+			req.getRequestDispatcher("/common/Pass.jsp?flag=schedule").forward(req, resp);
+		}else if(flag.equals("photo")) {
+			req.getRequestDispatcher("/common/Pass.jsp?flag=photo").forward(req, resp);
+		}else if(flag.equals("people")) {
+			req.getRequestDispatcher("/common/Pass.jsp?flag=people").forward(req, resp);
+		}
 	}
 	
 	@Override
@@ -29,7 +48,8 @@ public class PassController extends HttpServlet{
 		String idx = req.getParameter("idx");
 		String mode = req.getParameter("mode");
 		String pass = req.getParameter("pass");
-	
+		String flag = req.getParameter("flag");
+		
 		MVCBoardDAO dao =  new MVCBoardDAO();
 		/*
 		게시물의 일련번호와 비밀번호를 통해 해당 게시물이 있는지
@@ -42,17 +62,12 @@ public class PassController extends HttpServlet{
 		if(confirmPass == true) {
 			// 수정
 			if(mode.equals("edit")) {
-				/*
-				서블릿에서 session 내장객체를 아래와 같이 얻을 수 있다.
-				검증에 성공한 비밀번호를 session영역에 저장한 후
-				수정 폼으로 이동한다. 페이지 이동시 request영역은
-				공유되지 않으므로 여기서는 session영역을 사용한다.
-				 */
+				
 				HttpSession session = req.getSession();
 				session.setAttribute("pass", pass);
 				
-				// 수정페이지로 이동한다.
-				resp.sendRedirect("../mvcboard/edit.do?idx="+idx);
+				
+				resp.sendRedirect("../mvcboard/edit.do?idx="+idx+"&flag="+flag);
 			
 			// 삭제
 			}else if(mode.equals("delete")) {
@@ -69,7 +84,19 @@ public class PassController extends HttpServlet{
 					String saveFileName = dto.getSfile();
 					FileUtil.deleteFile(req,"/Uploads",saveFileName);
 				}
-				JSFunction.alertLocation(resp, "삭제되었습니다.", "../mvcboard/list.do");
+				
+				if(flag.equals("notice")) {
+					JSFunction.alertLocation(resp, "게시물이 삭제되었습니다.","../Project02/notice.list");
+				}else if(flag.equals("schedule")) {
+					JSFunction.alertLocation(resp, "게시물이 삭제되었습니다.","../Project02/schedule.list");
+				}else if(flag.equals("photo")) {
+					JSFunction.alertLocation(resp, "게시물이 삭제되었습니다.","../Project02/photo.list");
+				}else if(flag.equals("people")) {
+					JSFunction.alertLocation(resp, "게시물이 삭제되었습니다.","../Project02/people.list");
+				}
+				
+				
+				
 				
 			}
 			

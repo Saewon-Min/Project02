@@ -84,13 +84,13 @@
 		    
 		    <div align="right">
 
-				<button type="button" onclick="location.href='../Project02/notice.editpass?mode=edit&idx=${param.idx}&flag=notice';" style="width:auto;" class="btn btn-primary">
+				<button type="button" onclick="location.href='../Project02/schedule.editpass?mode=edit&idx=${param.idx}&flag=schedule';" style="width:auto;" class="btn btn-primary">
 				수정하기
 				</button>
-				<button type="button" onclick="location.href='../Project02/notice.editpass?mode=delete&idx=${param.idx}&flag=notice';" style="width:auto;" class="btn btn-primary">
+				<button type="button" onclick="location.href='../Project02/schedule.editpass?mode=delete&idx=${param.idx}&flag=schedule';" style="width:auto;" class="btn btn-primary">
 					삭제하기
 				</button>
-				<button type="button" onclick="location.href='../Project02/notice.list?flag=notice';" style="width:auto; " class="btn btn-primary">
+				<button type="button" onclick="location.href='../Project02/schedule.list?flag=schedule';" style="width:auto; " class="btn btn-primary">
 					리스트바로가기
 				</button>
 

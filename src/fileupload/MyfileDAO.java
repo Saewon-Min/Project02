@@ -23,9 +23,9 @@ public class MyfileDAO extends JConnect{
 		
 		try {
 			String query = " insert into myfile ( "
-					+ " idx, name, title, cate, ofile, sfile ) "
+					+ "  name, title, cate, ofile, sfile ) "
 					+ " values ( "
-					+ " seq_board_num.nextval,? ,? ,? ,?, ? ) ";
+					+ " ? ,? ,? ,?, ? ) ";
 			
 			psmt = con.prepareStatement(query);
 			psmt.setString(1, dto.getName());

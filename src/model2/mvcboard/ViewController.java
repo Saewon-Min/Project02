@@ -19,6 +19,8 @@ public class ViewController extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String idx = req.getParameter("idx");
+		String flag = req.getParameter("flag");
+		
 		MVCBoardDAO dao = new MVCBoardDAO();
 		dao.updateVisitCount(idx); // 조회수 증가
 		MVCBoardDTO dto = dao.selectView(idx); // 게시물 조회
@@ -38,8 +40,15 @@ public class ViewController extends HttpServlet{
 		
 		req.setAttribute("comments", comments);
 		dao2.close();
-		
-		req.getRequestDispatcher("/space/spaceSub01View.jsp").forward(req, resp);
+		if(flag.equals("notice")) {
+			req.getRequestDispatcher("/space/spaceSub01View.jsp").forward(req, resp);
+		}else if(flag.equals("schedule")) {
+			req.getRequestDispatcher("/space/spaceSub02View.jsp").forward(req, resp);
+		}else if(flag.equals("photo")) {
+			req.getRequestDispatcher("/space/spaceSub03View.jsp").forward(req, resp);
+		} else if(flag.equals("people")) {
+			req.getRequestDispatcher("/community/communityView.jsp").forward(req, resp);
+		}  
 		
 		
 	}

@@ -17,20 +17,19 @@ public class JConnect {
 	
 	public JConnect() {
 		try {
-			Class.forName("oracle.jdbc.OracleDriver");
-			String url = "jdbc:oracle:thin:@localhost:1521:xe";
-			String id = "kosmo";
-			String pass = "1234";
+			Class.forName("org.mariadb.jdbc.Driver");
+
+			String url = "jdbc:mariadb://127.0.0.1:3307/kosmo_db";
+			String id ="kosmo_user";  // 계정이름
+			String pass = "1234";  // 계정비번
+			
 			con = DriverManager.getConnection(url,id,pass);
-			System.out.println("JConnect 연결성공");
 			
+			System.out.println("MariaDB 연결성공");
 			
-			
-			
-		} catch (Exception e) {
-			System.out.println("JConnect 연결시 예외 발생");
+		}catch (Exception e){
+			System.out.println("MariaDB 연결시 예외발생");
 			e.printStackTrace();
-		
 		}
 		
 	}	
@@ -38,10 +37,10 @@ public class JConnect {
 	public JConnect(ServletContext application){
 		try {
 			
-			String drv = application.getInitParameter("JDBCDriver");
-			String url = application.getInitParameter("ConnectionURL");
-			String id = application.getInitParameter("OracleId");
-			String pwd = application.getInitParameter("OraclePwd");
+			String drv = application.getInitParameter("MariaJDBCDriver");
+			String url = application.getInitParameter("MariaConnectURL");
+			String id = application.getInitParameter("MariaUser");
+			String pwd = application.getInitParameter("MariaPass");
 			
 			Class.forName(drv);
 			
@@ -66,7 +65,7 @@ public class JConnect {
 			if(con!=null) con.close();
 			
 		}catch(Exception e) {
-			System.out.println("Oracle 자원 반납시 예외발생");
+			System.out.println("JConnect 자원 반납시 예외발생");
 		}
 	}
 		

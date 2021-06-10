@@ -19,7 +19,11 @@
  <!-- Core theme CSS (includes Bootstrap)-->
  <link href="../bootstrap4.6.0/css/styles.css" rel="stylesheet" />
 
+<%
 
+String id = (String)session.getAttribute("USER_ID");
+
+%>
 </head>
 <body>
 
@@ -43,6 +47,7 @@
 			<div class="container-fluid">
 			<form method="get">
 				<table width="90%" style="border:none" >
+					<input type="hid den" name="user_id" value="<%=id %>" />
 				<tr>
 					<td align='center'>
 						<select name="searchField">
@@ -85,7 +90,7 @@
 					+ loop.index) }
 			</td>
 			<td align="left">
-				<a href="../mvcboard/view.do?idx=${row.idx }">${row.title }</a>
+				<a href="../mvcboard/view.do?idx=${row.idx }&flag=notice">${row.title }</a>
 			</td>
 			<td>${row.name }</td>
 			<td>${row.visitcount }</td>
@@ -112,7 +117,7 @@
 	
 	</ul>
 	<ul class="pagination d-flex justify-content-end" >	
-	<button type="button" class="btn btn-warning" onclick="location.href='../spacesub01.write';" style="width:130px; ">
+	<button type="button" class="btn btn-warning" onclick="location.href='../Project02/spacesub01.write?flag=notice';" style="width:130px; ">
 	글쓰기
 	</button>
 	</ul>

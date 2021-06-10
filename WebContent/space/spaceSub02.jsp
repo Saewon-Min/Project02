@@ -78,7 +78,7 @@
 					+ loop.index) }
 			</td>
 			<td align="left">
-				<a href="../mvcboard/view.do?idx=${row.idx }">${row.title }</a>
+				<a href="../mvcboard/view.do?idx=${row.idx }&flag=schedule">${row.title }</a>
 			</td>
 			<td>${row.name }</td>
 			<td>${row.visitcount }</td>
@@ -105,7 +105,7 @@
 	
 	</ul>
 	<ul class="pagination d-flex justify-content-end" >	
-	<button type="button" class="btn btn-warning" onclick="location.href='../spacesub02.write';" style="width:130px; ">
+	<button type="button" class="btn btn-warning" onclick="location.href='../Project02/spacesub02.write?flag=schedule';" style="width:130px; ">
 	글쓰기
 	</button>
 	</ul>

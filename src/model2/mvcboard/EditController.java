@@ -29,11 +29,24 @@ public class EditController extends HttpServlet{
 		String idx = req.getParameter("idx");
 		MVCBoardDAO dao = new MVCBoardDAO();
 		MVCBoardDTO dto = dao.selectView(idx);
+		String flag = req.getParameter("flag");
+		
 		
 		// 하나의 레코드를 저장한 DTO객체를 request영역에 저장한 후 View로 포워드
 		req.setAttribute("dto", dto);
-		req.getRequestDispatcher("/14MVCBoard/Edit.jsp").forward(req, resp);
-	
+		
+		if(flag.equals("notice")) {
+			req.getRequestDispatcher("/common/Edit.jsp?flag=notice").forward(req, resp);
+		}else if(flag.equals("schedule")){
+			req.getRequestDispatcher("/common/Edit.jsp?flag=schedule").forward(req, resp);
+		}else if(flag.equals("photo")){
+			req.getRequestDispatcher("/common/EditPhoto.jsp").forward(req, resp);
+
+		}else if(flag.equals("people")){
+			req.getRequestDispatcher("/common/Edit.jsp?flag=people").forward(req, resp);
+
+		}
+		
 	}
 
 	
@@ -105,16 +118,20 @@ public class EditController extends HttpServlet{
 				dto.setSfile(prevSfile);
 			}
 			
+			String flag = req.getParameter("flag");
+			
 			// 레코드 업데이트 처리
+			
 			MVCBoardDAO dao = new MVCBoardDAO();
 			int result = dao.updatePost(dto);
+			
 			dao.close();
 			if(result==1) {
 				session.removeAttribute("pass");
-				resp.sendRedirect("../mvcboard/view.do?idx="+idx);
+				resp.sendRedirect("../mvcboard/view.do?idx="+idx+"&flag="+flag);
 			}else {
 				JSFunction.alertLocation(resp, "비밀번호 검증을 다시 진행해주세요",
-						"../mvcboard/view.do?idx="+idx);
+						"../mvcboard/view.do?idx="+idx+"&flag="+flag);
 			}
 			
 		}else {
