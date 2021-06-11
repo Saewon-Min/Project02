@@ -135,8 +135,10 @@ public class WriteController extends HttpServlet{
 			dao.close();
 			if(result==1) {
 				resp.sendRedirect("../Project02/notice.list");
+				
 			}else {
 				resp.sendRedirect("../Project02/spacesub01.write");
+				
 			}
 			
 		}else {

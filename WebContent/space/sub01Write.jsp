@@ -62,7 +62,7 @@ String id = (String)session.getAttribute("USER_ID");
 	<%@ include file="../include/spaceLeft.jsp" %>
 	<div class="container-fluid" align="center">
 	<form name="writeFrm" method="post" enctype="multipart/form-data"
-	    action="../Project02/spacesub01.write" onsubmit="return formValidate(this);">
+	    action="../Project02/spacesub01.write?flag=notice" onsubmit="return formValidate(this);">
 	<table width="90%">
 	<input type="hid den" name="user_id" value="<%=id %>" />
 	<input type="hid den" name="flag" value="${param.flag }" />
@@ -100,7 +100,7 @@ String id = (String)session.getAttribute("USER_ID");
    	 <td colspan="2" align="right" >
    		 <button type="submit">작성완료</button>
    		 <button type="reset">RESET</button>
-   		 <button type="button" onclick="location.href='../mvcboard/list.do';">
+   		 <button type="button" onclick="location.href='../Project02/notice.list?flag=notice';">
    			 리스트바로가기
    		 </button>
    	 </td>

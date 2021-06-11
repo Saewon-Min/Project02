@@ -8,6 +8,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<%
+String id = (String)session.getAttribute("USER_ID");
+%>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
@@ -36,6 +39,8 @@
 <div class="container-fluid">
 			<form method="get">
 				<table width="90%" style="border:none">
+				<input type="hid den" name="user_id" value="<%=id %>" />
+				
 				<tr>
 					<td align='center'>
 						<select name="searchField">
@@ -78,7 +83,7 @@
 					+ loop.index) }
 			</td>
 			<td align="left">
-				<a href="../mvcboard/view.do?idx=${row.idx }&flag=schedule">${row.title }</a>
+				<a href="../Project02/multi.view?idx=${row.idx }&flag=schedule">${row.title }</a>
 			</td>
 			<td>${row.name }</td>
 			<td>${row.visitcount }</td>

@@ -138,6 +138,8 @@ public class MVCBoardDAO extends ConnectionPool{
 			psmt.setString(7, dto.getPass());
 			psmt.setString(8, dto.getFlag());
 			
+			System.out.println("insert-sfile :"+dto.getSfile());
+			
 			result = psmt.executeUpdate();
 		
 		}catch (Exception e) {
@@ -173,6 +175,9 @@ public class MVCBoardDAO extends ConnectionPool{
 				dto.setVisitcount(rs.getInt("visitcount"));
 				dto.setId(rs.getString("id"));
 				dto.setFlag(rs.getString("flag"));
+				
+				System.out.println("rs.getString(sfile):"+rs.getString("sfile"));
+				
 			
 			}
 

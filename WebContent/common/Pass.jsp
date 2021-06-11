@@ -15,7 +15,7 @@
 <script type="text/javascript">
 	
 	function formValidate(f){
-		var flag = <%=request.getParameter("flag")%>;
+		var flag = "<%=request.getParameter("flag")%>";
 		
 		if(f.pass.value==""){
 			alert("비밀번호를 입력하세요");
@@ -23,41 +23,18 @@
 			return false;
 		}
 	
-		if(flag=="notice"){
+		if(flag.equals("notice")){
 			
 			f.action = "../Project02/notice.editpass?flag=notice";
-		}else if(flag=="schedule"){
+		}else if(flag.equals("schedule")){
 			f.action = "../Project02/schedule.editpass?flag=schedule";
-		}else if(flag=="photo"){
+		}else if(flag.equals("photo")){
 			f.action = "../Project02/photo.editpass?flag=photo";
-		}else if(flag=="people"){
+		}else if(flag.equals("people")){
 			f.action = "../Project02/people.editpass?flag=people";
 		}
 	
 	}
-	
-	$(function(){
-		var flag = <%=request.getParameter("flag")%>;
-		$("#listbtn").click(function(){
-			
-			if(flag=="notice"){	
-				$(this).attr("onclick","location.href='../Project02/notice.list?flag=notice'");
-			}else if(flag=="schedule"){
-				$(this).attr("onclick","location.href='../Project02/schedule.list?flag=schedule'");
-			}else if(flag=="photo"){
-				$(this).attr("onclick","location.href='../Project02/photo.list?flag=photo'");
-			}else if(flag=="people"){
-				$(this).attr("onclick","location.href='../Project02/people.list?flag=people'");
-			}
-		
-		
-		});
-	
-	
-	
-	});
-	
-	
 	
 	
 </script>
@@ -105,8 +82,7 @@
 	<br /><br /><br />
 		<button type="submit" style="width:auto;" class="btn btn-primary">검증하기</button>
 		<button type="reset" style="width:auto;" class="btn btn-primary">RESET</button>
-		<button id="listbtn" type="button" style="width:auto;" class="btn btn-primary">
-			리스트 바로가기</button>
+
 	
 	</div>
 	<br /><br /><br />

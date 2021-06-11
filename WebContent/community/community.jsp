@@ -77,7 +77,7 @@ String id = (String)session.getAttribute("USER_ID");
 					+ loop.index) }
 			</td>
 			<td align="left">
-				<a href="../mvcboard/view.do?idx=${row.idx }&flag=people">${row.title }</a>
+				<a href="../Project02/multi.view?idx=${row.idx }&flag=people">${row.title }</a>
 			</td>
 			<td>${row.name }</td>
 			<td>${row.visitcount }</td>

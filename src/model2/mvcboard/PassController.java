@@ -67,7 +67,7 @@ public class PassController extends HttpServlet{
 				session.setAttribute("pass", pass);
 				
 				
-				resp.sendRedirect("../mvcboard/edit.do?idx="+idx+"&flag="+flag);
+				resp.sendRedirect("../Project02/multi.edit?idx="+idx+"&flag="+flag);
 			
 			// 삭제
 			}else if(mode.equals("delete")) {

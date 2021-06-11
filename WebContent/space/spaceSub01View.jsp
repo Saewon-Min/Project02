@@ -15,11 +15,7 @@
 
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="../bootstrap4.6.0/css/styles.css" rel="stylesheet" />
-        <style type="text/css">
-        
-        
-        
-        </style>
+
 </head>
 <body>
 

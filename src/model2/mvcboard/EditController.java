@@ -18,7 +18,7 @@ import com.oreilly.servlet.MultipartRequest;
 import fileupload.FileUtil;
 import utils.JSFunction;
 
-@WebServlet("/mvcboard/edit.do")
+@WebServlet("*.edit")
 public class EditController extends HttpServlet{
 	
 	// 수정 폼을 띄워주기 위한 부분
@@ -29,6 +29,7 @@ public class EditController extends HttpServlet{
 		String idx = req.getParameter("idx");
 		MVCBoardDAO dao = new MVCBoardDAO();
 		MVCBoardDTO dto = dao.selectView(idx);
+		System.out.println("dto.getSfile : "+dto.getSfile());
 		String flag = req.getParameter("flag");
 		
 		
@@ -40,7 +41,7 @@ public class EditController extends HttpServlet{
 		}else if(flag.equals("schedule")){
 			req.getRequestDispatcher("/common/Edit.jsp?flag=schedule").forward(req, resp);
 		}else if(flag.equals("photo")){
-			req.getRequestDispatcher("/common/EditPhoto.jsp").forward(req, resp);
+			req.getRequestDispatcher("/common/Edit.jsp?flag=photo").forward(req, resp);
 
 		}else if(flag.equals("people")){
 			req.getRequestDispatcher("/common/Edit.jsp?flag=people").forward(req, resp);
@@ -68,6 +69,7 @@ public class EditController extends HttpServlet{
 			String idx = mr.getParameter("idx");
 			String prevOfile = mr.getParameter("prevOfile");
 			String prevSfile = mr.getParameter("prevSfile");
+			String flag = mr.getParameter("flag");
 			
 			// -일반 입력상자로 받을 파라미터
 			String name = mr.getParameter("name");
@@ -90,7 +92,9 @@ public class EditController extends HttpServlet{
 			
 			// 새롭게 업로드 된 파일의 이름을 얻어온다.
 			String fileName = mr.getFilesystemName("ofile");
-		
+			System.out.println("filename : "+fileName);
+			
+			
 			if(fileName!=null) {
 				// 새롭게 등록된 파일이 있다면 파일명 변경을 위해 파일명을 결정하고
 				String nowTime = new SimpleDateFormat("yyyyMMdd_HmsS").format(new Date());
@@ -118,7 +122,7 @@ public class EditController extends HttpServlet{
 				dto.setSfile(prevSfile);
 			}
 			
-			String flag = req.getParameter("flag");
+			//String flag = req.getParameter("flag");
 			
 			// 레코드 업데이트 처리
 			
@@ -128,10 +132,10 @@ public class EditController extends HttpServlet{
 			dao.close();
 			if(result==1) {
 				session.removeAttribute("pass");
-				resp.sendRedirect("../mvcboard/view.do?idx="+idx+"&flag="+flag);
+				resp.sendRedirect("../Project02/multi.view?idx="+idx+"&flag="+flag);
 			}else {
 				JSFunction.alertLocation(resp, "비밀번호 검증을 다시 진행해주세요",
-						"../mvcboard/view.do?idx="+idx+"&flag="+flag);
+						"../Project02/multi.view?idx="+idx+"&flag="+flag);
 			}
 			
 		}else {

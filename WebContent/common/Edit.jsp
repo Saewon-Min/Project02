@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="../include/global.jsp" %>
     
 <%@ include file="../include/top.jsp" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,35 +30,35 @@
 			return false;
 		}
 		
-		if(flag=="notice"){
+		if(flag.equals("notice")){
 			
-			f.action = "../mvcboard/edit.do?flag=notice";
-		}else if(flag=="schedule"){
-			f.action = "../mvcboard/edit.do?flag=schedule";
-		}else if(flag=="photo"){
-			f.action = "../mvcboard/edit.do?flag=photo";
-		}else if(flag=="people"){
-			f.action = "../mvcboard/edit.do?flag=people";
+			f.action = "../Project02/multi.edit?flag=notice";
+		}else if(flag.equals("schedule")){
+			f.action = "../Project02/multi.edit?flag=schedule";
+		}else if(flag.equals("photo")){
+			f.action = "../Project02/multi.edit?flag=photo";
+		}else if(flag.equals("people")){
+			f.action = "../Project02/multi.edit?flag=people";
 		}
 		
 		
 	}
 	
 	$(function(){
-		var flag = <%=request.getParameter("flag")%>;
+		var flag = "<%=request.getParameter("flag")%>";
 		$("#listbtn").click(function(){
 			
-			if(flag=="notice"){	
-				$(this).attr("onclick","location.href='../Project02/notice.list?flag=notice'");
-			}else if(flag=="schedule"){
-				$(this).attr("onclick","location.href='../Project02/schedule.list?flag=schedule'");
-			}else if(flag=="photo"){
-				$(this).attr("onclick","location.href='../Project02/photo.list?flag=photo'");
-			}else if(flag=="people"){
-				$(this).attr("onclick","location.href='../Project02/people.list?flag=people'");
+			if(flag.equals("notice")){	
+				$(this).attr("onclick","location.href='../Project02/notice.list?flag=notice';");
+			}else if(flag.equals("schedule")){
+				$(this).attr("onclick","location.href='../Project02/schedule.list?flag=schedule';");
+			}else if(flag.equals("photo")){
+				$(this).attr("onclick","location.href='../Project02/photo.list?flag=photo';");
+			}else if(flag.equals("people")){
+				$(this).attr("onclick","location.href='../Project02/people.list?flag=people';");
 			}
 		
-		
+		  
 		});
 	
 	
@@ -73,7 +73,7 @@
 
 	<div class="jumbotron">
 	<br /><br /><br /><br /><br />
-     <div class="text-center" style="vertical-align: middle" >
+     <div class="text-center" style="vertical-align: middle">
        	<br />
            <h1 class="section-heading text-uppercase" ></h1>
            <br />
@@ -91,7 +91,7 @@
 	<input type="hid den" name="idx" value=${dto.idx } /><!-- 일련번호 -->
 	<input type="hid den" name="prevOfile" value=${dto.ofile } /><!-- 원본 파일명 -->	
 	<input type="hid den" name="prevSfile" value=${dto.sfile } /><!-- 저장된 파일명 -->	
-	<input type="hid den" name="prevSfile" value=${param.flag } />
+	<%-- <input type="hid den" name="flag" value=${param.flag } /> --%>
 <table class="table table-bordered" border="1" width="90%">
 	<tr>
 		<td>작성자</td>
@@ -116,11 +116,11 @@
 		<td>
 		<!-- 만약 첨부된 파일이 있다면 이미지를 나타낸다 -->
 		<c:if test="${not empty dto.ofile }">		
-			<img src="../Uploads/${dto.sfile }" style="width:100px" />
+			<img src="../Uploads/${dto.sfile }" style="width:100px" alt="첨부된 사진"/>
 			<br />
 		</c:if>
 			<input type="file" name="ofile" /> 
-		</td>
+		</td> 
 	</tr>	
 </table>	
 <div align="right">
