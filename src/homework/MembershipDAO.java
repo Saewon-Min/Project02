@@ -264,6 +264,54 @@ public class MembershipDAO extends ConnectionPool{
 	
 	
 	
+	
+public Map<String, String> findId(String name, String email) {
+		
+		Map<String, String> map = new HashMap<String,String>();
+		
+
+		String query = " SELECT id,name,email  "
+				+ " FROM membership "
+				+ " WHERE name=? and email=? ";
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, name);
+			psmt.setString(2, email);
+			rs = psmt.executeQuery();
+			/*
+			매개변수로 전달된 일련번호를 통해 조회하므로
+			결과는 무조건 1개만 나오게 된다. 따라서 if문으로
+			반환된 결과가 있는지만 확인하면 된다.
+			 */
+
+			
+			if(rs.next()) {
+				map.put("id",rs.getString("id")); 
+				map.put("noID", "not");
+
+				
+			}else {
+				map.put("noID", "nothing");
+				System.out.println("결과셋이 없습니다.");
+			}
+			
+		} catch (Exception e) {
+			System.out.println("findId오류");
+			e.printStackTrace();
+		}
+		return map;
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	/*
 	게시물의 개수를 카운트
 	 */

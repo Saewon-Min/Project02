@@ -41,7 +41,7 @@ public class EditController extends HttpServlet{
 		}else if(flag.equals("schedule")){
 			req.getRequestDispatcher("/common/Edit.jsp?flag=schedule").forward(req, resp);
 		}else if(flag.equals("photo")){
-			req.getRequestDispatcher("/common/Edit.jsp?flag=photo").forward(req, resp);
+			req.getRequestDispatcher("/common/EditPhoto.jsp?flag=photo").forward(req, resp);
 
 		}else if(flag.equals("people")){
 			req.getRequestDispatcher("/common/Edit.jsp?flag=people").forward(req, resp);
@@ -75,6 +75,8 @@ public class EditController extends HttpServlet{
 			String name = mr.getParameter("name");
 			String title = mr.getParameter("title");
 			String content = mr.getParameter("content");
+			String photoflag = mr.getParameter("photoflag");
+			
 			
 			/* 
 			- 서블릿에서 getSession()메소드를 통해 session내장객체를
@@ -89,6 +91,7 @@ public class EditController extends HttpServlet{
 			dto.setTitle(title);
 			dto.setContent(content);
 			dto.setPass(pass);
+			dto.setPhotoflag(photoflag);
 			
 			// 새롭게 업로드 된 파일의 이름을 얻어온다.
 			String fileName = mr.getFilesystemName("ofile");
@@ -126,13 +129,19 @@ public class EditController extends HttpServlet{
 			
 			// 레코드 업데이트 처리
 			
+			
+			
 			MVCBoardDAO dao = new MVCBoardDAO();
 			int result = dao.updatePost(dto);
 			
 			dao.close();
 			if(result==1) {
 				session.removeAttribute("pass");
-				resp.sendRedirect("../Project02/multi.view?idx="+idx+"&flag="+flag);
+				if(flag.equals("photo")) {
+					resp.sendRedirect("../Project02/multi.view?idx="+idx+"&flag="+flag+"&photoflag="+photoflag);
+				}else {
+					resp.sendRedirect("../Project02/multi.view?idx="+idx+"&flag="+flag);
+				}
 			}else {
 				JSFunction.alertLocation(resp, "비밀번호 검증을 다시 진행해주세요",
 						"../Project02/multi.view?idx="+idx+"&flag="+flag);

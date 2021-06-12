@@ -206,7 +206,7 @@ function loginValidate(fn){
 				<div>
 					
 					<div  align="center">
-					<button id="btnModal" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">로그인</button>
+					<button id="btnModal" onclick="document.getElementById('id01').style.display='block'" style="width:auto; background-color: lightblue">로그인</button>
 					</div>
 					<div id="id01" class="modal">
 					  
@@ -237,7 +237,8 @@ function loginValidate(fn){
 					
 					    <div class="container" style="background-color:#f1f1f1">
 					      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-					      <span class="psw">Forgot <a href="#">password?</a></span>
+					      
+					      <span class="psw">Forgot <a href="../find/findID.jsp">ID?</a>&nbsp; <a href="#">Password?</a></span>
 					    </div>
 					  </form>
 					</div>
@@ -258,7 +259,7 @@ function loginValidate(fn){
 					<div>
 					
 					<div align="center">
-					 <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">로그아웃</button>
+					 <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;  background-color: lightblue">로그아웃</button>
 					</div>
 					<div id="id01" class="modal">
 					  

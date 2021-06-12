@@ -91,7 +91,7 @@
 	<input type="hid den" name="idx" value=${dto.idx } /><!-- 일련번호 -->
 	<input type="hid den" name="prevOfile" value=${dto.ofile } /><!-- 원본 파일명 -->	
 	<input type="hid den" name="prevSfile" value=${dto.sfile } /><!-- 저장된 파일명 -->	
-	<%-- <input type="hid den" name="flag" value=${param.flag } /> --%>
+	<input type="hid den" name="flag" value=${param.flag } />
 <table class="table table-bordered" border="1" width="90%">
 	<tr>
 		<td>작성자</td>

@@ -24,7 +24,10 @@
 
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="../bootstrap4.6.0/css/styles.css" rel="stylesheet" />
+
+
 </head>
+
 <body>
 <%
 String id = (String)session.getAttribute("USER_ID");
@@ -76,17 +79,11 @@ String id = (String)session.getAttribute("USER_ID");
                 <p>${row.content }</p>
                 <div class="portfolio-links">
                   <a href="../Uploads/${row.sfile }" data-gall="portfolioGallery" class="venobox" title="${row.title }"><i class="bx bx-plus"></i></a>
-                  	<div class="dropdown dropright" style="bor"> 
-                  	<button type="button" class="dropdown" data-toggle='dropdown'><i id="" class="material-icons" style="color:white;">more_vert</i></button>
+                  	 
                   	
-                  	<div class="dropdown-menu">
-                  		<a class="dropdown-item" href="../Project02/photo.editpass?mode=edit&idx=${param.idx}&flag=photo" style="font-size:15px; color:black;">수정</a>
-                  		<a class="dropdown-item" href="../Project02/photo.editpass?mode=delete&idx=${param.idx}&flag=photo"  style="font-size:15px;color:black;">삭제</a>
+               		<a href="../Project02/photo.editpass?mode=edit&idx=${row.idx}&flag=photo" style="font-size:15px; color:white; font-weight:bold; text-decoration: none;" >수정</a>
+               		<a href="../Project02/photo.editpass?mode=delete&idx=${row.idx}&flag=photo"  style="font-size:15px;color:white;font-weight:bold; text-decoration: none;">삭제</a>
                 		
-                	</div>
-                	</div>	
-                  	
-                	
                 </div>
               </div>
             </div>

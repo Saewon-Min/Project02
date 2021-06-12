@@ -29,42 +29,21 @@
 			f.content.focus();
 			return false;
 		}
-	
-		if(flag=="notice"){
-			
-			f.action = "../mvcboard/edit.do?flag=notice";
-		}else if(flag=="schedule"){
-			f.action = "../mvcboard/edit.do?flag=schedule";
-		}else if(flag=="photo"){
-			f.action = "../mvcboard/edit.do?flag=photo";
-		}else if(flag=="people"){
-			f.action = "../mvcboard/edit.do?flag=people";
-		}
-	
+
+	   	 if(f.photoflag.value==""){
+	   		 alert('첨부파일 카테고리를 선택해주세요')
+	   		 return false;
+	   	 }
+	   	 
+	   	if(f.ofile.value==""){
+	  		 alert('사진을 첨부해주세요')
+	  		 return false;
+	  	 }
 	
 	
 	}
 	
-	$(function(){
-		var flag = <%=request.getParameter("flag")%>;
-		$("#listbtn").click(function(){
-			
-			if(flag=="notice"){	
-				$(this).attr("onclick","location.href='../Project02/notice.list'");
-			}else if(flag=="schedule"){
-				$(this).attr("onclick","location.href='../Project02/schedule.list'");
-			}else if(flag=="photo"){
-				$(this).attr("onclick","location.href='../Project02/photo.list'");
-			}else if(flag=="people"){
-				$(this).attr("onclick","location.href='../Project02/people.list'");
-			}
-		
-		
-		});
-	
-	
-	
-	});
+
 	
 	
 	
@@ -86,7 +65,7 @@
 	<%@ include file="../include/spaceLeft.jsp" %>
 	<div class="container-fluid" align="center">
 <form name="writeFrm" method="post" enctype="multipart/form-data"
-	action=""
+	action="../Project02/multi.edit?flag=photo"
 	onsubmit="return formValidate(this);">
 
 	<input type="hid den" name="idx" value=${dto.idx } /><!-- 일련번호 -->
@@ -113,6 +92,14 @@
 		</td>
 	</tr>
 	<tr>
+   	 <td>첨부파일 카테고리</td>
+   	 <td style="font-weight:bold">
+   		 강아지 <input type="radio" name="photoflag" value="filter-dog"/>&nbsp;&nbsp;&nbsp;
+   		 고양이 <input type="radio" name="photoflag" value="filter-cat"/>&nbsp;&nbsp;&nbsp;
+   		 그 외 반려동물 <input type="radio" name="photoflag" value="filter-etc"/>
+   	 </td>
+    </tr>
+	<tr>
 		<td>첨부파일</td>
 		<td>
 		<!-- 만약 첨부된 파일이 있다면 이미지를 나타낸다 -->
@@ -128,7 +115,7 @@
 
 			<button type="submit" style="width:auto;" class="btn btn-primary">작성완료</button>
 			<button type="reset" style="width:auto;" class="btn btn-primary">RESET</button>
-			<button type="button" style="width:auto;" class="btn btn-primary">
+			<button type="button" style="width:auto;" class="btn btn-primary" onclick="location.href='../Project02/photo.list'">
 				리스트바로가기
 			</button>
 </div>

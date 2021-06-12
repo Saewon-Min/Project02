@@ -44,8 +44,12 @@ public class ViewController extends HttpServlet{
 			req.getRequestDispatcher("/space/spaceSub01View.jsp").forward(req, resp);
 		}else if(flag.equals("schedule")) {
 			req.getRequestDispatcher("/space/spaceSub02View.jsp").forward(req, resp);
+		/*
+		 * }else if(flag.equals("photo")) {
+		 * req.getRequestDispatcher("/space/spaceSub03View.jsp").forward(req, resp);
+		 */
 		}else if(flag.equals("photo")) {
-			req.getRequestDispatcher("/space/spaceSub03View.jsp").forward(req, resp);
+			req.getRequestDispatcher("../Project02/photo.list?flag=photo").forward(req, resp);
 		} else if(flag.equals("people")) {
 			req.getRequestDispatcher("/community/communityView.jsp").forward(req, resp);
 		}  

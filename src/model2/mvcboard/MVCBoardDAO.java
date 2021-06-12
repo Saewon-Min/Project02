@@ -215,7 +215,7 @@ public class MVCBoardDAO extends ConnectionPool{
 				dto.setPhotoflag(rs.getString("photoflag"));
 				
 				System.out.println("rs.getString(sfile):"+rs.getString("sfile"));
-				
+				System.out.println("selectview-selectview-photoflag :"+rs.getString("photoflag"));
 			
 			}
 
@@ -288,7 +288,7 @@ public class MVCBoardDAO extends ConnectionPool{
 		try {
 			// 비회원제 게시판이므로 패스워드까지 where절에 추가함
 			String query = " update multiMVCBoard set "
-					+ " title=?, name=?, content=?, ofile=?, sfile=? "
+					+ " title=?, name=?, content=?, ofile=?, sfile=? ,photoflag=? "
 					+ " where idx=? and pass=? ";
 			
 			psmt = con.prepareStatement(query);
@@ -297,8 +297,9 @@ public class MVCBoardDAO extends ConnectionPool{
 			psmt.setString(3, dto.getContent());
 			psmt.setString(4, dto.getOfile());
 			psmt.setString(5, dto.getSfile());
-			psmt.setString(6, dto.getIdx());
-			psmt.setString(7, dto.getPass());
+			psmt.setString(6, dto.getPhotoflag());
+			psmt.setString(7, dto.getIdx());
+			psmt.setString(8, dto.getPass());
 			
 			result = psmt.executeUpdate();
 			
