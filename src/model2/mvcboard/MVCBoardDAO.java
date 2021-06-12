@@ -103,8 +103,9 @@ public class MVCBoardDAO extends ConnectionPool{
 				dto.setDowncount(rs.getInt("downcount"));
 				dto.setPass(rs.getString("pass"));
 				dto.setVisitcount(rs.getInt("visitcount"));
-				//dto.setId(rs.getString("id"));
-				//dto.setFlag(rs.getString("flag"));
+				dto.setPhotoflag(rs.getString("photoflag"));
+				dto.setId(rs.getString("id"));
+				dto.setFlag(rs.getString("flag"));
 				bbs.add(dto);
 				
 				
@@ -152,6 +153,42 @@ public class MVCBoardDAO extends ConnectionPool{
 	}
 	
 	
+	
+	public int insertPhotoWrite(MVCBoardDTO dto) {
+		int result = 0;
+		try {
+			String query = " INSERT INTO multiMVCBoard ( "
+				 +  "id, name, title, content, ofile,sfile,pass,flag,photoflag ) "
+				 + " VALUES ( "
+				 + " ? ,?, ?, ?, ?, ?, ?,?,? ) ";
+			
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, dto.getId());
+			psmt.setString(2, dto.getName());
+			psmt.setString(3, dto.getTitle());
+			psmt.setString(4, dto.getContent());
+			psmt.setString(5, dto.getOfile());
+			psmt.setString(6, dto.getSfile());
+			psmt.setString(7, dto.getPass());
+			psmt.setString(8, dto.getFlag());
+			psmt.setString(9, dto.getPhotoflag());
+			
+			System.out.println("insert-sfile :"+dto.getSfile());
+			
+			result = psmt.executeUpdate();
+		
+		}catch (Exception e) {
+			System.out.println("게시물 입력 중 예외 발생");
+			e.printStackTrace();
+		}
+		
+		return result;
+		
+	}
+	
+	
+	
+	
 	public MVCBoardDTO selectView(String idx) {
 		MVCBoardDTO dto = new MVCBoardDTO();
 		String query = " select * from multiMVCBoard where idx=? ";
@@ -175,6 +212,7 @@ public class MVCBoardDAO extends ConnectionPool{
 				dto.setVisitcount(rs.getInt("visitcount"));
 				dto.setId(rs.getString("id"));
 				dto.setFlag(rs.getString("flag"));
+				dto.setPhotoflag(rs.getString("photoflag"));
 				
 				System.out.println("rs.getString(sfile):"+rs.getString("sfile"));
 				

@@ -241,6 +241,7 @@ public class WriteController extends HttpServlet{
 			String content = mr.getParameter("content");
 			String pass = mr.getParameter("pass");
 			String flag = mr.getParameter("flag");
+			String photoflag = mr.getParameter("photoflag");
 			
 			System.out.println(flag);
 			
@@ -251,6 +252,7 @@ public class WriteController extends HttpServlet{
 			dto.setPass(pass);
 			dto.setId(id);
 			dto.setFlag(flag);
+			dto.setPhotoflag(photoflag);
 			
 			
 			// 서버에 저장된 파일명 변경하기
@@ -273,7 +275,7 @@ public class WriteController extends HttpServlet{
 			
 			// DAO에서 insert 처리
 			MVCBoardDAO dao = new MVCBoardDAO();
-			int result = dao.insertWrite(dto);
+			int result = dao.insertPhotoWrite(dto);
 			dao.close();
 			if(result==1) {
 				resp.sendRedirect("../Project02/photo.list");

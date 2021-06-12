@@ -8,7 +8,7 @@
   </context-param>
    <context-param>
   	<param-name>MariaConnectURL</param-name>
-  	<param-value>jdbc:mariadb://127.0.0.1:3307/kosmo_db</param-value>
+  	<param-value>jdbc:mariadb://127.0.0.1:3307/project02_db</param-value>
   </context-param>
    <context-param>
   	<param-name>MariaUser</param-name>

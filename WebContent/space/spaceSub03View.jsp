@@ -27,7 +27,7 @@
 	<br /><br /><br /><br /><br />
      <div class="text-center" style="vertical-align: middle" >
        	<br />
-           <h1 class="section-heading text-uppercase" >공지사항</h1>
+           <h1 class="section-heading text-uppercase" >사진게시판</h1>
            <br />
        </div>
 
@@ -58,7 +58,9 @@
 		    </tr>
 		    <tr>
 		   	 <th>제목</th>
-		   	 <td colspan="3"  style="text-align:left">${dto.title }</td>
+		   	 <td style="text-align:left">${dto.title }</td>
+		   	 <th>첨부파일 카테고리</th>
+		   	 <td>${dto.photoflag }</td>
 		    </tr>
 		    <tr >
 		   	 <th cellpadding ="60px">내용</th>

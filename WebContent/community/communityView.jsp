@@ -27,7 +27,7 @@
 	<br /><br /><br /><br /><br />
      <div class="text-center" style="vertical-align: middle" >
        	<br />
-           <h1 class="section-heading text-uppercase" >공지사항</h1>
+           <h1 class="section-heading text-uppercase" >반려인 게시판</h1>
            <br />
        </div>
 

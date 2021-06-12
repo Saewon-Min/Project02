@@ -19,7 +19,7 @@ public class JConnect {
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
 
-			String url = "jdbc:mariadb://127.0.0.1:3307/kosmo_db";
+			String url = "jdbc:mariadb://127.0.0.1:3307/project02_db";
 			String id ="kosmo_user";  // 계정이름
 			String pass = "1234";  // 계정비번
 			

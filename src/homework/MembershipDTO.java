@@ -15,6 +15,7 @@ public class MembershipDTO {
     private String phone ;    
     private String homephone ;    
     private java.sql.Date regidate;
+
     
     
     public MembershipDTO() {}

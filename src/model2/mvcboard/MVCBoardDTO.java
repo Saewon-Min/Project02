@@ -14,6 +14,7 @@ public class MVCBoardDTO {
 	private int visitcount;
 	private String flag;
 	private String id;
+	private String photoflag;
 	
 	public String getIdx() {
 		return idx;
@@ -86,6 +87,12 @@ public class MVCBoardDTO {
 	}
 	public void setId(String id) {
 		this.id = id;
+	}
+	public String getPhotoflag() {
+		return photoflag;
+	}
+	public void setPhotoflag(String photoflag) {
+		this.photoflag = photoflag;
 	}
 
 	

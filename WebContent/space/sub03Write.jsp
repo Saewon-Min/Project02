@@ -33,6 +33,16 @@
    		 f.pass.focus();
    		 return false;
    	 }
+   	 if(f.photoflag.value==""){
+   		 alert('첨부파일 카테고리를 선택해주세요')
+   		 return false;
+   	 }
+   	if(f.ofile.value==""){
+  		 alert('사진을 첨부해주세요')
+  		 return false;
+  	 }
+   	 
+   	 
     }
 </script>  
 <style type="text/css">
@@ -65,6 +75,7 @@ String id = (String)session.getAttribute("USER_ID");
 <table width="90%">
 <input type="hid den" name="user_id" value="<%=id %>" />
 <input type="hid den" name="flag" value="${param.flag }" />
+
     <tr>
    	 <td>작성자</td>
    	 <td>
@@ -84,9 +95,17 @@ String id = (String)session.getAttribute("USER_ID");
    	 </td>
     </tr>
     <tr>
+   	 <td>첨부파일 카테고리</td>
+   	 <td style="font-weight:bold">
+   		 강아지 <input type="radio" name="photoflag" value="filter-dog"/>&nbsp;&nbsp;&nbsp;
+   		 고양이 <input type="radio" name="photoflag" value="filter-cat"/>&nbsp;&nbsp;&nbsp;
+   		 그 외 반려동물 <input type="radio" name="photoflag" value="filter-etc"/>
+   	 </td>
+    </tr>
+    <tr>
    	 <td>첨부파일</td>
    	 <td>
-   		 <input type="file" name="ofile" />
+   		<input type="file" name="ofile" />
    	 </td>
     </tr>
     <tr>
