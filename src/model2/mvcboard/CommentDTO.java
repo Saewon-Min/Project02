@@ -2,6 +2,7 @@ package model2.mvcboard;
 
 public class CommentDTO {
 
+	private String id;
 	private String idx ;
 	private String board_idx ;
 	private String name ;
@@ -15,6 +16,12 @@ public class CommentDTO {
 	
 	public String getIdx() {
 		return idx;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
 	}
 	public void setIdx(String idx) {
 		this.idx = idx;

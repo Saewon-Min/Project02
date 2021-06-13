@@ -103,6 +103,127 @@
 					리스트바로가기
 				</button>
 
+<script>
+function commentValidate(f){
+	if(f.name.value==""){
+		alert("작성자를 입력하세요");
+		f.name.focus();
+		return false;
+	}
+	if(f.pass.value==""){
+		alert("비밀번호를 입력하세요");
+		f.pass.focus();
+		return false;
+	}
+	if(f.comments.value==""){
+		alert("댓글 내용을 입력하세요");
+		f.comments.focus();
+		return false;
+	}
+}
+</script>
+<br /><br /><br />
+<div align="left">
+<h2 style="background-color: lightyellow; width:150px;" >댓글</h2>
+</div>
+<form name="commentFrm" method="post" action="../Project02/commentWrite.comm?flag=people" onsubmit="return commentValidate(this);">
+	<!-- 해당 게시물의 일련번호로 댓글 테이블의 참조키가 된다. -->
+	<input type="hidden" name="board_idx" value="${param.idx }" />
+	<table border="1" width="90%" class="table table-bordered" >
+		<colgroup>
+			<col width="30%"/>
+			<col width="40%"/>
+			<col width="*"/>
+		</colgroup>
+		<tr>
+			<td>작성자 : <input type="text" name="name" size="10" /></td>
+			<td colspan="2">비밀번호 : <input type="password" name="pass" size="10" /></td>
+		</tr>
+		<tr>
+			<td colspan="3">
+				<textarea name="comments" style="width:100%;height:70px;"></textarea>
+			</td>
+		</tr>
+	</table>
+	<div align="right">
+		<button class="btn btn-primary" type="submit" style="width:auto;height:auto;" >댓글작성</button>
+	
+	</div>
+
+</form>
+
+<div align="left">
+<h2 style="background-color: lightyellow; width:150px;">댓글 목록</h2>
+</div>
+<script>
+function commentEdit(idx, board_idx) {
+	window.open('../common/commentEdit.comm?idx='+idx+'&board_idx='+board_idx
+			,'commentPop1','top=0,left=0,width=700,height=300');
+}
+
+function commentDelete(idx, board_idx) {
+	window.open('../common/commentDelete.comm?idx='+idx+'&board_idx='+board_idx
+			,'commentPop','top=0,left=0,width=700,height=300');
+}
+
+
+</script>
+<%
+String id = (String)session.getAttribute("USER_ID");
+%>
+<!-- 
+	HTML5에서 지원하는 앵커(Ancher) 기능으로 해당 페이지에서 특정
+	위치를 로드하고 싶을때 아래와 같이 <a태그에 name속성을 부여한다.
+	사용시에는 쿼리스트링 마지막에 #앵커명 형태로 사용하면 된다.
+-->
+<a name="commentsList"></a>
+<table border="1" width="90%" class="table table-bordered">
+	<colgroup>
+		<col width="30%" />
+		<col width="40%" />
+		<col width="*" />
+	</colgroup>
+	<c:choose>
+		<c:when test="${empty comments }">
+			<tr>
+				<td colspan="3" align="center">
+					등록된 댓글이 없습니다.
+				</td>
+			</tr>
+		</c:when>
+		<c:otherwise>
+			<c:forEach items= "${comments }" var="row" varStatus="loop">
+				<tr>
+					<td>작성자 : ${row.name }</td>
+					<td>작성일 : ${row.postdate }</td>
+					
+					<c:set var="id" value="<%=id %>" />
+
+  					<c:if test="${id != null and row.id eq id }" var="index">   
+						<td>
+							<!-- 수정, 삭제를 위해 전달되는 파라미터는 댓글의 일련번호,
+								해당 게시물의 일련번호 2개가 필요하다. -->
+							<input type="button" value="수정" class="btn btn-primary"
+								onclick="commentEdit(${row.idx }, ${row.board_idx });"/>
+							<input type="button" value="삭제"  class="btn btn-primary"
+								onclick="commentDelete(${row.idx }, ${row.board_idx });"/>
+							
+						</td>
+					</c:if>
+				</tr>
+				<tr>
+					<td colspan="3">${row.comments }</td>
+				</tr>
+			</c:forEach>
+		</c:otherwise>
+	
+	</c:choose>
+
+
+</table>
+
+
+
 			</div>
 			
 			

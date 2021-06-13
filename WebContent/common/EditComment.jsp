@@ -3,7 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
-<head>
+<head>  
+        <link href="../bootstrap4.6.0/css/styles.css" rel="stylesheet" />
 <meta charset="UTF-8">
 <title>댓글 수정하기</title>
 <script type="text/javascript">
@@ -35,18 +36,18 @@
 </script>
 </head>
 <body>
-
-<h2>댓글 수정하기(comment Edit)</h2>
+<div class="container" style="background-color: skyblue; margin-top:5%;" align="center" >
+<h2 style="color:white;">댓글 수정하기(comment Edit)</h2>
 
 <form name="writeFrm" method="post" 
 	action="./commentEditAction.comm"
 	onsubmit="return formValidate(this);">
 
-	<input type="hid den" name="idx" value=${dto.idx } /><!-- 댓글 일련번호 -->	
-	<input type="hid den" name="board_idx" value=${dto.board_idx } />
+	<input type="hidden" name="idx" value=${dto.idx } /><!-- 댓글 일련번호 -->	
+	<input type="hidden" name="board_idx" value=${dto.board_idx } />
 	<%-- <input type="hid den" name="pass" value=${dto.pass } /> --%>
 
-<table border="1" width="90%">
+<table width="90%" class="table table-bordered" style="background-color: lightyellow">
 	<tr>
 		<td>작성자</td>
 		<td>
@@ -66,14 +67,16 @@
 	</tr>
 	<tr>
 		<td colspan="6" align="center">
-			<button type="submit">작성완료</button>
-			<button type="reset">RESET</button>
+			<button type="submit" class="btn btn-primary">작성완료</button>
+			<button type="reset" class="btn btn-primary">RESET</button>
 
 		</td>
 	</tr>
 	
 </table>	
 </form>
+<br />
+</div>
 </body>
 </html>
 

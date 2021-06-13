@@ -17,16 +17,17 @@ public class CommentDAO extends ConnectionPool{
 		int result = 0;
 		try {
 			String query = " insert into mycomment ( "
-					+ " board_idx, name, pass, comments ) "
+					+ " id,board_idx, name, pass, comments ) "
 					+ " values ( "
-					+ " ?, ?, ?, ? ) ";
+					+ " ?,?, ?, ?, ? ) ";
 			
 			
 			psmt = con.prepareStatement(query);
-			psmt.setString(1, dto.getBoard_idx());
-			psmt.setString(2, dto.getName());
-			psmt.setString(3, dto.getPass());
-			psmt.setString(4, dto.getComments());
+			psmt.setString(1, dto.getId());
+			psmt.setString(2, dto.getBoard_idx());
+			psmt.setString(3, dto.getName());
+			psmt.setString(4, dto.getPass());
+			psmt.setString(5, dto.getComments());
 			result = psmt.executeUpdate();
 			
 		} catch (Exception e) {
@@ -45,8 +46,8 @@ public class CommentDAO extends ConnectionPool{
 		List<CommentDTO> comments = new Vector<CommentDTO>();
 		
 		// 댓글 작성일을 시:분까지 출력하기 위해 to_char()함수를 사용함
-		String query = " select idx, board_idx, name, pass, comments, "
-				+ " DATE_FORMAT(postdate,'%Y-%m-%d %H:%i:%s') "
+		String query = " select id,idx, board_idx, name, pass, comments, "
+				+ " DATE_FORMAT(postdate,'%Y-%m-%d %H:%i:%s') as postdate "
 				+ " from mycomment "
 				+ " where board_idx=? "
 				+ " order by idx desc " ;
@@ -56,10 +57,13 @@ public class CommentDAO extends ConnectionPool{
 			psmt.setString(1, board_idx);
 			rs = psmt.executeQuery();
 			
+			System.out.println("쿼리문: "+query);
+			
 			while(rs.next()) {
 				
 				CommentDTO dto = new CommentDTO();
 				
+				dto.setId(rs.getString("id"));
 				dto.setIdx(rs.getString("idx"));
 				dto.setBoard_idx(rs.getString("board_idx"));
 				dto.setName(rs.getString("name"));

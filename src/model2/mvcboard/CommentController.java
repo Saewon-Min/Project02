@@ -26,6 +26,15 @@ public class CommentController extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	
+		
+		HttpSession session = req.getSession();
+		
+		if(session.getAttribute("USER_ID")==null){
+			JSFunction.alertBack(resp, "로그인 후 이용해주세요");
+				
+			return;
+		}
+		
 		// 요청명을 분석한다.
 		String uri = req.getRequestURI();
 		int lastSlash = uri.lastIndexOf("/");
@@ -53,7 +62,7 @@ public class CommentController extends HttpServlet{
 	// 댓글쓰기
 	private void commentWrite(HttpServletRequest req, HttpServletResponse resp) 
 			throws ServletException, IOException {
-		
+		HttpSession session = req.getSession();
 		/*
 		서블릿에서 기능 처리를 위한 메소드는 doGet(), doPost()와 동일하게
 		request, response 객체를 매개변수로 사용하고,
@@ -62,13 +71,17 @@ public class CommentController extends HttpServlet{
 		System.out.println("댓글쓰기");
 		
 		// 폼 값 받기
+		String id = (String) session.getAttribute("USER_ID");
 		String board_idx = req.getParameter("board_idx");
 		String name = req.getParameter("name");
 		String pass = req.getParameter("pass");
 		String comments = req.getParameter("comments");
+		String flag = req.getParameter("flag");
+		
 		
 		// DTO 객체에 저장
 		CommentDTO dto = new CommentDTO();
+		dto.setId(id);
 		dto.setBoard_idx(board_idx);
 		dto.setName(name);
 		dto.setPass(pass);
@@ -83,7 +96,9 @@ public class CommentController extends HttpServlet{
 			댓글 작성 완료 후 내용 보기 페이지로 리다이렉트 할때
 			댓글 목록 부분을 로드하기 위해 URL뒤에 앵커를 추가한다.
 			 */
-			resp.sendRedirect("./view.do?idx="+board_idx+"#commentsList");
+			if(flag.equals("people")) {
+			resp.sendRedirect("../Project02/people.view?idx="+board_idx+"&flag="+flag+"#commentsList");
+			}
 		}else {
 			JSFunction.alertBack(resp, "댓글 작성에 실패했습니다.");
 		}
@@ -105,7 +120,7 @@ public class CommentController extends HttpServlet{
 
 		// 하나의 레코드를 저장한 DTO객체를 request영역에 저장한 후 View로 포워드
 		req.setAttribute("dto", dto);
-		req.getRequestDispatcher("/14MVCBoard/EditComment.jsp").forward(req, resp);
+		req.getRequestDispatcher("/common/EditComment.jsp").forward(req, resp);
 		
 			
 	}
@@ -162,7 +177,7 @@ public class CommentController extends HttpServlet{
 		CommentDTO dto = dao.commentView(idx,board_idx);
 		
 		req.setAttribute("dto", dto);
-		req.getRequestDispatcher("/14MVCBoard/DeleteComment.jsp").forward(req, resp);
+		req.getRequestDispatcher("/common/DeleteComment.jsp").forward(req, resp);
 		
 	}
 	
