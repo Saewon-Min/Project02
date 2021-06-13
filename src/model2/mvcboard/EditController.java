@@ -25,13 +25,22 @@ public class EditController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+		HttpSession session = req.getSession(); 
+
+		
 		// 파라미터로 전달된 일련번호를 통해 기존 게시물을 조회한다.
 		String idx = req.getParameter("idx");
 		MVCBoardDAO dao = new MVCBoardDAO();
 		MVCBoardDTO dto = dao.selectView(idx);
 		System.out.println("dto.getSfile : "+dto.getSfile());
 		String flag = req.getParameter("flag");
+
 		
+		if(!session.getAttribute("USER_ID").equals(dto.getId())){
+			// 작성자가 본인이 아니라면 경고창을 띄우고 뒤로 이동한다.
+			JSFunction.alertBack(resp, "작성자 본인만 수정할 수 있습니다.");
+			return;
+		}
 		
 		// 하나의 레코드를 저장한 DTO객체를 request영역에 저장한 후 View로 포워드
 		req.setAttribute("dto", dto);

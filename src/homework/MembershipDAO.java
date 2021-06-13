@@ -292,7 +292,7 @@ public Map<String, String> findId(String name, String email) {
 				
 			}else {
 				map.put("noID", "nothing");
-				System.out.println("결과셋이 없습니다.");
+				System.out.println("존재하는 회원이 없습니다.");
 			}
 			
 		} catch (Exception e) {
@@ -305,7 +305,44 @@ public Map<String, String> findId(String name, String email) {
 	
 	
 	
+public Map<String, String> findPass(String name, String email,String id) {
 	
+	Map<String, String> map = new HashMap<String,String>();
+	
+
+	String query = " SELECT id,name,email,pass  "
+			+ " FROM membership "
+			+ " WHERE name=? and email=? and id=?";
+	try {
+		psmt = con.prepareStatement(query);
+		psmt.setString(1, name);
+		psmt.setString(2, email);
+		psmt.setString(3, id);
+		rs = psmt.executeQuery();
+		/*
+		매개변수로 전달된 일련번호를 통해 조회하므로
+		결과는 무조건 1개만 나오게 된다. 따라서 if문으로
+		반환된 결과가 있는지만 확인하면 된다.
+		 */
+
+		
+		if(rs.next()) {
+			map.put("pass",rs.getString("pass")); 
+			map.put("noPass", "not");
+
+			
+		}else {
+			map.put("noPass", "nothing");
+			System.out.println("존재하는 회원이 없습니다.");
+		}
+		
+	} catch (Exception e) {
+		System.out.println("findPass오류");
+		e.printStackTrace();
+	}
+	return map;
+	
+}	
 	
 	
 	

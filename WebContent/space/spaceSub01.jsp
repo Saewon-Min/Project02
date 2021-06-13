@@ -1,3 +1,5 @@
+<%@page import="homework.MembershipDTO"%>
+<%@page import="homework.MembershipDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../include/global.jsp" %>
@@ -117,9 +119,19 @@ String id = (String)session.getAttribute("USER_ID");
 	
 	</ul>
 	<ul class="pagination d-flex justify-content-end" >	
+	
+	<% 
+
+	if(session.getAttribute("USER_ID")!= null && session.getAttribute("USER_ID").equals("admin") ){
+	%>
 	<button type="button" class="btn btn-warning" onclick="location.href='../Project02/spacesub01.write?flag=notice';" style="width:130px; ">
 	글쓰기
 	</button>
+	<% 
+	}
+	%>
+	
+	
 	</ul>
 	
 	
@@ -127,7 +139,7 @@ String id = (String)session.getAttribute("USER_ID");
 	
 	</div>
       	</div>
-        	
+    <%@ include file="../include/bottom.jsp" %>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
     <script src="../bootstrap4.6.0/js/js/scripts.js"></script>

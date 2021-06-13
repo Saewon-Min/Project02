@@ -1,3 +1,5 @@
+<%@page import="model2.mvcboard.MVCBoardDTO"%>
+<%@page import="model2.mvcboard.MVCBoardDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../include/global.jsp" %>
@@ -85,13 +87,24 @@
 		    
 		    
 		    <div align="right">
-
+		    <!-- 관리자는 전체 글 수정 삭제 가능 -->
+		    
+			<%-- <% 
+			MVCBoardDAO dao = new MVCBoardDAO();
+			String index = (String)request.getAttribute("idx");
+			MVCBoardDTO dto = dao.selectView(index);
+			if(session.getAttribute("USER_ID") != null && 
+				session.getAttribute("USER_ID").toString().equals(dto.getId())){
+			%> --%>
 				<button type="button" onclick="location.href='../Project02/photo.editpass?mode=edit&idx=${param.idx}&flag=photo';" style="width:auto;" class="btn btn-primary">
 				수정하기
 				</button>
 				<button type="button" onclick="location.href='../Project02/photo.editpass?mode=delete&idx=${param.idx}&flag=photo';" style="width:auto;" class="btn btn-primary">
 					삭제하기
 				</button>
+<%-- 			<% 
+			}
+			%>	 --%>			
 				<button type="button" onclick="location.href='../Project02/photo.list?flag=photo';" style="width:auto; " class="btn btn-primary">
 					리스트바로가기
 				</button>
@@ -104,7 +117,7 @@
 			
 			
         	</div>
-       
+       <%@ include file="../include/bottom.jsp" %>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->

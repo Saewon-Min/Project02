@@ -30,7 +30,7 @@ public class ViewController extends HttpServlet{
 		dto.setContent(dto.getContent().replaceAll("\r\n", "<br/>"));
 		// 리퀘스트 영역에 저장
 		req.setAttribute("dto", dto);
-		
+		req.setAttribute("idx", idx);
 		
 		// 댓글 기능(목록) 추가
 		CommentDAO dao2 = new CommentDAO();

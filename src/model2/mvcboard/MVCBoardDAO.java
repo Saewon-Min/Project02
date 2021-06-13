@@ -1,8 +1,12 @@
 package model2.mvcboard;
 
+import java.net.http.HttpRequest;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import common.ConnectionPool;
 import model1.board.BoardDTO;
@@ -73,6 +77,8 @@ public class MVCBoardDAO extends ConnectionPool{
 	public List<MVCBoardDTO> selectListPage(Map<String, Object> map){
 		List<MVCBoardDTO> bbs = new Vector<MVCBoardDTO>();
 		
+		
+
 		String query = " " +
 				"select * from multiMVCBoard where ";
 		

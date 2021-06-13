@@ -8,32 +8,38 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<%
+String id = (String)session.getAttribute("USER_ID");
+%>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-     <link href="../bootstrap4.6.0/css/styles.css" rel="stylesheet" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+
+
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="../bootstrap4.6.0/css/styles.css" rel="stylesheet" />
+
+<!-- Core theme CSS (includes Bootstrap)-->
 </head>
 <body>
-<%
-
-String id = (String)session.getAttribute("USER_ID");
-
-%>
 	<div class="jumbotron">
 	<br /><br /><br /><br /><br />
      <div class="text-center" style="vertical-align: middle" >
-       	<br />
-           <h1 class="section-heading text-uppercase" >반려인 게시판</h1>
-           <br />
-       </div>
+            	<br />
+                <h1 class="section-heading text-uppercase" >정모 일정</h1>
+                <br />
+            </div>
 
     </div>
-        <div class="d-flex" id="wrapper">
-		<%@ include file="../include/spaceLeft.jsp" %>
-
+    <div class="d-flex" id="wrapper">
+    		<%@ include file="../include/spaceLeft.jsp" %>
+            
 
 <div class="container-fluid">
 			<form method="get">
-				<table width="90%" style="border:none" >
-			<input type="hid den" name="user_id" value="<%=id %>" />
+				<table width="90%" style="border:none">
+				<input type="hid den" name="user_id" value="<%=id %>" />
 				
 				<tr>
 					<td align='center'>
@@ -77,7 +83,7 @@ String id = (String)session.getAttribute("USER_ID");
 					+ loop.index) }
 			</td>
 			<td align="left">
-				<a href="../Project02/multi.view?idx=${row.idx }&flag=people">${row.title }</a>
+				<a href="../Project02/multi.view?idx=${row.idx }&flag=schedule">${row.title }</a>
 			</td>
 			<td>${row.name }</td>
 			<td>${row.visitcount }</td>
@@ -94,54 +100,35 @@ String id = (String)session.getAttribute("USER_ID");
 
 		</tr>
 		</c:forEach>
-		</c:otherwise>
-		</c:choose>
+	</c:otherwise>
+</c:choose>
 	</table>
+
 	<ul class="pagination d-flex justify-content-center" >
 	
 	${map.pagingImg }
 	
 	</ul>
 	<ul class="pagination d-flex justify-content-end" >	
-	<button type="button" class="btn btn-warning" onclick="location.href='../Project02/community.write?flag=people';" style="width:130px; ">
+	<% 
+
+	if(session.getAttribute("USER_ID").equals("admin") ){
+	%>
+	<button type="button" class="btn btn-warning" onclick="location.href='../Project02/spacesub02.write?flag=schedule';" style="width:130px; ">
 	글쓰기
 	</button>
+	<% 
+	}
+	%>
 	</ul>
-
 	
-	
-			</div>
-        	</div>
-        	
-       <%@ include file="../include/bottom.jsp" %>
-        <!-- Bootstrap core JS-->
+	</div>
+      	</div>
+      	
+      	<%@ include file="../include/bottom.jsp" %>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="../bootstrap4.6.0/js/js/scripts.js"></script>
-	
+
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

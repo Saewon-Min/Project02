@@ -238,7 +238,7 @@ function loginValidate(fn){
 					    <div class="container" style="background-color:#f1f1f1">
 					      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
 					      
-					      <span class="psw">Forgot <a href="../find/findID.jsp">ID?</a>&nbsp; <a href="#">Password?</a></span>
+					      <span class="psw">Forgot <a href="../find/findID.jsp">ID?</a>&nbsp; <a href="../find/findPass.jsp">Password?</a></span>
 					    </div>
 					  </form>
 					</div>

@@ -1,3 +1,5 @@
+<%@page import="model2.mvcboard.MVCBoardDTO"%>
+<%@page import="model2.mvcboard.MVCBoardDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
      <%@ include file="../include/globalPhoto.jsp" %>
@@ -79,11 +81,16 @@ String id = (String)session.getAttribute("USER_ID");
                 <p>${row.content }</p>
                 <div class="portfolio-links">
                   <a href="../Uploads/${row.sfile }" data-gall="portfolioGallery" class="venobox" title="${row.title }"><i class="bx bx-plus"></i></a>
-                  	 
-                  	
-               		<a href="../Project02/photo.editpass?mode=edit&idx=${row.idx}&flag=photo" style="font-size:15px; color:white; font-weight:bold; text-decoration: none;" >수정</a>
-               		<a href="../Project02/photo.editpass?mode=delete&idx=${row.idx}&flag=photo"  style="font-size:15px;color:white;font-weight:bold; text-decoration: none;">삭제</a>
-                		
+  	
+  	
+  				<c:set var="id" value="<%=id %>" />
+
+  				<c:if test="${id != null and row.id eq id }" var="index">   
+	          		<a href="../Project02/photo.editpass?mode=edit&idx=${row.idx}&flag=photo" style="font-size:15px; color:white; font-weight:bold; text-decoration: none;" >수정</a>
+	          		<a href="../Project02/photo.editpass?mode=delete&idx=${row.idx}&flag=photo"  style="font-size:15px;color:white;font-weight:bold; text-decoration: none;">삭제</a>
+    
+    			</c:if>
+               		
                 </div>
               </div>
             </div>
@@ -125,10 +132,10 @@ String id = (String)session.getAttribute("USER_ID");
         	
     
     
-    
-    
     <div id="preloader"></div>
     <a href="#" class="back-to-top"><i class="bx bx-up-arrow-alt"></i></a>
+    
+    <%@ include file="../include/bottom.jsp" %>
     
         	
         	

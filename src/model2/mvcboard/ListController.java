@@ -2,6 +2,7 @@ package model2.mvcboard;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -82,19 +83,20 @@ public class ListController extends HttpServlet{
 
 		// 실제 출력할 레코드를 가져옴
 		List<MVCBoardDTO> boardLists = dao.selectListPage(map);
+		
 		dao.close();
 		String pagingImg = "";
 		// View에 출력할 페이지 번호를 문자열로 저장
-		if(flag=="notice") {
+		if(flag.equals("notice")) {
 			pagingImg = BoardPage.pagingImg(flagCount, pageSize, blockPage, pageNum, "../Project02/notice.list");
 			
-		}else if(flag=="schedule") {
+		}else if(flag.equals("schedule")) {
 			pagingImg = BoardPage.pagingImg(flagCount, pageSize, blockPage, pageNum, "../Project02/schedule.list");
 			
-		}else if(flag=="photo") {
+		}else if(flag.equals("photo")) {
 			pagingImg = BoardPage.pagingImg(flagCount, pageSize, blockPage, pageNum, "../Project02/photo.list");
 			
-		}else if(flag=="people") {
+		}else if(flag.equals("people")) {
 			pagingImg = BoardPage.pagingImg(flagCount, pageSize, blockPage, pageNum, "../Project02/people.list");
 			
 		}
@@ -109,16 +111,18 @@ public class ListController extends HttpServlet{
 		request.setAttribute("boardLists", boardLists); // 페이지에 출력할 게시물
 		request.setAttribute("map", map); // 각종 파라미터 및 페이지관련 값
 
-		if(flag=="notice") {
+		
+		
+		if(flag.equals("notice")) {
 			
 			request.getRequestDispatcher("/space/spaceSub01.jsp").forward(request, resp);
-		}else if(flag=="schedule") {
+		}else if(flag.equals("schedule")) {
 			/* session.removeAttribute("flag"); */
 			request.getRequestDispatcher("/space/spaceSub02.jsp").forward(request, resp);
-		}else if(flag=="photo") {
+		}else if(flag.equals("photo")) {
 			/* session.removeAttribute("flag"); */
 			request.getRequestDispatcher("/space/spaceSub03.jsp").forward(request, resp);
-		}else if(flag=="people") {
+		}else if(flag.equals("people")) {
 			request.getRequestDispatcher("/community/community.jsp").forward(request, resp);
 			
 		}

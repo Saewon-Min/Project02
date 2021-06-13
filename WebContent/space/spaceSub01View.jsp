@@ -1,3 +1,5 @@
+<%@page import="model2.mvcboard.MVCBoardDTO"%>
+<%@page import="model2.mvcboard.MVCBoardDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../include/global.jsp" %>
@@ -79,13 +81,18 @@
 		    
 		    
 		    <div align="right">
-
+			<% 
+			if(session.getAttribute("USER_ID")!= null && session.getAttribute("USER_ID").equals("admin") ){
+			%>
 				<button type="button" onclick="location.href='../Project02/notice.editpass?mode=edit&idx=${param.idx}&flag=notice';" style="width:auto;" class="btn btn-primary">
 				수정하기
 				</button>
 				<button type="button" onclick="location.href='../Project02/notice.editpass?mode=delete&idx=${param.idx}&flag=notice';" style="width:auto;" class="btn btn-primary">
 					삭제하기
 				</button>
+			<% 
+			}
+			%>
 				<button type="button" onclick="location.href='../Project02/notice.list?flag=notice';" style="width:auto; " class="btn btn-primary">
 					리스트바로가기
 				</button>
@@ -98,7 +105,7 @@
 			
 			
         	</div>
-       
+       <%@ include file="../include/bottom.jsp" %>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->

@@ -113,7 +113,7 @@ String id = (String)session.getAttribute("USER_ID");
 	</ul>	
 			</div>
         	</div>
-
+<%@ include file="../include/bottom.jsp" %>
 	
 </body>
 </html>
