@@ -321,7 +321,38 @@ public class MVCBoardDAO extends ConnectionPool{
 		
 	}
 	
-	
+public int adminUpdatePost(MVCBoardDTO dto) {
+		
+		int result = 0;
+		try {
+			// 비회원제 게시판이므로 패스워드까지 where절에 추가함
+			String query = " update multiMVCBoard set "
+					+ " title=?, name=?, content=?, ofile=?, sfile=? ,photoflag=? "
+					+ " where idx=? ";
+			
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, dto.getTitle());
+			psmt.setString(2, dto.getName());
+			psmt.setString(3, dto.getContent());
+			psmt.setString(4, dto.getOfile());
+			psmt.setString(5, dto.getSfile());
+			psmt.setString(6, dto.getPhotoflag());
+			psmt.setString(7, dto.getIdx());
+			//psmt.setString(8, dto.getPass());
+			
+			result = psmt.executeUpdate();
+			
+			
+			
+		} catch (Exception e) {
+			System.out.println("게시물 수정 중 예외발생");
+			e.printStackTrace();
+		}
+		
+		
+		return result;
+		
+	}
 	
 	
 	// 삭제처리

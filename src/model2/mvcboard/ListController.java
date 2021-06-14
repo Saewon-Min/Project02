@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import common.BoardConfig;
 import utils.BoardPage;
@@ -26,6 +27,8 @@ public class ListController extends HttpServlet{
 		int lastSlash = uri.lastIndexOf("/");
 		String commandStr = uri.substring(lastSlash);
 		String flag = "";
+		String admin = "";
+				
 		
 		if(commandStr.equals("/notice.list")) {
 			flag="notice";
@@ -34,6 +37,18 @@ public class ListController extends HttpServlet{
 		}else if(commandStr.equals("/photo.list")) {
 			flag="photo";
 		}else if(commandStr.equals("/people.list")) {
+			flag="people";
+		}else if(commandStr.equals("/noticeAdmin.list")) {
+			admin="admin";
+			flag="notice";
+		}else if(commandStr.equals("/scheduleAdmin.list")) {
+			admin="admin";
+			flag="schedule";
+		}else if(commandStr.equals("/photoAdmin.list")) {
+			admin="admin";
+			flag="photo";
+		}else if(commandStr.equals("/peopleAdmin.list")) {
+			admin="admin";
 			flag="people";
 		}
 		
@@ -88,17 +103,33 @@ public class ListController extends HttpServlet{
 		String pagingImg = "";
 		// View에 출력할 페이지 번호를 문자열로 저장
 		if(flag.equals("notice")) {
-			pagingImg = BoardPage.pagingImg(flagCount, pageSize, blockPage, pageNum, "../Project02/notice.list");
+			if(admin.equals("admin")) {
+				pagingImg = BoardPage.pagingImg(flagCount, pageSize, blockPage, pageNum, "../Project02/noticeAdmin.list");
+			}else {
+				pagingImg = BoardPage.pagingImg(flagCount, pageSize, blockPage, pageNum, "../Project02/notice.list");
+				
+			}
 			
 		}else if(flag.equals("schedule")) {
+			if(admin.equals("admin")) {
+				pagingImg = BoardPage.pagingImg(flagCount, pageSize, blockPage, pageNum, "../Project02/scheduleAdmin.list");
+			}else {
 			pagingImg = BoardPage.pagingImg(flagCount, pageSize, blockPage, pageNum, "../Project02/schedule.list");
-			
+			}
 		}else if(flag.equals("photo")) {
+			if(admin.equals("admin")) {
+				pagingImg = BoardPage.pagingImg(flagCount, pageSize, blockPage, pageNum, "../Project02/photoAdmin.list");
+			}else {
+		
 			pagingImg = BoardPage.pagingImg(flagCount, pageSize, blockPage, pageNum, "../Project02/photo.list");
-			
+			}
 		}else if(flag.equals("people")) {
+			if(admin.equals("admin")) {
+				pagingImg = BoardPage.pagingImg(flagCount, pageSize, blockPage, pageNum, "../Project02/peopleAdmin.list");
+			}else {
+		
 			pagingImg = BoardPage.pagingImg(flagCount, pageSize, blockPage, pageNum, "../Project02/people.list");
-			
+			}
 		}
 		
 		
@@ -115,15 +146,30 @@ public class ListController extends HttpServlet{
 		
 		if(flag.equals("notice")) {
 			
-			request.getRequestDispatcher("/space/spaceSub01.jsp").forward(request, resp);
+			if(admin.equals("admin")) {
+				request.getRequestDispatcher("/admin/tables.jsp").forward(request, resp);
+			}else {
+				request.getRequestDispatcher("/space/spaceSub01.jsp").forward(request, resp);
+				
+			}
 		}else if(flag.equals("schedule")) {
-			/* session.removeAttribute("flag"); */
+			if(admin.equals("admin")) {
+				request.getRequestDispatcher("/admin/tables.jsp").forward(request, resp);
+			}else {
 			request.getRequestDispatcher("/space/spaceSub02.jsp").forward(request, resp);
+			}
 		}else if(flag.equals("photo")) {
-			/* session.removeAttribute("flag"); */
+			if(admin.equals("admin")) {
+				request.getRequestDispatcher("/admin/tables.jsp").forward(request, resp);
+			}else {
 			request.getRequestDispatcher("/space/spaceSub03.jsp").forward(request, resp);
+			}
 		}else if(flag.equals("people")) {
+			if(admin.equals("admin")) {
+				request.getRequestDispatcher("/admin/tables.jsp").forward(request, resp);
+			}else {
 			request.getRequestDispatcher("/community/community.jsp").forward(request, resp);
+			}
 			
 		}
 

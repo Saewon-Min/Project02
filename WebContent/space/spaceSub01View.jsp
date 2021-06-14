@@ -96,6 +96,13 @@
 				<button type="button" onclick="location.href='../Project02/notice.list?flag=notice';" style="width:auto; " class="btn btn-primary">
 					리스트바로가기
 				</button>
+		<br /><br />
+		<div align="center" style="border:1px solid lightgray; padding-top:20px; padding-bottom:20px">
+		<h5>해당 게시글에는 댓글을 작성하실 수 없습니다.</h5>
+		</div>
+
+
+
 
 			</div>
 			

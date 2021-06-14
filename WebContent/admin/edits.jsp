@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%> 
+    pageEncoding="UTF-8"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ include file="../include/global.jsp" %>
-    
-<%@ include file="../include/top.jsp" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,8 +29,40 @@
 			return false;
 		}
 		
+		if(flag.equals("notice")){
+			
+			f.action = "../Project02/multi.edit?flag=notice";
+		}else if(flag.equals("schedule")){
+			f.action = "../Project02/multi.edit?flag=schedule";
+		}else if(flag.equals("photo")){
+			f.action = "../Project02/multi.edit?flag=photo";
+		}else if(flag.equals("people")){
+			f.action = "../Project02/multi.edit?flag=people";
+		}
+		
+		
 	}
 	
+	$(function(){
+		var flag = "<%=request.getParameter("flag")%>";
+		$("#listbtn").click(function(){
+			
+			if(flag.equals("notice")){	
+				$(this).attr("onclick","location.href='../Project02/notice.list?flag=notice';");
+			}else if(flag.equals("schedule")){
+				$(this).attr("onclick","location.href='../Project02/schedule.list?flag=schedule';");
+			}else if(flag.equals("photo")){
+				$(this).attr("onclick","location.href='../Project02/photo.list?flag=photo';");
+			}else if(flag.equals("people")){
+				$(this).attr("onclick","location.href='../Project02/people.list?flag=people';");
+			}
+		
+		  
+		});
+	
+	
+	
+	});
 	
 	
 	
@@ -53,7 +84,7 @@
 	<%@ include file="../include/spaceLeft.jsp" %>
 	<div class="container-fluid" align="center">
 <form name="writeFrm" method="post" enctype="multipart/form-data"
-	action="../admin.edit?flag=admin"
+	action=""
 	onsubmit="return formValidate(this);">
 
 	<input type="hid den" name="idx" value=${dto.idx } /><!-- 일련번호 -->
@@ -95,7 +126,7 @@
 
 			<button type="submit" style="width:auto;" class="btn btn-primary">작성완료</button>
 			<button type="reset" style="width:auto;" class="btn btn-primary">RESET</button>
-			<button type="button" style="width:auto;" class="btn btn-primary" onclick="location.href='../admin/tables.jsp';">
+			<button type="button" style="width:auto;" class="btn btn-primary">
 				리스트바로가기
 			</button>
 </div>
@@ -106,4 +137,3 @@
 </div>
 </body>
 </html>
-

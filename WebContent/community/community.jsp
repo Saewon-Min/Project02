@@ -31,22 +31,24 @@ String id = (String)session.getAttribute("USER_ID");
 
 
 <div class="container-fluid">
-			<form method="get">
+			<form method="get" class="form-inline">
 				<table width="90%" style="border:none" >
 			<input type="hid den" name="user_id" value="<%=id %>" />
 				
-				<tr>
-					<td align='center'>
-						<select name="searchField">
+				<tr >
+					<td align='center' >
+						<select name="searchField" class="form-control" style="background-color: skyblue; color:white; font-weight:bold">
 							<option value="title">제목</option>
 							<option value="content">내용</option>
 						</select>
-						<input type="text" name="searchWord" />
-						<input type="submit" value="검색하기" />
+						<input type="text" name="searchWord" class="form-control"/>
+						<input class="btn btn-primary" type="submit" value="검색하기" />
+						
 					</td>
 				</tr>
 				</table>
 				</form>
+				<br />
 			  <table class="table table-hover">
 			    <thead>
 			      <tr style="text-align: center">

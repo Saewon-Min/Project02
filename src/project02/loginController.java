@@ -79,9 +79,9 @@ public class loginController  extends HttpServlet{
 				}else{
 					CookieManager.deleteCookie(response, "loginId");
 				}
-				// 메세지를 경고창으로 띄우고 로그인 페이지로 이동한다.
-				JSFunction.alertLocation(response, "로그인 성공", "./main/main.jsp");
-				//response.sendRedirect("./main/main.jsp"); 
+				
+				JSFunction.alertLocation(response, "로그인 성공","./main/main.jsp");
+				
 				
 			}else{
 				JSFunction.alertBack(response, "일치하는 회원정보가 없습니다.");

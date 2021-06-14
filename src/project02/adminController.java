@@ -1,4 +1,4 @@
-package model2.mvcboard;
+package project02;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,56 +16,40 @@ import javax.servlet.http.HttpSession;
 import com.oreilly.servlet.MultipartRequest;
 
 import fileupload.FileUtil;
+import model2.mvcboard.MVCBoardDAO;
+import model2.mvcboard.MVCBoardDTO;
 import utils.JSFunction;
-
-@WebServlet("*.edit")
-public class EditController extends HttpServlet{
+@WebServlet("*.admin") 
+public class adminController extends HttpServlet{
 	
-	// 수정 폼을 띄워주기 위한 부분
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-		HttpSession session = req.getSession(); 
-
+	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		// 파라미터로 전달된 일련번호를 통해 기존 게시물을 조회한다.
-		String idx = req.getParameter("idx");
-		MVCBoardDAO dao = new MVCBoardDAO();
-		MVCBoardDTO dto = dao.selectView(idx);
-		System.out.println("dto.getSfile : "+dto.getSfile());
-		String flag = req.getParameter("flag");
-
 		
-		if(!session.getAttribute("USER_ID").equals(dto.getId())){
-			// 작성자가 본인이 아니라면 경고창을 띄우고 뒤로 이동한다.
-			JSFunction.alertBack(resp, "작성자 본인만 수정할 수 있습니다.");
-			return;
+		String uri = req.getRequestURI();
+		int lastSlash = uri.lastIndexOf("/");
+		String commandStr = uri.substring(lastSlash);
+		
+		// 마지막 요청명을 통해 각 기능의 메소드를 호출한다.
+		if(commandStr.equals("/edit.admin")) {
+			edit(req, resp);
+		}else if(commandStr.equals("/delete.admin")) {
+			delete(req,resp);
 		}
 		
-		// 하나의 레코드를 저장한 DTO객체를 request영역에 저장한 후 View로 포워드
-		req.setAttribute("dto", dto);
 		
-		if(flag.equals("notice")) {
-			req.getRequestDispatcher("/common/Edit.jsp?flag=notice").forward(req, resp);
-		}else if(flag.equals("schedule")){
-			req.getRequestDispatcher("/common/Edit.jsp?flag=schedule").forward(req, resp);
-		}else if(flag.equals("photo")){
-			req.getRequestDispatcher("/common/EditPhoto.jsp?flag=photo").forward(req, resp);
-
-		}else if(flag.equals("people")){
-			req.getRequestDispatcher("/common/Edit.jsp?flag=people").forward(req, resp);
-
-		}
+		
+		
+		
+		
 		
 	}
+	
 
-	
-	
-	// 수정 처리
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		// 물리적 경로와 제한 용량을 통해 MultipartRequest 객체 생성 및 파일 업로드
+
+
+	public void edit(HttpServletRequest req, HttpServletResponse resp) 
+			throws ServletException, IOException {
 		String saveDirectory = req.getServletContext().getRealPath("/Uploads");
 		ServletContext application = this.getServletContext();
 		int maxPostSize = Integer.parseInt(application.getInitParameter("maxPostSize"));
@@ -80,7 +64,7 @@ public class EditController extends HttpServlet{
 			String idx = mr.getParameter("idx");
 			String prevOfile = mr.getParameter("prevOfile");
 			String prevSfile = mr.getParameter("prevSfile");
-			String flag = mr.getParameter("flag");
+			
 			String photoflag = mr.getParameter("photoflag");
 			
 			// -일반 입력상자로 받을 파라미터
@@ -89,19 +73,14 @@ public class EditController extends HttpServlet{
 			String content = mr.getParameter("content");
 
 			
-			/* 
-			- 서블릿에서 getSession()메소드를 통해 session내장객체를
-			얻어온 후 session영역의 비밀번호를 가져와서 DTO에 저장한다.
-			*/
-			HttpSession session = req.getSession();
-			String pass = (String)session.getAttribute("pass");
+		
 			
 			MVCBoardDTO dto = new MVCBoardDTO();		
 			dto.setIdx(idx);
 			dto.setName(name);
 			dto.setTitle(title);
 			dto.setContent(content);
-			dto.setPass(pass);
+			
 			dto.setPhotoflag(photoflag);
 			
 			// 새롭게 업로드 된 파일의 이름을 얻어온다.
@@ -143,34 +122,41 @@ public class EditController extends HttpServlet{
 			
 			
 			MVCBoardDAO dao = new MVCBoardDAO();
-			int result = dao.updatePost(dto);
+			int result = dao.adminUpdatePost(dto);
 			
 			dao.close();
 			if(result==1) {
-				session.removeAttribute("pass");
-				if(flag.equals("photo")) {
-					resp.sendRedirect("../Project02/multi.view?idx="+idx+"&flag="+flag+"&photoflag="+photoflag);
-				}else {
-					resp.sendRedirect("../Project02/multi.view?idx="+idx+"&flag="+flag);
-				}
+				
+				resp.sendRedirect("../Project02/admin.view?idx="+idx+"&flag=admin");
+				
 			}else {
 				JSFunction.alertLocation(resp, "비밀번호 검증을 다시 진행해주세요",
-						"../Project02/multi.view?idx="+idx+"&flag="+flag);
+						"../Project02/admin.view?idx="+idx+"&flag=admin");
 			}
 			
 		}else {
 
-			/*
-			디렉토리의 물리적 경로가 잘못되었거나, 파일 용량이 초과되었을때
-			MultipartRequest 객체가 생성되지 않는다. 즉, 글쓰기 오류가
-			발생하게 된다.
-			 */
+			
 			JSFunction.alertBack(resp, "글 수정 중 오류가 발생했습니다.");
 		}
-		
-		  
-	
 	}
-	
-	
+
+
+
+	public void delete(HttpServletRequest req, HttpServletResponse resp) 
+			throws ServletException, IOException {
+		
+	}
+
+
+
+
+
+
+
+
+
+
+
+
 }

@@ -21,6 +21,8 @@ public class ViewController extends HttpServlet{
 		String idx = req.getParameter("idx");
 		String flag = req.getParameter("flag");
 		
+		
+		
 		MVCBoardDAO dao = new MVCBoardDAO();
 		dao.updateVisitCount(idx); // 조회수 증가
 		MVCBoardDTO dto = dao.selectView(idx); // 게시물 조회
@@ -52,7 +54,9 @@ public class ViewController extends HttpServlet{
 			req.getRequestDispatcher("../Project02/photo.list?flag=photo").forward(req, resp);
 		} else if(flag.equals("people")) {
 			req.getRequestDispatcher("/community/communityView.jsp").forward(req, resp);
-		}  
+		}else if(flag.equals("admin")) {
+			req.getRequestDispatcher("/admin/views.jsp").forward(req, resp);
+		}
 		
 		
 	}
