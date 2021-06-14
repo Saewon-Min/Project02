@@ -50,7 +50,7 @@ public class EditController extends HttpServlet{
 		}else if(flag.equals("schedule")){
 			req.getRequestDispatcher("/common/Edit.jsp?flag=schedule").forward(req, resp);
 		}else if(flag.equals("photo")){
-			req.getRequestDispatcher("/common/EditPhoto.jsp?flag=photo").forward(req, resp);
+			req.getRequestDispatcher("/admin/EditPhoto.jsp?flag=photo").forward(req, resp);
 
 		}else if(flag.equals("people")){
 			req.getRequestDispatcher("/common/Edit.jsp?flag=people").forward(req, resp);

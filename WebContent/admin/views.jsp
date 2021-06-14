@@ -18,6 +18,26 @@ String id = (String)session.getAttribute("USER_ID");
             <%@ include file="../admin/leftsidenav.jsp" %>
             <div id="layoutSidenav_content">
                 <main>
+                <div class="container-fluid px-4">
+                        <h1 class="mt-4">Tables</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item"><a href="../Project02/noticeAdmin.list">공지사항</a></li>
+                            <li class="breadcrumb-item "><a href="../Project02/scheduleAdmin.list">정모일정</a></li>
+                            <li class="breadcrumb-item "><a href="../Project02/photoAdmin.list">사진게시판</a></li>
+                            <li class="breadcrumb-item "><a href="../Project02/peopleAdmin.list">반려인게시판</a></li>
+                            
+                        </ol>  
+                        
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fas fa-table me-1"></i>
+                               공지사항게시판
+                            </div>
+                            <div class="card-body">
+                                    <div class="d-flex" id="wrapper">
+                
+                
+                
                    <div class="container-fluid" >
 			<table class="table table-bordered" width="90%" style="background-color: white; vertical-align: center;">
 		    <colgroup>
@@ -54,7 +74,7 @@ String id = (String)session.getAttribute("USER_ID");
 		   	 <td>
 		   	 <!-- 첨부한 파일이 있을때만 다운로드 링크 활성화 -->
 		   	 <c:if test="${not empty dto.ofile }">
-		   		 ${dto.ofile } <!-- 기존 파일명 출력 -->
+		   		${dto.ofile } 
 		   		 <a href="../mvcboard/download.do?ofile=${dto.ofile }&sfile=${dto.sfile }&idx=${dto.idx }">
 		   			 [다운로드]
 		   		 </a>   	 
@@ -68,7 +88,7 @@ String id = (String)session.getAttribute("USER_ID");
 		    
 		    <div align="right">
 		   
-				<button type="button" onclick="location.href='../Project02/photo.list?flag=photo';" style="width:auto; " class="btn btn-primary">
+				<button type="button" onclick="location.href='../Project02/noticeAdmin.list?flag=admin';" style="width:auto; " class="btn btn-primary">
 					리스트바로가기
 				</button>
 
@@ -76,6 +96,11 @@ String id = (String)session.getAttribute("USER_ID");
 			
 			
 			</div>
+			</div>
+                            </div>
+                        </div>
+                    </div>			
+			
                 </main>
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">

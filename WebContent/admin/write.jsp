@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <!DOCTYPE html>
 <html>
 <%@ include file="../admin/topHead.jsp" %>
@@ -14,37 +13,42 @@
 <title>파일첨부형 게시판</title>
 <link href="../bootstrap4.6.0/css/styles.css" rel="stylesheet" />
 
-
 <script type="text/javascript">
-	function formValidate(f){
-		if(f.name.value==""){
-			alert("작성자를 입력하세요");
-			f.name.focus();
-			return false;
-		}
-		if(f.title.value==""){
-			alert("제목을 입력하세요");
-			f.title.focus();
-			return false;
-		}
-		if(f.content.value==""){
-			alert("내용을 입력하세요");
-			f.content.focus();
-			return false;
-		}
-		
-	
-		
-		
-	}
-	
+    function formValidate(f){
+   	 if(f.name.value==""){
+   		 alert("작성자를 입력하세요");
+   		 f.name.focus();
+   		 return false;
+   	 }
+   	 if(f.title.value==""){
+   		 alert("제목을 입력하세요");
+   		 f.title.focus();
+   		 return false;
+   	 }
+   	 if(f.content.value==""){
+   		 alert("내용을 입력하세요");
+   		 f.content.focus();
+   		 return false;
+   	 }
+   	 if(f.pass.value==""){
+   		 alert("비밀번호를 입력하세요");
+   		 f.pass.focus();
+   		 return false;
+   	 }
+    }
+</script>  
+<style type="text/css">
+button{
+	width:auto;
+}
 
-	
-	
-	
-</script>
+</style> 
 </head>
-    <body class="sb-nav-fixed">
+<%
+String id = (String)session.getAttribute("USER_ID");
+
+%>
+<body class="sb-nav-fixed">
         <%@ include file="../admin/topNav.jsp" %>
         <div id="layoutSidenav">
             <%@ include file="../admin/leftsidenav.jsp" %>
@@ -63,67 +67,66 @@
           <div class="card mb-4">
               <div class="card-header">
                   <i class="fas fa-table me-1"></i>
-                 공지사항게시판
+                게시판
               </div>
               <div class="card-body">    
-                
-    		<div class="d-flex" id="wrapper">
-			    
-				
-				<div class="container-fluid" align="center">
-			<form name="writeFrm" method="post" enctype="multipart/form-data"
-				action="../Project02/editAction.admin?flag=admin"
-				onsubmit="return formValidate(this);">
-			
-				<input type="hid den" name="idx" value=${dto.idx } /><!-- 일련번호 -->
-				<input type="hid den" name="prevOfile" value=${dto.ofile } /><!-- 원본 파일명 -->	
-				<input type="hid den" name="prevSfile" value=${dto.sfile } /><!-- 저장된 파일명 -->	
-				<input type="hid den" name="flag" value=${param.flag } />
-			<table class="table table-bordered" border="1" width="90%">
-				<tr>
-					<td>작성자</td>
-					<td>
-						<input type="text" name="name" style="width:150px;" value="${dto.name }" />
-					</td>
-				</tr>
-				<tr>
-					<td>제목</td>
-					<td>
-						<input type="text" name="title" style="width:90%;" value="${dto.title }" />
-					</td>
-				</tr>
-				<tr>
-					<td>내용</td>
-					<td>
-						<textarea name="content" style="width:90%;height:100px;">${dto.content }</textarea>
-					</td>
-				</tr>
-				<tr>
-					<td>첨부파일</td>
-					<td>
-					
-					<c:if test="${not empty dto.ofile }">		
-						<img src="../Uploads/${dto.sfile }" style="width:100px" alt="첨부된 사진"/>
-					</c:if>
-						<br />
-						<input type="file" name="ofile" /> 
-					</td> 
-				</tr>	
-			</table>	
-			<div align="right">
 
-			<button type="submit" style="width:auto;" class="btn btn-primary">작성완료</button>
-			<button type="reset" style="width:auto;" class="btn btn-primary">RESET</button>
-			<button type="button" style="width:auto;" class="btn btn-primary" onclick="location.href='../Project02/noticeAdmin.list'">
-				리스트바로가기
-			</button>
-			</div>
 
-			</form>
+    <div class="d-flex" id="wrapper">
+    
+	<div class="container-fluid" align="center">
+	<form name="writeFrm" method="post" enctype="multipart/form-data"
+	    action="../Project02/adminWriteAction.admin?flag=${param.flag }" onsubmit="return formValidate(this);">
+	<table width="90%">
+	<input type="hid den" name="user_id" value="<%=id %>" />
+	<input type="hid den" name="flag" value="${param.flag }" />
+    <tr>
+   	 <td>작성자</td>
+   	 <td>
+   		 <input type="text" name="name" style="width:150px;" />
+   	 </td>
+    </tr>
+    <tr>
+   	 <td>제목</td>
+   	 <td>
+   		 <input type="text" name="title" style="width:90%;" />
+   	 </td>
+    </tr>
+    <tr>
+   	 <td>내용</td>
+   	 <td>
+   		 <textarea name="content" style="width:90%;height:100px;"></textarea>
+   	 </td>
+    </tr>
+    <tr>
+   	 <td>첨부파일</td>
+   	 <td>
+   		 <input type="file" name="ofile" />
+   	 </td>
+    </tr>
+    <tr>
+   	 <td>비밀번호</td>
+   	 <td>
+   		 <input type="password" name="pass" style="width:100px;" />
+   	 </td>
+    </tr>
+    <tr>
+   	 <td colspan="2" align="right" >
+   		 <button type="submit">작성완료</button>
+   		 <button type="reset">RESET</button>
+   		 <button type="button" onclick="location.href='../Project02/noticeAdmin.list';">
+   			 리스트바로가기
+   		 </button>
+   	 </td>
+    </tr>
+</table>    
+</form>
+	
+</div>
+</div>
 
-			</div>
-		</div>
-		</div>
+
+</div>
       	</div>
             </div>
       	</main>
@@ -150,5 +153,9 @@
 
 
 
+
+
+
 </body>
 </html>
+

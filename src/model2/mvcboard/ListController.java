@@ -147,26 +147,26 @@ public class ListController extends HttpServlet{
 		if(flag.equals("notice")) {
 			
 			if(admin.equals("admin")) {
-				request.getRequestDispatcher("/admin/tables.jsp").forward(request, resp);
+				request.getRequestDispatcher("/admin/tables.jsp?flag=notice").forward(request, resp);
 			}else {
 				request.getRequestDispatcher("/space/spaceSub01.jsp").forward(request, resp);
 				
 			}
 		}else if(flag.equals("schedule")) {
 			if(admin.equals("admin")) {
-				request.getRequestDispatcher("/admin/tables.jsp").forward(request, resp);
+				request.getRequestDispatcher("/admin/tables.jsp?flag=schedule").forward(request, resp);
 			}else {
 			request.getRequestDispatcher("/space/spaceSub02.jsp").forward(request, resp);
 			}
 		}else if(flag.equals("photo")) {
 			if(admin.equals("admin")) {
-				request.getRequestDispatcher("/admin/tables.jsp").forward(request, resp);
+				request.getRequestDispatcher("/admin/tables.jsp?flag=photo").forward(request, resp);
 			}else {
 			request.getRequestDispatcher("/space/spaceSub03.jsp").forward(request, resp);
 			}
 		}else if(flag.equals("people")) {
 			if(admin.equals("admin")) {
-				request.getRequestDispatcher("/admin/tables.jsp").forward(request, resp);
+				request.getRequestDispatcher("/admin/tables.jsp?flag=people").forward(request, resp);
 			}else {
 			request.getRequestDispatcher("/community/community.jsp").forward(request, resp);
 			}

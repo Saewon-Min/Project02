@@ -4,14 +4,12 @@
 <%
 
 String id = (String)session.getAttribute("USER_ID");
-
+String flag = request.getParameter("flag");
 %>
 <html lang="en">
     <%@ include file="../admin/topHead.jsp" %>
-    <%@ include file="../include/global.jsp" %>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-     <link href="../bootstrap4.6.0/css/styles.css" rel="stylesheet" />
-    
+   
+
     <body class="sb-nav-fixed">
         <%@ include file="../admin/topNav.jsp" %>
         <div id="layoutSidenav">
@@ -30,11 +28,27 @@ String id = (String)session.getAttribute("USER_ID");
                         
                         <div class="card mb-4">
                             <div class="card-header">
+                            <c:set value="<%=flag %>" var="flag"/>
+                            <c:if test="${flag eq 'notice' }">
                                 <i class="fas fa-table me-1"></i>
-                               공지사항게시판
+                              공지사항 게시판
+                            </c:if>
+                            <c:if test="${flag eq 'schedule' }">
+                                <i class="fas fa-table me-1"></i>
+                              정모 일정 게시판
+                            </c:if>
+                            <c:if test="${flag eq 'photo' }">
+                                <i class="fas fa-table me-1"></i>
+                              사진 게시판
+                            </c:if>
+                            <c:if test="${flag eq 'people' }">
+                                <i class="fas fa-table me-1"></i>
+                              반려인 게시판
+                            </c:if>
+                              
                             </div>
                             <div class="card-body">
-                                    <div class="d-flex" id="wrapper">
+                            <div class="d-flex" id="wrapper"> 
     
 		
     
@@ -42,7 +56,7 @@ String id = (String)session.getAttribute("USER_ID");
             <!-- Page content wrapper-->
             
 			
-			<div class="container-fluid" >
+			 <div class="container-fluid" > 
 			
 			  <table class="table table-hover">
 			    <thead>
@@ -91,15 +105,22 @@ String id = (String)session.getAttribute("USER_ID");
 			</c:if>
 			</td>
 			<td>
-			<button type="button" onclick="location.href='../Project02/edit.admin?idx=${param.idx}';" style="width:auto;" class="btn btn-primary">
+			
+			<c:if test="${row.flag eq 'photo' }">
+			<button type="button" onclick="location.href='../Project02/edit.admin?idx=${row.idx}&flag=photo';" style="width:auto;" class="btn btn-primary">
 				수정하기
 				</button>
+			</c:if>	
+			<c:if test="${row.flag ne 'photo' }">	
+			<button type="button" onclick="location.href='../Project02/edit.admin?idx=${row.idx}&flag=admin';" style="width:auto;" class="btn btn-primary">
+				수정하기
+				</button>
+			</c:if>
 			</td>
 			<td>
-				<button type="button" onclick="location.href='../Project02/delete.admin?idx=${param.idx}';" style="width:auto;" class="btn btn-primary">
+				<button type="button" onclick="location.href='../Project02/deleteAction.admin?idx=${row.idx}';" style="width:auto;" class="btn btn-primary">
 					삭제하기
 				</button>
-			
 			</td>
 		</tr>
 		</c:forEach>
@@ -118,7 +139,7 @@ String id = (String)session.getAttribute("USER_ID");
 
 	if(session.getAttribute("USER_ID")!= null && session.getAttribute("USER_ID").equals("admin") ){
 	%>
-	<button type="button" class="btn btn-warning" onclick="location.href='../Project02/spacesub01.write?flag=notice';" style="width:130px; ">
+	<button type="button" class="btn btn-warning" onclick="location.href='../Project02/adminWrite.admin?flag=<%=flag %>';" style="width:130px; ">
 	글쓰기
 	</button>
 	<% 
@@ -132,7 +153,7 @@ String id = (String)session.getAttribute("USER_ID");
 
 	
 	</div>
-      	</div>
+       </div>
                             </div>
                         </div>
                     </div>
