@@ -16,6 +16,8 @@ import javax.servlet.http.HttpSession;
 import com.oreilly.servlet.MultipartRequest;
 
 import fileupload.FileUtil;
+import model2.mvcboard.CommentDAO;
+import model2.mvcboard.CommentDTO;
 import model2.mvcboard.MVCBoardDAO;
 import model2.mvcboard.MVCBoardDTO;
 import utils.JSFunction;
@@ -57,6 +59,14 @@ public class adminController extends HttpServlet{
 			writeAction(req, resp);
 		}else if(commandStr.equals("/adminWritePhoto.admin")) {
 			photoWrite(req, resp);
+		}else if(commandStr.equals("/commentWrite.admin")) {
+			commentWrite(req, resp);
+		}else if(commandStr.equals("/commentEdit.admin")) {
+			commentEdit(req, resp);
+		}else if(commandStr.equals("/commentEditAction.admin")) {
+			commentEditAction(req, resp);
+		}else if(commandStr.equals("/commentDeleteAction.admin")) {
+			commentDeleteAction(req, resp);
 		}
 		
 		
@@ -393,12 +403,110 @@ public class adminController extends HttpServlet{
 	}
 
 
+	public void commentWrite(HttpServletRequest req, HttpServletResponse resp) 
+			throws ServletException, IOException {
+		HttpSession session = req.getSession();
+		/*
+		서블릿에서 기능 처리를 위한 메소드는 doGet(), doPost()와 동일하게
+		request, response 객체를 매개변수로 사용하고,
+		ServletException, IOException 에 대한 예외처리를 해주는게 좋다.
+		 */
+		System.out.println("댓글쓰기");
+		
+		// 폼 값 받기
+		String id = (String) session.getAttribute("USER_ID");
+		String board_idx = req.getParameter("board_idx");
+		String name = req.getParameter("name");
+		String pass = req.getParameter("pass");
+		String comments = req.getParameter("comments");
+		
+		
+		// DTO 객체에 저장
+		CommentDTO dto = new CommentDTO();
+		dto.setId(id);
+		dto.setBoard_idx(board_idx);
+		dto.setName(name);
+		dto.setPass(pass);
+		dto.setComments(comments);
+		
+		// DAO 객체 생성 및 메소드 호출
+		CommentDAO dao = new CommentDAO();
+		
+		int result = dao.commentInsert(dto);
+		if(result == 1) {
+			
+			resp.sendRedirect("../Project02/admin.view?idx="+board_idx+"&flag=admin"+"#commentsList");
+			
+		}else {
+			JSFunction.alertBack(resp, "댓글 작성에 실패했습니다.");
+		}
+		
+	}
+
+	public void commentEdit(HttpServletRequest req, HttpServletResponse resp) 
+			throws ServletException, IOException {
+		String idx = req.getParameter("idx");
+		String board_idx = req.getParameter("board_idx");
 
 
+		CommentDAO dao = new CommentDAO();
+		CommentDTO dto = dao.commentView(idx,board_idx);
+
+		// 하나의 레코드를 저장한 DTO객체를 request영역에 저장한 후 View로 포워드
+		req.setAttribute("dto", dto);
+		req.getRequestDispatcher("/admin/EditComment.jsp").forward(req, resp);
+	}
+
+	public void commentEditAction(HttpServletRequest req, HttpServletResponse resp) 
+			throws ServletException, IOException {
+		String idx = req.getParameter("idx");
+		String board_idx = req.getParameter("board_idx");
+		String name = req.getParameter("name");
+		String postdate = req.getParameter("postdate");
+		String comments = req.getParameter("comments");
+		
+
+		CommentDTO dto = new CommentDTO();		
+		dto.setComments(comments);
+		dto.setBoard_idx(board_idx);
+		dto.setIdx(idx);
+
+		
+		CommentDAO dao = new CommentDAO();
+			int result = dao.adminCommentUpdate(dto);
+			dao.close();
+			
+			if(result==1) {
+				JSFunction.alertOpenerReloadClose(resp,"댓글이 수정되었습니다.");	
+				
+			}else {
+				JSFunction.alertBack(resp, "댓글 수정 중 오류가 발생했습니다.");
+				
+			}
+			
+		
+	}
 
 
+	public void commentDeleteAction(HttpServletRequest req, HttpServletResponse resp) 
+			throws ServletException, IOException {
+		String idx = req.getParameter("idx");
+		String board_idx = req.getParameter("board_idx");
 
+		CommentDAO dao =  new CommentDAO();
 
+			int result = dao.adminDeleteComment(idx,board_idx);
+			dao.close();
+			
+			
+			if(result==1) {
+				JSFunction.alertBack(resp,"댓글이 삭제되었습니다.");			
+			}	
+			else {
+				JSFunction.alertBack(resp, "댓글 삭제를 실패했습니다.");
+			}
+		
+	}
 
 
 

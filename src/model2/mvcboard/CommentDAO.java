@@ -160,6 +160,34 @@ public class CommentDAO extends ConnectionPool{
 		
 	}
 	
+public int adminCommentUpdate(CommentDTO dto) {
+
+		
+		int result = 0;
+		try {
+			String query = " update mycomment set "
+					+ " comments=? "
+					+ " where idx=? and board_idx=? ";
+			
+			psmt = con.prepareStatement(query);
+			//psmt.setString(1, dto.getName());
+			//psmt.setString(2, dto.getPostdate());
+			psmt.setString(1, dto.getComments());
+			psmt.setString(2, dto.getIdx());
+			psmt.setString(3, dto.getBoard_idx());
+
+			result = psmt.executeUpdate();
+	
+			
+		} catch (Exception e) {
+			System.out.println("댓글 수정 중 예외발생");
+			e.printStackTrace();
+		}
+		
+		
+		return result;
+		
+	}
 	
 	public int deleteComment(String idx, String board_idx, String pass) {
 		
@@ -172,7 +200,7 @@ public class CommentDAO extends ConnectionPool{
 			psmt.setString(3, pass);
 			result = psmt.executeUpdate();
 		} catch (Exception e) {
-			System.out.println("게시물 삭제 중 예외발생");
+			System.out.println("댓글 삭제 중 예외발생");
 			e.printStackTrace();
 		}
 		
@@ -183,7 +211,26 @@ public class CommentDAO extends ConnectionPool{
 		
 	}
 	
-	
+	public int adminDeleteComment(String idx, String board_idx) {
+		
+		int result = 0;
+		try {
+			String query= " delete from mycomment where idx=? and board_idx=?";
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, idx);
+			psmt.setString(2, board_idx);
+			result = psmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("관리자 댓글 삭제 중 예외발생");
+			e.printStackTrace();
+		}
+		
+		return result;
+		
+		
+		
+		
+	}
 	
 	public boolean confirmPassword(String pass, String idx) {
 		

@@ -126,7 +126,7 @@ function commentValidate(f){
 <div align="left">
 <h2 style="background-color: lightyellow; width:150px;" >댓글</h2>
 </div>
-<form name="commentFrm" method="post" action="../Project02/commentWrite.comm?flag=people" onsubmit="return commentValidate(this);">
+<form name="commentFrm" method="post" action="../Project02/commentWrite.comm?flag=schedule" onsubmit="return commentValidate(this);">
 	<!-- 해당 게시물의 일련번호로 댓글 테이블의 참조키가 된다. -->
 	<input type="hidden" name="board_idx" value="${param.idx }" />
 	<table border="1" width="90%" class="table table-bordered" >
