@@ -2,11 +2,11 @@
     pageEncoding="UTF-8"%>
     
 
-<%@page import="homework.MembershipDTO"%>
+<%@page import="membership.MembershipDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
-<%@page import="homework.MembershipDAO"%>
+<%@page import="membership.MembershipDAO"%>
     <%@ include file="../include/global.jsp" %>
    	<%@ include file="../include/top.jsp" %>
 

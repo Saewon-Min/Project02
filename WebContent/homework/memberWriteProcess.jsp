@@ -1,39 +1,12 @@
 
 
 <%@page import="utils.JSFunction"%>
-<%@page import="homework.MembershipDAO"%>
-<%@page import="homework.MembershipDTO"%>
+<%@page import="membership.MembershipDAO"%>
+<%@page import="membership.MembershipDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
 request.setCharacterEncoding("UTF-8");
-%>
-
-<% 
-/*   
-[선생님코드]
-
-String[] paramArr = new String[20];
-int idx = 0;
-Enumeration<String> forms = request.getParameterNames();
-while(forms.hasMoreElements()){
-	String paramName = (String)forms.nextElement();
-	paramArr[idx++]= request.getParameter(paramName);
-	
-}
-
-MembershipDTO dto = new MembershipDTO();
-
-dto.setId(paramArr[0]);
-.
-.
-이런식으로 name의 순서대로 값을 받아와서 저장하기
-
-*/
-
-
-
-
 %>
 
 

@@ -1,10 +1,10 @@
 <%@page import="utils.BoardPage"%>
-<%@page import="homework.MembershipDTO"%>
+<%@page import="membership.MembershipDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="common.BoardConfig"%>
 <%@page import="java.util.HashMap"%>  
 <%@page import="java.util.Map"%>
-<%@page import="homework.MembershipDAO"%>
+<%@page import="membership.MembershipDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <% 

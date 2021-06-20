@@ -73,8 +73,8 @@ String id = (String)session.getAttribute("USER_ID");
 <form name="writeFrm" method="post" enctype="multipart/form-data"
     action="../Project02/spacesub03.write?flag=photo" onsubmit="return formValidate(this);">
 <table width="90%">
-<input type="hid den" name="user_id" value="<%=id %>" />
-<input type="hid den" name="flag" value="${param.flag }" />
+<input type="hidden" name="user_id" value="<%=id %>" />
+<input type="hidden" name="flag" value="${param.flag }" />
 
     <tr>
    	 <td>작성자</td>

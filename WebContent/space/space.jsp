@@ -7,33 +7,6 @@
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-<script type="text/javascript">
-$(function(){
-    /*
-    태그 선택자 input과 :input의 차이점
-        input => input태그만 선택한다.
-        :input => input태그를 포함하여 문서내의 모든 폼 엘리먼트를
-            선택한다. 즉, textarea, select가 포함된다.
-    */
-/*     $('#notice').click(function(){
-        $(this).href="#noticeStart";
-
-    });
-        
-    $('#schedule').click(function(){
-    	$(this).href="#scheduleStart";
-
-    });
-    
-    $('#photo').click(function(){
-    	$(this).href="#photoStart";
-
-    }); */
-
-
-});
-
-</script>
 </head>
 <body>
 <section class="page-section" id="services">

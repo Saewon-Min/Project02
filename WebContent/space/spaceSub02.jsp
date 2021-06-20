@@ -39,7 +39,7 @@ String id = (String)session.getAttribute("USER_ID");
 <div class="container-fluid">
 			<form method="get" class="form-inline">
 				<table width="90%" style="border:none">
-				<input type="hid den" name="user_id" value="<%=id %>" />
+				<input type="hidden" name="user_id" value="<%=id %>" />
 				
 				<tr>
 					<td align='center'>

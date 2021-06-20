@@ -1,20 +1,14 @@
-package homework;
+package membership;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+
 import java.sql.SQLIntegrityConstraintViolationException;
-import java.sql.Statement;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
-import javax.servlet.ServletContext;
 
 import common.ConnectionPool;
-import model1.board.BoardDTO;
 
 ;
 

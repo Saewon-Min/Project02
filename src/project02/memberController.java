@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import homework.MembershipDAO;
-import homework.MembershipDTO;
+import membership.MembershipDAO;
+import membership.MembershipDTO;
 import utils.JSFunction;
 
 @WebServlet("*.member")
@@ -89,12 +89,13 @@ public class memberController extends HttpServlet{
 		
 	}
 	
-	
+	// 회원정보수정
 	public void editMember(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 	
 	}
 	
+	// 회원 탈퇴
 	public void deleteMember(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 	

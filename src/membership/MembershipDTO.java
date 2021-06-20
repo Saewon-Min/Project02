@@ -1,4 +1,4 @@
-package homework;
+package membership;
 
 import java.sql.Date;
 
