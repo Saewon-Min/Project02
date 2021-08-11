@@ -98,6 +98,9 @@ public class CommentController extends HttpServlet{
 			 */
 			if(flag.equals("people")) {
 			resp.sendRedirect("../Project02/people.view?idx="+board_idx+"&flag="+flag+"#commentsList");
+			}else if(flag.equals("schedule")) {
+				resp.sendRedirect("../Project02/schedule.view?idx="+board_idx+"&flag="+flag+"#commentsList");
+
 			}
 		}else {
 			JSFunction.alertBack(resp, "댓글 작성에 실패했습니다.");
