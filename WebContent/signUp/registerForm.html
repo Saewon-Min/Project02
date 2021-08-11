@@ -88,6 +88,11 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 	border: 0;
 }
 
+
+form{
+	outline: none;
+}
+
 </style>
 
 
@@ -297,23 +302,22 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 생년월일(datepicker 사용하기)
 주소(우편번호 API)
 이메일
-전화번호 인증-> 이메일로?
+전화번호 인증-> 전화인증부터 구현 하고 못하면 이메일로?
 관심태그
 계정 연동 (API)
 가입 약관
 개인 정보 처리 방침
  -->
 <body>
-
 	<div class="container">
 		<div class="input-form-background row">
 			<div class="input-form col-md-12 mx-auto">
 				<div class="input-form-wrap">
-					<h3>신청자 정보</h3>
-					<form name="moyoFrm" id="moyoFrm" action="#" method="post" > 
+					<h3>회원가입</h3>
+					<form name="registFrm" id="moyoFrm" action="#" method="post" onsubmit="return loginValdidate(this);"> 
 						<table class="table table-bordered">
 							<colgroup>
-								<col width="20%"/>
+								<col width="40%"/>
 								<col width="*"/>
 							</colgroup>
 							<tbody>
@@ -323,7 +327,9 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 									<td>
 										<input type="text" name="id" class="form-control" style="width: 230px;" required/>
 									</td>
-									<button type="button" onclick="">중복확인</button>
+									<td>
+										<button type="button" id="btn" onclick="" style="width: 120px;height: 40px;">중복확인</button>
+									</td>
 								</tr>
 								
 								<tr>
@@ -356,11 +362,17 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 									<td>
 										<input type="text" name="addr1" class="form-control" style="width: 230px;" required/>
 									</td>
+									<td>
+										<button type="button" onclick="" style="width: 120px;height: 40px;">우편번호</button>
+									</td>
 								</tr>
 								
 								<tr>
 									<td class="text-left"
-										style="vertical-align:middle;">주소 밑부분</td>
+										style="vertical-align:middle;"></td>
+									<td>
+										<input type="text" name="addr2" class="form-control" style="width: 230px;" required/>
+									</td>
 									<td>
 										<input type="text" name="addr2" class="form-control" style="width: 230px;" required/>
 									</td>
@@ -412,10 +424,10 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 								</tr>
 								<tr>
 									<td class="text-left"
-										style="vertical-align:middle;">방문예정시간</td>
+										style="vertical-align:middle;">관심 태그</td>
 									<td class="form-inline">
-										<input type="number" name="moyoHour" class="form-control" min="0" max="24" value="00" /> &nbsp;시&nbsp;&nbsp;
-										<input type="number" name="moyoMinute" class="form-control" min="0" max="59" value="00" /> &nbsp;분
+										<input type="checkbox" name="check1" class="form-control" min="0" max="24" value="00" /> &nbsp;시&nbsp;&nbsp;
+										<input type="checkbox" name="moyoMinute" class="form-control" min="0" max="59" value="00" /> &nbsp;분
 									</td>
 								</tr>
 							</tbody>
@@ -449,7 +461,7 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 			</div>
 		</div>
 	</div>
-	
+
 </body>
 </html>
 
