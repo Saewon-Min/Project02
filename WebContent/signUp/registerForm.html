@@ -37,44 +37,22 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 }
 
 
-#moyoFrm {
+#registFrm {
 	margin: 4% 7%; width: 70%;
 }
 
-#moyoFrm *:not(input, select){
+#registFrm *:not(input, select){
 	border: 0;
 }
 
-.productImg {
-	width: 400px; height: 400px;
-	border: 1px solid lightgray;
-	border-radius: 3px;
-}
 
-
-
-#moyoInfo {
-	margin: 5% 0;
-	margin-left: 5%;
-}
-
-#moyoInfo h3 {
-	margin-bottom: 20px; font-weight: bold;
-}
-
-#moyoInfo h6 {
-	font-weight: bold;
-}
 
 .input-form-wrap h3 {
 	margin-top: 20px; 
 }
-#moyoInfoWrap {
-	display: flex; align-items: center;
-	margin-top: -30px;
-}
 
-#moyoAgree {
+
+#registerAgree {
 	margin: 5%; margin-bottom: 8%;
 }
 
@@ -83,9 +61,14 @@ box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 4px #ff6c2f;
 }
 
-#moyoSubmitBtn {
+#registerSubmitBtn {
 	background-color: #ff6c2f; color: white;
 	border: 0;
+}
+
+#postBtn:hover, #checkid:hover{
+	background-color: black;
+	color:white;
 }
 
 
@@ -93,16 +76,14 @@ form{
 	outline: none;
 }
 
+
+
 </style>
 
 
 <script>
     $( function() {
-        //라디오를 버튼모양으로 바꿔주는 jQuery UI
-        $("input[type=radio]").checkboxradio({
-            icon: false
-        });
-
+        
         //날짜선택을 편리하게 - Date Picker
         $("#birthday").datepicker({
             dateFormat : "yy-mm-dd"
@@ -279,10 +260,10 @@ form{
                 console.log("zonecode", data.zonecode);
                 console.log("address", data.address);
                 //회원 가입폼에 적용
-                var f = document.loginFrm;//<form>태그의 DOM객체를 변수에 저장
+                var f = document.registFrm;//<form>태그의 DOM객체를 변수에 저장
                 f.zipcode.value = data.zonecode;
-                f.address1.value = data.address;
-                f.address2.focus();
+                f.addr1.value = data.roadAddress;
+                f.addr2.focus();
             }
         }).open();
     }
@@ -314,22 +295,21 @@ form{
 			<div class="input-form col-md-12 mx-auto">
 				<div class="input-form-wrap">
 					<h3>회원가입</h3>
-					<form name="registFrm" id="moyoFrm" action="#" method="post" onsubmit="return loginValdidate(this);"> 
+					<form name="registFrm" id="registFrm" action="#" method="post" onsubmit="return loginValdidate(this);"> 
 						<table class="table table-bordered">
 							<colgroup>
-								<col width="40%"/>
+								<col width="25%"/>
 								<col width="*"/>
 							</colgroup>
 							<tbody>
 								<tr>
 									<td class="text-left"
 										style="vertical-align:middle;">아이디</td>
-									<td>
-										<input type="text" name="id" class="form-control" style="width: 230px;" required/>
+									<td class="form-inline">
+										<input type="text" name="id" class="form-control" style="width: 230px;" required/>&nbsp;&nbsp;&nbsp;&nbsp;
+										<button type="button" id="checkid" onclick="" style="width: 120px;height: 40px;">중복확인</button>
 									</td>
-									<td>
-										<button type="button" id="btn" onclick="" style="width: 120px;height: 40px;">중복확인</button>
-									</td>
+									
 								</tr>
 								
 								<tr>
@@ -352,43 +332,33 @@ form{
 									<td class="text-left"
 										style="vertical-align:middle;">생년월일</td>
 									<td>
-										<input type="text" name="birth" class="form-control" style="width: 230px;" required/>
+										<input type="date" id="birthday" name="birthday" class="form-control" style="width: 230px;" required />
 									</td>
 								</tr>
 								
 								<tr>
 									<td class="text-left"
 										style="vertical-align:middle;">주소</td>
-									<td>
-										<input type="text" name="addr1" class="form-control" style="width: 230px;" required/>
+									<td class="form-inline">
+										<input type="text" name="addr1" class="form-control" style="width: 230px;" required/>&nbsp;&nbsp;&nbsp;&nbsp;
+										<button type="button" id="postBtn" onclick="zipcodeFind();" style="width: 120px;height: 40px;">우편번호</button>
 									</td>
-									<td>
-										<button type="button" onclick="" style="width: 120px;height: 40px;">우편번호</button>
-									</td>
+									
 								</tr>
 								
 								<tr>
 									<td class="text-left"
 										style="vertical-align:middle;"></td>
-									<td>
-										<input type="text" name="addr2" class="form-control" style="width: 230px;" required/>
-									</td>
-									<td>
-										<input type="text" name="addr2" class="form-control" style="width: 230px;" required/>
+									<td class="form-inline">
+										<input type="text" name="addr2" class="form-control" style="width: 200px;" required/>&nbsp;&nbsp;&nbsp;&nbsp;
+										<input type="text" name="addr3" class="form-control" style="width: 200px;" required/>
 									</td>
 								</tr>
-								<tr>
-									<td class="text-left"
-										style="vertical-align:middle;">이메일</td>
-									<td>
-										<input type="text" name="userName" class="form-control" style="width: 230px;" required/>
-									</td>
-								</tr>
-								
+
 								<tr>
 									<td class="text-left"
 										style="vertical-align:middle;">전화번호</td>
-									<td class="form-inline">
+									<td class="form-inline" >
 										<select name="mobile1" class="form-control" 
 										onchange="phoneFocus(3, this, 'mobile2');" style="width:80px;" required>
 											<option value=" "> </option>
@@ -410,24 +380,39 @@ form{
 								<tr>
 									<td class="text-left"
 										style="vertical-align:middle;">이메일&nbsp;&nbsp;&nbsp;</td>
-										<td class="form-inline">
+									<td class="form-inline" >
 										<input type="text" class="form-control" name="email1" value="" style="width:30%;" required />
 										&nbsp;@&nbsp;
 										<input type="text" class="form-control" name="email2" value="" style="width:30%;" required/>&nbsp;&nbsp;
-										<select name="email_domain" class="form-control" onchange="emailSelect(this);" style="width:25%;">
+										<select name="email_domain" class="form-control" onchange="inputEmail(this);" style="width:30%;">
 											<option value="">- 직접입력 -</option>
 											<option value="naver.com">naver.com</option>
-											<option value="hanmail.net">hanmail.net</option>
+											<option value="daum.net">daum.net</option>
 											<option value="gmail.com">gmail.com</option>
+											<option value="nate.com">nate.com</option>
 										</select>
 									</td>
+									
 								</tr>
-								<tr>
+								<tr >
 									<td class="text-left"
-										style="vertical-align:middle;">관심 태그</td>
-									<td class="form-inline">
-										<input type="checkbox" name="check1" class="form-control" min="0" max="24" value="00" /> &nbsp;시&nbsp;&nbsp;
-										<input type="checkbox" name="moyoMinute" class="form-control" min="0" max="59" value="00" /> &nbsp;분
+										style="vertical-align:middle;" >관심 태그</td>
+									<td class="form-inline" style="padding-bottom: 0px;">
+										<input type="checkbox" name="tag1" class="form-control"  /> &nbsp;댄디&nbsp;&nbsp;&nbsp;&nbsp;
+										<input type="checkbox" name="tag1" class="form-control"  /> &nbsp;클래식&nbsp;&nbsp;&nbsp;&nbsp;
+										<input type="checkbox" name="tag1" class="form-control"  /> &nbsp;캐주얼&nbsp;&nbsp;&nbsp;&nbsp;
+										<input type="checkbox" name="tag1" class="form-control"  /> &nbsp;스포티&nbsp;&nbsp;&nbsp;&nbsp;
+									</td> 
+								</tr>
+								<tr >
+									<td class="text-left"
+										style="vertical-align:middle;"></td>
+									<td class="form-inline" style="padding-top: 0px;">
+										<input type="checkbox" name="tag1" class="form-control"  /> &nbsp;모던&nbsp;&nbsp;&nbsp;&nbsp;
+										<input type="checkbox" name="tag1" class="form-control"  /> &nbsp;스트릿&nbsp;&nbsp;&nbsp;&nbsp;
+										<input type="checkbox" name="tag1" class="form-control"  /> &nbsp;빈티지&nbsp;&nbsp;&nbsp;&nbsp;
+										<input type="checkbox" name="tag1" class="form-control"  /> &nbsp;러블리&nbsp;&nbsp;&nbsp;&nbsp;
+										
 									</td> 
 								</tr>
 							</tbody>
@@ -438,7 +423,7 @@ form{
 
 					<h3>약관동의</h3>
 
-					<div id="moyoAgree">
+					<div id="registerAgree">
 						<textarea rows="6" name="content" class="form-control" style="resize:none;"
 							placeholder="개인정보수집약관" readonly></textarea>
 						<div class="custom-control custom-checkbox mb-4 mt-2">
@@ -454,8 +439,8 @@ form{
 								for="cancelAgree">무단 취소 시 부여되는 경고사항에 대해 동의합니다.</label>
 						</div>
 
-						<button class="btn btn-primary btn-lg btn-block" id="moyoSubmitBtn"
-							type="submit">모여!</button>
+						<button class="btn btn-primary btn-lg btn-block" id="registerSubmitBtn"
+							type="submit">회&nbsp;원&nbsp;가&nbsp;입</button>
 					</div>
 				</div>
 			</div>
