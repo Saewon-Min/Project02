@@ -90,6 +90,11 @@
 			color: #777777;
 			font-size: 12px;
 		}
+
+		/* 여러가지 브라우저 환경에서 동일하게 적용하기 위한 코드 */
+		input::-ms-input-placeholder {font-style: italic;font-size: 12px; }
+		input::-webkit-input-placeholder {font-style: italic;font-size: 12px;}
+		input::-moz-placeholder {font-style: italic;font-size: 12px;}
 	</style>
 
 
@@ -332,7 +337,7 @@
 							<tbody>
 								<tr style="text-align: right;">
 									<td colspan="2">
-										<span style="color:red;">*필수입력사항</span>
+										<span class="red">*필수입력사항</span>
 
 									</td>
 								</tr>
@@ -341,7 +346,7 @@
 									</td>
 									<td class="form-inline">
 										<input type="text" name="user_id" class="form-control" style="width: 250px;"
-											required />&nbsp;&nbsp;&nbsp;&nbsp;
+											required placeholder="아이디를 입력해주세요." />&nbsp;&nbsp;&nbsp;&nbsp;
 										<button type="button" id="checkid" onclick="idCheck(this.form);"
 											style="width: 120px;height: 40px;">중복확인</button>
 									</td>
@@ -358,7 +363,7 @@
 									</td>
 									<td>
 										<input type="text" name="pass1" class="form-control" style="width: 250px;"
-											required />
+											required placeholder="비밀번호를 입력해주세요." />
 									</td>
 								</tr>
 
@@ -376,21 +381,15 @@
 										확인</td>
 									<td>
 										<input type="text" name="pass2" class="form-control" style="width: 250px;"
-											required />
+											required placeholder="비밀번호를 입력해주세요." />
 									</td>
 								</tr>
 
 								<td><span class="red">*</span> 이름</td>
 								<td class="form-inline">
 									<input type="text" class="form-control" name="name" value="" style="width: 250px;"
-										required />
-									&nbsp;&nbsp;&nbsp;&nbsp;
-									<label for="radio-1">남</label>
-									<input type="radio" name="gender" id="radio-1" value="남" checked>
-									&nbsp;&nbsp;&nbsp;&nbsp;
-									<label for="radio-2">여</label>
-									<input type="radio" name="gender" id="radio-2" value="여">
-
+										required placeholder="이름을 입력해주세요." />
+								
 								</td>
 								</tr>
 
@@ -399,7 +398,7 @@
 											style="padding-left: 13px;">생년월일</span> </td>
 									<td>
 										<input type="date" id="birthday" name="birthday" class="form-control"
-											style="width: 250px;" required />
+											style="width: 250px; font-style: italic; font-size: 12px;" required />
 									</td>
 								</tr>
 
@@ -408,7 +407,7 @@
 									</td>
 									<td class="form-inline">
 										<input type="text" name="postcode" class="form-control" style="width: 250px;"
-											required />&nbsp;&nbsp;&nbsp;&nbsp;
+											required placeholder="우편번호" />&nbsp;&nbsp;&nbsp;&nbsp;
 										<button type="button" id="postBtn" onclick="zipcodeFind();"
 											style="width: 120px;height: 40px;">우편번호</button>
 									</td>
@@ -419,7 +418,7 @@
 									<td class="text-left" style="vertical-align:middle;"></td>
 									<td>
 										<input type="text" name="addr1" class="form-control" style="width: 500px;"
-											required />&nbsp;&nbsp;&nbsp;&nbsp;
+											required placeholder="주소를 입력해주세요." />&nbsp;&nbsp;&nbsp;&nbsp;
 										<input type="text" name="addr2" class="form-control" style="width: 500px;"
 											required placeholder="상세주소를 입력해주세요." />
 
