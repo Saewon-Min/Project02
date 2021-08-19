@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>id_overapping.jsp</title>
+<title>Moving Closet</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script
@@ -13,8 +13,6 @@
 
 <style>
 .input-form-background {
-	padding-top: 50px;
-	padding-bottom: 50px;
 }
 
 .input-form-wrap {
@@ -33,7 +31,14 @@
 	border-radius: 10px;
 	-webkit-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
 	-moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
-	box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
+	box-shadow: 0 8px 20px 0 rgba(255, 255, 255, 0.493);
+	position: absolute;
+	bottom: 800px;
+	right: 0px;
+	background-color: white;
+	color: black;
+	padding-left: 20px;
+	padding-right: 20px;
 }
 
 #mainbtn:focus {
@@ -47,13 +52,18 @@
 	background-color: #ff6c2f;
 	color: white;
 	border: 0;
-	width:200px;
+	width:300px;height:50px;
 }
 
 #paramId{
     color: #ff6c2f;
     font-weight: bold;
 }
+#regicon {
+  position: relative;
+  font-family: Arial;
+}
+
 
 
 </style>
@@ -62,18 +72,21 @@
 
 <body>
 
-	<div class="container" style="margin-top: 200px;width: 65%;" align="center">
-		<div class="input-form-background row">
+	<img alt="" src="./registerComplete2.png" width="100%">
+	<div class="container" style="" align="center" id="regicon">
+		<div class="input-form-background">
 			<div class="input-form col-md-12 mx-auto">
-				<div class="input-form-wrap" style="text-align:center;padding-top: 20px;">
-					<h3><span id="paramId">${param.user_id} </span> 님 회원가입이 완료되었습니다.</h3>
-					<h3><strong>Moving Closet</strong> 을 찾아주셔서 감사합니다.</h3>
+				<div class="input-form-wrap" style="text-align:center;padding-top:100px;padding-bottom:80px;">
+					<h3><span id="paramId">${param.user_id} </span> 님 회원가입이 완료되었습니다.</h3><br />
+					<h3><strong>Moving Closet</strong> 을 찾아주셔서 감사합니다.</h3><br />
 					<h3>즐거운 쇼핑하시기 바랍니다.</h3>	
                     <br>
-					<button type="button" class="btn btn-primary" id="mainbtn">메인</button>
+					<button type="button" class="btn btn-primary" id="mainbtn" onclick="location.href='./main.do';">홈페이지</button>
 				</div>
 			</div>
 		</div>
+
+		
 	</div>
 
 
